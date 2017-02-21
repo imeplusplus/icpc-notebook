@@ -1,0 +1,194 @@
+\documentclass[a4paper, 13pt, twocolumn, landscape]{book}
+
+\usepackage[left=1cm, right=1cm, bottom=1cm, top=1cm, headsep=0.2cm]{geometry}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\fancyhead{}
+\fancyfoot{}
+\lhead{INSTITUTO MILITAR DE ENGENHARIA - \the\year}
+\chead{LOREM IPSUM}
+\rhead{\thepage}
+
+\renewcommand{\headrulewidth}{2pt}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\definecolor{verdecpp}{rgb}{0,0.5,0}
+\lstset{
+  language=C++,
+  inputencoding=utf8/latin1,
+  alsolanguage={[Sharp]C},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{verdecpp},
+  commentstyle=\color{red},
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  %numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  %backgroundcolor=\color{green!10},
+  breakautoindent=true,
+  captionpos=b,
+  xleftmargin=0pt,
+}
+
+\begin{document}
+
+  \pagestyle{fancy}
+
+  \setlength{\columnseprule}{1pt}
+  \large
+
+  % Basics
+  \textbf{Template}
+  \lstinputlisting[language=C++]{../../template.cpp}
+  \textbf{vimrc}
+  \lstinputlisting{../../vimrc}
+
+  \textbf{builtin}
+  \lstinputlisting[language=C++]{misc/builtin.cpp}
+  \textbf{prime numbers}
+  \lstinputlisting{misc/prime-numbers.txt}
+  \textbf{Week day}
+  \lstinputlisting[language=C++]{misc/week-day.cpp}
+
+  % Graphs
+  \textbf{DFS}
+  \lstinputlisting[language=C++]{graphs/dfs.cpp}
+  \textbf{BFS}
+  \lstinputlisting[language=C++]{graphs/bfs.cpp}
+  \textbf{Topological Sort}
+  \lstinputlisting[language=C++]{graphs/kahn.cpp}
+  \textbf{Articulation points and bridges}
+  \lstinputlisting[language=C++]{graphs/articulation.cpp}
+  \textbf{Strongly Connected Components}
+  \lstinputlisting[language=C++]{graphs/kosaraju.cpp}
+  \textbf{Minimum Spanning Tree}
+  \lstinputlisting[language=C++]{graphs/kruskal.cpp}
+  \lstinputlisting[language=C++]{graphs/prim.cpp}
+  \textbf{Shortest path}
+  \lstinputlisting[language=C++]{graphs/dijkstra.cpp}
+  \lstinputlisting[language=C++]{graphs/bellman-ford.cpp}
+  \lstinputlisting[language=C++]{graphs/spfa.cpp}
+  \lstinputlisting[language=C++]{graphs/floyd-warshall.cpp}
+  \textbf{Maximum Flow}
+  \lstinputlisting[language=C++]{graphs/dinic.cpp} % Flow
+  \textbf{Minimum Cost Maximum Flow}
+  \lstinputlisting[language=C++]{graphs/min-cost-max-flow.cpp} % Flow
+  \textbf{Maximum Bipartite Cardinality Matching}
+  \lstinputlisting[language=C++]{graphs/kuhn.cpp}
+  \textbf{Lowest Common Ancestor}
+  \lstinputlisting[language=C++]{graphs/lca.cpp}
+  \textbf{2-SAT}
+  \lstinputlisting[language=C++]{graphs/2-sat.cpp}
+
+  % Math
+
+  \textbf{Number Theory}
+  \lstinputlisting[language=C++]{math/basics.cpp}
+  \textbf{Primes}
+  \lstinputlisting[language=C++]{math/sieve.cpp}
+  \textbf{Euler phi}
+  \lstinputlisting[language=C++]{math/euler-phi.cpp}
+  \textbf{Extended Euclidean}
+  \lstinputlisting[language=C++]{math/extended-euclid.cpp}
+  \textbf{Multiplicative Inverse}
+  \lstinputlisting[language=C++]{math/mult-inverse.cpp}
+  \textbf{Prime factors}
+  \lstinputlisting[language=C++]{math/prime-factors.cpp}
+  \lstinputlisting[language=C++]{math/pollard-rho.cpp}
+  \textbf{Primarily test}
+  \lstinputlisting[language=C++]{math/miller-rabin.cpp}
+  \textbf{Fast Fourier Transform}
+  \lstinputlisting[language=C++]{math/fft.cpp}
+
+  % Strings
+
+  \textbf{String Matching}
+  \lstinputlisting[language=C++]{strings/rabin-karp.cpp}
+  \lstinputlisting[language=C++]{strings/kmp.cpp}
+  \lstinputlisting[language=C++]{strings/suffix-array.cpp}
+
+  % Data Structures
+
+  \textbf{Disjoint Set Union}
+  \lstinputlisting[language=C++]{data-structures/dsu.cpp}
+  \textbf{Sparse Table}
+  \lstinputlisting[language=C++]{data-structures/sparse-table.cpp}
+  \textbf{Fenwick Tree}
+  \lstinputlisting[language=C++]{data-structures/bit.cpp}
+  \textbf{Fenwick Tree 2D}
+  \lstinputlisting[language=C++]{data-structures/bit2d.cpp}
+  \textbf{Segment Tree}
+  \lstinputlisting[language=C++]{data-structures/segtree.cpp}
+  \textbf{Heavy-Light Decomposition}
+  \lstinputlisting[language=C++]{data-structures/hld.cpp}
+
+  \newpage
+  \onecolumn
+  \begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{
+      \begin{tabular}{|c|c|c|c|m{80mm}|m{120mm}|c|}
+        \hline
+        & A & C & N & Assunto & Descricao & Diff\\
+        \hline
+        & & & & & &\\
+        A & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        B & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        C & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        D & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        E & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        F & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        G & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        H & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        I & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        J & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        K & & & & & &\\
+        & & & & & &\\
+        \hline
+        & & & & & &\\
+        L & & & & & &\\
+        & & & & & &\\
+        \hline
+      \end{tabular}
+    }
+  \end{table}
+
+\end{document}
