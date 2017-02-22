@@ -13,7 +13,7 @@ void lazy(int p, int l, int r) {
     st[p] = lz[p];
     // RMQ -> update: = lz[p],         increment: += lz[p]
     // RSQ -> update: = (r-l+1)*lz[p], increment: += (r-l+1)*lz[p]
-    lz[2*p] = lz[2*p+1] = lz[p]; // update: =, increment +=
+    if(l!=r) lz[2*p] = lz[2*p+1] = lz[p]; // update: =, increment +=
     lz[p] = 0;
   }
 }
