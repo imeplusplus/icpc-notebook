@@ -1,11 +1,16 @@
-\documentclass[a4paper, 13pt, twocolumn, landscape]{book}
+\documentclass[a4paper, 10pt, twocolumn, landscape]{article}
 
-\usepackage[left=1cm, right=1cm, bottom=1cm, top=1cm, headsep=0.2cm]{geometry}
-\usepackage{array}
-\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{bookmark}
 \usepackage{pdflscape}
+\usepackage{array}
 \usepackage{multicol}
+\usepackage[left=1cm, right=1cm, bottom=1cm, top=1cm, headsep=0.2cm]{geometry}
 \usepackage{fancyhdr}
+\usepackage{minted}
 \fancyhead{}
 \fancyfoot{}
 \lhead{INSTITUTO MILITAR DE ENGENHARIA - \the\year}
@@ -38,6 +43,14 @@
   xleftmargin=0pt,
 }
 
+\hypersetup{
+  pdftitle={ICPC Notebook},
+  pdfauthor={Lorem Ipsum},
+  colorlinks=true,
+  allcolors=blue,
+}
+\setminted[cpp]{frame=none,breaklines}
+
 \begin{document}
 
   \pagestyle{fancy}
@@ -45,90 +58,91 @@
   \setlength{\columnseprule}{1pt}
   \large
 
-  % Basics
-  \textbf{Template}
-  \lstinputlisting[language=C++]{../../template.cpp}
-  \textbf{vimrc}
-  \lstinputlisting{../../vimrc}
+  \tableofcontents
+
+  \section{Basics}
+  %\textbf{Template}
+  %\inputminted{cpp}{../../template.cpp}
+  %\textbf{vimrc}
+  %\lstinputlisting{../../vimrc}
 
   \textbf{builtin}
-  \lstinputlisting[language=C++]{misc/builtin.cpp}
+  \inputminted{cpp}{misc/builtin.cpp}
   \textbf{prime numbers}
   \lstinputlisting{misc/prime-numbers.txt}
   \textbf{Week day}
-  \lstinputlisting[language=C++]{misc/week-day.cpp}
+  \inputminted{cpp}{misc/week-day.cpp}
 
-  % Graphs
+  \section{Graphs}
   \textbf{DFS}
-  \lstinputlisting[language=C++]{graphs/dfs.cpp}
+  \inputminted{cpp}{graphs/dfs.cpp}
   \textbf{BFS}
-  \lstinputlisting[language=C++]{graphs/bfs.cpp}
+  \inputminted{cpp}{graphs/bfs.cpp}
   \textbf{Topological Sort}
-  \lstinputlisting[language=C++]{graphs/kahn.cpp}
+  \inputminted{cpp}{graphs/kahn.cpp}
   \textbf{Articulation points and bridges}
-  \lstinputlisting[language=C++]{graphs/articulation.cpp}
+  \inputminted{cpp}{graphs/articulation.cpp}
   \textbf{Strongly Connected Components}
-  \lstinputlisting[language=C++]{graphs/kosaraju.cpp}
+  \inputminted{cpp}{graphs/kosaraju.cpp}
   \textbf{Minimum Spanning Tree}
-  \lstinputlisting[language=C++]{graphs/kruskal.cpp}
-  \lstinputlisting[language=C++]{graphs/prim.cpp}
+  \inputminted{cpp}{graphs/kruskal.cpp}
+  \inputminted{cpp}{graphs/prim.cpp}
   \textbf{Shortest path}
-  \lstinputlisting[language=C++]{graphs/dijkstra.cpp}
-  \lstinputlisting[language=C++]{graphs/bellman-ford.cpp}
-  \lstinputlisting[language=C++]{graphs/spfa.cpp}
-  \lstinputlisting[language=C++]{graphs/floyd-warshall.cpp}
+  \inputminted{cpp}{graphs/dijkstra.cpp}
+  \inputminted{cpp}{graphs/bellman-ford.cpp}
+  \inputminted{cpp}{graphs/spfa.cpp}
+  \inputminted{cpp}{graphs/floyd-warshall.cpp}
   \textbf{Maximum Flow}
-  \lstinputlisting[language=C++]{graphs/dinic.cpp} % Flow
+  \inputminted{cpp}{graphs/dinic.cpp} % Flow
   \textbf{Minimum Cost Maximum Flow}
-  \lstinputlisting[language=C++]{graphs/min-cost-max-flow.cpp} % Flow
+  \inputminted{cpp}{graphs/min-cost-max-flow.cpp} % Flow
   \textbf{Maximum Bipartite Cardinality Matching}
-  \lstinputlisting[language=C++]{graphs/kuhn.cpp}
+  \inputminted{cpp}{graphs/kuhn.cpp}
   \textbf{Lowest Common Ancestor}
-  \lstinputlisting[language=C++]{graphs/lca.cpp}
+  \inputminted{cpp}{graphs/lca.cpp}
   \textbf{2-SAT}
-  \lstinputlisting[language=C++]{graphs/2-sat.cpp}
+  \inputminted{cpp}{graphs/2-sat.cpp}
 
-  % Math
-
+  \section{Mathematics}
   \textbf{Number Theory}
-  \lstinputlisting[language=C++]{math/basics.cpp}
+  \inputminted{cpp}{math/basics.cpp}
   \textbf{Primes}
-  \lstinputlisting[language=C++]{math/sieve.cpp}
+  \inputminted{cpp}{math/sieve.cpp}
   \textbf{Euler phi}
-  \lstinputlisting[language=C++]{math/euler-phi.cpp}
+  \inputminted{cpp}{math/euler-phi.cpp}
   \textbf{Extended Euclidean}
-  \lstinputlisting[language=C++]{math/extended-euclid.cpp}
+  \inputminted{cpp}{math/extended-euclid.cpp}
   \textbf{Multiplicative Inverse}
-  \lstinputlisting[language=C++]{math/mult-inverse.cpp}
+  \inputminted{cpp}{math/mult-inverse.cpp}
   \textbf{Prime factors}
-  \lstinputlisting[language=C++]{math/prime-factors.cpp}
-  \lstinputlisting[language=C++]{math/pollard-rho.cpp}
+  \inputminted{cpp}{math/prime-factors.cpp}
+  \inputminted{cpp}{math/pollard-rho.cpp}
   \textbf{Primarily test}
-  \lstinputlisting[language=C++]{math/miller-rabin.cpp}
+  \inputminted{cpp}{math/miller-rabin.cpp}
   \textbf{Fast Fourier Transform}
-  \lstinputlisting[language=C++]{math/fft.cpp}
+  \inputminted{cpp}{math/fft.cpp}
 
-  % Strings
-
+  
+  \section{Strings}
   \textbf{String Matching}
-  \lstinputlisting[language=C++]{strings/rabin-karp.cpp}
-  \lstinputlisting[language=C++]{strings/kmp.cpp}
-  \lstinputlisting[language=C++]{strings/suffix-array.cpp}
+  \inputminted{cpp}{strings/rabin-karp.cpp}
+  \inputminted{cpp}{strings/kmp.cpp}
+  \inputminted{cpp}{strings/suffix-array.cpp}
 
-  % Data Structures
-
+ 
+  \section{Data Structures}
   \textbf{Disjoint Set Union}
-  \lstinputlisting[language=C++]{data-structures/dsu.cpp}
+  \inputminted{cpp}{data-structures/dsu.cpp}
   \textbf{Sparse Table}
-  \lstinputlisting[language=C++]{data-structures/sparse-table.cpp}
+  \inputminted{cpp}{data-structures/sparse-table.cpp}
   \textbf{Fenwick Tree}
-  \lstinputlisting[language=C++]{data-structures/bit.cpp}
+  \inputminted{cpp}{data-structures/bit.cpp}
   \textbf{Fenwick Tree 2D}
-  \lstinputlisting[language=C++]{data-structures/bit2d.cpp}
+  \inputminted{cpp}{data-structures/bit2d.cpp}
   \textbf{Segment Tree}
-  \lstinputlisting[language=C++]{data-structures/segtree.cpp}
+  \inputminted{cpp}{data-structures/segtree.cpp}
   \textbf{Heavy-Light Decomposition}
-  \lstinputlisting[language=C++]{data-structures/hld.cpp}
+  \inputminted{cpp}{data-structures/hld.cpp}
 
   \newpage
   \onecolumn
