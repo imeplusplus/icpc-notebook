@@ -1,6 +1,6 @@
 struct Sparse{
   int n, t[30][N];
-  Sparse(int _n, int *v) {
+  void init(int _n, int *v) {
     n = _n; f=_f;
     for(int i = 0; i < n; i++)
       t[0][i]=v[i];
