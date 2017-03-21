@@ -15,17 +15,17 @@ void add_edge (int a, int b, int c) {
 bool bfs() {
   memset(h, 0, n * sizeof h[0]);
   queue<int> q;
-  h[s] = 0;
+  h[s] = 1;
   q.push(s);
   while(!q.empty()) {
     int u = q.front(); q.pop();
     for(int i : g[u]) {
       int v = e[i].v;
-      if (h[v] < 0 and e[i].f < e[i].c)
+      if (!h[v] and e[i].f < e[i].c)
         q.push(v), h[v] = h[u] + 1;
     }
   }
-  return h[t] != -1;
+  return h[t];
 }
 
 int dfs (int u, int flow) {
