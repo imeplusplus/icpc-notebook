@@ -13,7 +13,7 @@ void add_edge (int a, int b, int c) {
 }
 
 bool bfs() {
-  memset(h, 0, n * sizeof h[0]);
+  memset(h, 0, sizeof h);
   queue<int> q;
   h[s] = 1;
   q.push(s);
@@ -29,8 +29,7 @@ bool bfs() {
 }
 
 int dfs (int u, int flow) {
-  if (!flow) return 0;
-  if (u == t) return flow;
+  if (!flow or u == t) return flow;
   for (int &i = ptr[u]; i < g[u].size(); ++i) {
     edge &dir = e[g[u][i]], &rev = e[g[u][i]^1];
     int v = dir.v;
@@ -48,7 +47,7 @@ int dfs (int u, int flow) {
 int dinic() {
   int flow = 0;
   while (bfs()) {
-    memset(ptr, 0, n * sizeof ptr[0]);
+    memset(ptr, 0, sizeof ptr);
     while (int inc = dfs(s, INF)) flow += inc;
   }
   return flow;
