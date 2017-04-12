@@ -1,4 +1,5 @@
 // Kuhn - Bipartite Matching O(VE)
+// TIP: If too slow, shuffle nodes and try again.
 int x, vis[N], b[N], ans;
 
 bool match(int u) {
@@ -6,7 +7,6 @@ bool match(int u) {
   vis[u] = x;
   for (int v : adj[u])
     if (!b[v] or match(b[v])) return b[v]=u;
-    // if 0-indexed: b[v]=u; return 1;
   return 0;
 }
 
