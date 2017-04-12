@@ -1,7 +1,6 @@
 // Kosaraju - SCC O(V+E)
 vi adj[N], adjt[N];
-int ord[N], ordn, scc[N], sccn;
-int vis[N];
+int ord[N], ordn, scc[N], sccn, vis[N];
 
 void dfs(int u) {
   vis[u] = 1;
@@ -16,6 +15,6 @@ void dfst(int u) {
 }
 
 // in main
-sccn = ordn = 0;
-for (int i = 0; i < n; ++i) if (!vis[i]) dfs(i);
-for (int i = n-1; i >= 0; --i) if (vis[ord[i]]) dfst(ord[i]), sccn++;
+sccn = ordn = 1;
+for (int i = 1; i <= n; ++i) if (!vis[i]) dfs(i);
+for (int i = n; i > 0; --i) if (vis[ord[i]]) dfst(ord[i]), sccn++;
