@@ -1,8 +1,5 @@
-// Extended Euclid
-int x, y, d;
-void extgcd(int a, int b) {
-  if (!b) { x = 1; y = 0; d = a; return; }
-  extgcd(b, a%b);
-  int x1 = y, y1 = x-(a/b)*y;
-  x = x1, y = y1;
+// Extended Euclid: gcd(a, b) = x*a + y*b
+void extgcd(int a, int b, int &x, int &y, int &d) {
+  if (b) extgcd(b, a%b, y, x, d), y -= x*(a/b);
+  else x = 1, y = 0, d = a;
 }
