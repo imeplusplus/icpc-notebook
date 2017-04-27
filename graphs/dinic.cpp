@@ -1,37 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 1e5+1, INF = 1e9;
 struct edge {int v, c, f;};
 
-int n, s, t, h[N], ptr[N];
-vector<edge> e;
+int n, src, snk, h[N], ptr[N];
+vector<edge> edgs;
 vector<int> g[N];
 
-void add_edge (int a, int b, int c) {
-  int k = e.size();
-  e.push_back({b, c, 0});
-  e.push_back({a, 0, 0});
-  g[a].push_back(k);
-  g[b].push_back(k+1);
+void add_edge (int u, int v, int c) {
+  int k = edgs.size();
+  edgs.push_back({v, c, 0});
+  edgs.push_back({u, 0, 0});
+  g[u].push_back(k);
+  g[v].push_back(k+1);
 }
 
 bool bfs() {
   memset(h, 0, sizeof h);
   queue<int> q;
-  h[s] = 1;
-  q.push(s);
+  h[src] = 1;
+  q.push(src);
   while(!q.empty()) {
     int u = q.front(); q.pop();
     for(int i : g[u]) {
-      int v = e[i].v;
-      if (!h[v] and e[i].f < e[i].c)
+      int v = edgs[i].v;
+      if (!h[v] and edgs[i].f < edgs[i].c)
         q.push(v), h[v] = h[u] + 1;
     }
   }
-  return h[t];
+  return h[snk];
 }
 
 int dfs (int u, int flow) {
-  if (!flow or u == t) return flow;
+  if (!flow or u == snk) return flow;
   for (int &i = ptr[u]; i < g[u].size(); ++i) {
-    edge &dir = e[g[u][i]], &rev = e[g[u][i]^1];
+    edge &dir = edgs[g[u][i]], &rev = edgs[g[u][i]^1];
     int v = dir.v;
     if (h[v] != h[u] + 1)  continue;
     int inc = min(flow, dir.c - dir.f);
@@ -48,7 +52,7 @@ int dinic() {
   int flow = 0;
   while (bfs()) {
     memset(ptr, 0, sizeof ptr);
-    while (int inc = dfs(s, INF)) flow += inc;
+    while (int inc = dfs(src, INF)) flow += inc;
   }
   return flow;
 }
