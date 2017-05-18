@@ -33,7 +33,7 @@ struct Date{
     void advance(int days) {
         days += count();
         d = m = 1;
-        y = days/366;
+        y = 1 + days/366;
         days -= count();
         while(days >= ydays())
             days -= ydays(), y++;
