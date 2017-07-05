@@ -1,4 +1,4 @@
-// Kuhn - Bipartite Matching O(VE)
+// Kuhn - Maximum Cardinality Bipartite Matching (MCBM) O(VE)
 // TIP: If too slow, shuffle nodes and try again.
 int x, vis[N], b[N], ans;
 
@@ -13,7 +13,7 @@ bool match(int u) {
 for (int i = 1; i <= n; ++i) ++x, ans += match(i);
 
 // Maximum Independent Set on bipartite graph
-MIS + MCMB = V
+MIS + MCBM = V
 
 // Minimum Vertex Cover on bipartite graph
-MVC = MCMB
+MVC = MCBM
