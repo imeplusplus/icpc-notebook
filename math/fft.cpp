@@ -1,9 +1,9 @@
 typedef complex<ld> T;
 typedef vector<T> VT;
-T tmp[N];
 
 void fft(T* a, int n, bool inv) {
   if (n == 1) return;
+  T tmp[n];
   for (int i = 0; i < n/2; ++i)
     tmp[i] = a[2*i], tmp[i+n/2] = a[2*i+1];
 
@@ -28,3 +28,6 @@ void multiply(VT& a, VT b) {
   fft(&a[0],n,1);
   for (int i = 0; i < n; ++i) a[i] /= n;
 }
+
+// Convert to integers after multiplying:
+// (int)(a[i].real() + 0.5);
