@@ -3,7 +3,7 @@ int anc[25][N], h[N], rt;
 
 // build (sancse table)
 anc[0][rt] = rt; // set ancent of the root to itself
-for (int i = 0; (1<<i) < n; ++i)
+for (int i = 1; (1<<i) < n; ++i)
   for (int j = 1; j <= n; ++j)
     anc[i][j] = anc[i-1][anc[i-1][j]];
 
