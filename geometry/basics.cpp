@@ -54,6 +54,17 @@ struct point {
   ld dist_seg(point x, point y) {
     return min(dist_line(x, y), min(dist(x), dist(y)));
   }
+
+  point rotate(ld a) {
+    return point(cos(a)*x-sin(a)*y, sin(a)*x+cos(a)*y);
+  }
+
+  point rotate(point p) { // rotate around the argument from vector p
+    ld hyp = (p.x+p.y) * (p.x+p.y);
+    ld cos = p.x / hyp;
+    ld sin = p.y / hyp;
+    return point(cos*x-sin*y, sin*x+cos*y);
+  }
 };
 
 
@@ -123,4 +134,19 @@ bool point_inside_convex_poly(int l, int r, vector<point> v, point p) {
     else l = m;
   }
   return point_inside_triangle(p, v[0], v[l], v[r]);
+}
+
+// TODO: find bug in this function
+bool find_circle_intersection(point p1, ld r1, point p2, ld r2, point &a1, point &a2) {
+  ld x, y;
+  ld d = p1.dist(p2);
+  if (d > r1 + r2) return 0;
+
+  x = (r1*r1 - r2*r2 + d*d) / 2*d;
+  y = sqrt(r1*r1 - x*x);
+  a1 = point(x, y), a2 = point(x, -y);
+
+  a1 = a1.rotate(p2 - p1) + p1;
+  a2 = a2.rotate(p2 - p1) + p1;
+  return 1;
 }
