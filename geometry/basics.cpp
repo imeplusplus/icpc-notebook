@@ -30,15 +30,13 @@ struct point {
   // dir == -1 => p is counterclockwise from this
   int dir(point o, point p) {
     ld x = (*this - o) % (p - o);
-    return (x > EPS) - (x < EPS);
+    return !eq(x, 0);
   }
 
   bool on_seg(point p, point q) {
     if (this->dir(p, q)) return 0;
-    return le(x, min(p.x, q.x)) and
-           ge(x, max(p.x, q.x)) and
-           le(y, min(p.y, q.y)) and
-           ge(y, max(p.y, q.y));
+    return ge(x, min(p.x, q.x)) and le(x, max(p.x, q.x)) and
+           ge(y, min(p.y, q.y)) and le(y, max(p.y, q.y));
   }
 
   ld abs() { return sqrt(x*x + y*y); }
@@ -61,9 +59,9 @@ struct point {
 
   point rotate(point p) { // rotate around the argument from vector p
     ld hyp = (p.x+p.y) * (p.x+p.y);
-    ld cos = p.x / hyp;
-    ld sin = p.y / hyp;
-    return point(cos*x-sin*y, sin*x+cos*y);
+    ld c = p.x / hyp;
+    ld s = p.y / hyp;
+    return point(c*x-s*y, s*x+c*y);
   }
 };
 
@@ -79,6 +77,12 @@ bool segments_intersect(point p, point q, point a, point b) {
   if (d1*d2 < 0 and d3*d4 < 0) return 1;
   return p.on_seg(a, b) or q.on_seg(a, b) or
          a.on_seg(p, q) or b.on_seg(p, q);
+}
+
+point line_intersect(point p, point q, point a, point b) {
+  point r = q-p, s = b-a, c(p%q, a%b);
+  if (eq(x,0)) return point(INF, INF);
+  return point(point(r.x, s.x) % c, point(r.y, s.y) % c) / abs(r%s);
 }
 
 // Sorting points in counterclockwise order.
