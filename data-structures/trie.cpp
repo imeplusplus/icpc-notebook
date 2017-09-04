@@ -1,9 +1,10 @@
+// Trie <O(|S|), O(|S|)>
 int trie[N][26], trien = 1;
-char p = 'a'; //a for lowercase, A for uppercase.
 
 int add(int u, char c){
-  if(trie[u][c-p]) return trie[u][c-p];
-  return trie[u][c-p] = ++trien;
+  c-='a';
+  if (trie[u][c]) return trie[u][c];
+  return trie[u][c] = ++trien;
 }
 
 //to add a string s in the trie

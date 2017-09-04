@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int INF = 0x3f3f3f3f;
+
 typedef long double ld;
 const double EPS = 1e-9;
 
@@ -30,7 +32,7 @@ struct point {
   // dir == -1 => p is counterclockwise from this
   int dir(point o, point p) {
     ld x = (*this - o) % (p - o);
-    return !eq(x, 0);
+    return ge(x,0) - le(x,0);
   }
 
   bool on_seg(point p, point q) {
