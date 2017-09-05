@@ -97,26 +97,35 @@ bool radial(point p, point q) {
 
 // Graham Scan
 vector<point> convex_hull(vector<point> pts) {
-  vector<point> c;
-  c.resize(pts.size());
-
+  vector<point> ch;
   point mn = pts[0];
 
-  for(point p : pts)
-    if (p.y < mn.y or (p.y == mn.y and p.x < p.y))
-      mn = p;
+  for(point p : pts) if (p.y < mn.y or (p.y == mn.y and p.x < p.y)) mn = p;
 
   origin = mn;
   sort(pts.begin(), pts.end(), radial);
 
   int n = 0;
+
+  // IF: Convex hull without colinear points
   for(point p : pts) {
-    while (n > 1 and c[n-1].dir(c[n-2], p) < 1) n--;
-    c[n++] = p;
+    while (n > 1 and ch[n-1].dir(ch[n-2], p) < 1) n--;
+    ch[n++] = p;
   }
 
-  c.resize(n);
-  return c;
+  /* ELSE IF: Convex hull with colinear points
+  for(point p : pts) {
+    while (n > 1 and ch[n-1].dir(ch[n-2], p) < 0) n--;
+    ch[n++] = p;
+  }
+
+  for(int i=pts.size()-1; i >=1; --i)
+    if (pts[i] != ch[n-1] and !pts[i].dir(pts[0], ch[n-1]))
+      ch[n++] = pts[i];
+  // END IF */
+
+  ch.resize(n);
+  return ch;
 }
 
 // Double of the triangle area
