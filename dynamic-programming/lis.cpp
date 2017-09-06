@@ -1,4 +1,8 @@
 // Longest Increasing Subsequence - O(nlogn)
+//
+// dp(i) = max j<i { dp(j) | a[j] < a[i] } + 1
+//
+
 int dp[N], v[N], n, lis;
 
 memset(dp, 63, sizeof dp);
