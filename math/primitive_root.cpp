@@ -4,9 +4,9 @@ ll root(ll p) {
   vector<ll> fact;
 
   for (int i=2; i*i<=n; ++i) if (n % i == 0) {
-      fact.push_back (i);
-      while (n % i == 0) n /= i;
-    }
+    fact.push_back (i);
+    while (n % i == 0) n /= i;
+  }
 
   if (n > 1) fact.push_back (n);
 
