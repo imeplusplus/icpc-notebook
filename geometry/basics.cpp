@@ -6,32 +6,35 @@ const int INF = 0x3f3f3f3f;
 typedef long double ld;
 const double EPS = 1e-9;
 
-bool ge(ld x, ld y) { return x + EPS > y; }
-bool le(ld x, ld y) { return x - EPS < y; }
-bool eq(ld x, ld y) { return ge(x, y) and le(x, y); }
+// Change long double to long long if using integers
+typedef long double type;
+
+bool ge(type x, type y) { return x + EPS > y; }
+bool le(type x, type y) { return x - EPS < y; }
+bool eq(type x, type y) { return ge(x, y) and le(x, y); }
 
 struct point {
-  ld x, y;
+  type x, y;
 
   point() : x(0), y(0) {}
-  point(ld x, ld y) : x(x), y(y) {}
+  point(type x, type y) : x(x), y(y) {}
 
   point operator -() { return point(-x, -y); }
   point operator +(point p) { return point(x+p.x, y+p.y); }
   point operator -(point p) { return point(x-p.x, y-p.y); }
 
-  point operator *(ld k) { return point(k*x, k*y); }
-  point operator /(ld k) { return point(x/k, y/k); }
+  point operator *(type k) { return point(k*x, k*y); }
+  point operator /(type k) { return point(x/k, y/k); }
 
-  ld operator *(point p) { return x*p.x + y*p.y; }
-  ld operator %(point p) { return x*p.y - y*p.x; }
+  type operator *(point p) { return x*p.x + y*p.y; }
+  type operator %(point p) { return x*p.y - y*p.x; }
 
   // o is the origin, p is another point
   // dir == +1 => p is clockwise from this
   // dir ==  0 => p is colinear with this
   // dir == -1 => p is counterclockwise from this
   int dir(point o, point p) {
-    ld x = (*this - o) % (p - o);
+    type x = (*this - o) % (p - o);
     return ge(x,0) - le(x,0);
   }
 
@@ -42,7 +45,9 @@ struct point {
   }
 
   ld abs() { return sqrt(x*x + y*y); }
+  type abs2() { return x*x + y*y; }
   ld dist(point x) { return (*this - x).abs(); }
+  type dist2(point x) { return (*this - x).abs2(); }
 
   point project(point y) { return y * ((*this * y) / (y * y)); }
 
@@ -81,7 +86,7 @@ bool segments_intersect(point p, point q, point a, point b) {
          a.on_seg(p, q) or b.on_seg(p, q);
 }
 
-point line_intersect(point p, point q, point a, point b) {
+point lines_intersect(point p, point q, point a, point b) {
   point r = q-p, s = b-a, c(p%q, a%b);
   if (eq(r%s,0)) return point(INF, INF);
   return point(point(r.x, s.x) % c, point(r.y, s.y) % c) / abs(r%s);
@@ -107,13 +112,13 @@ vector<point> convex_hull(vector<point> pts) {
 
   int n = 0;
 
-  // IF: Convex hull without colinear points
+  // IF: Convex hull without collinear points
   for(point p : pts) {
     while (n > 1 and ch[n-1].dir(ch[n-2], p) < 1) n--;
     ch[n++] = p;
   }
 
-  /* ELSE IF: Convex hull with colinear points
+  /* ELSE IF: Convex hull with collinear points
   for(point p : pts) {
     while (n > 1 and ch[n-1].dir(ch[n-2], p) < 0) n--;
     ch[n++] = p;
