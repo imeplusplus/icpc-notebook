@@ -1,5 +1,8 @@
 // Lowest Common Ancestor <O(nlogn), O(logn)>
-int anc[25][N], h[N], rt;
+const int N = 1e6, M = 20;
+int anc[M][N], h[N], rt;
+
+// TODO: Calculate h[u] and set anc[0][u] = parent of node u for each u
 
 // build (sparse table)
 anc[0][rt] = rt; // set parent of the root to itself
@@ -10,10 +13,12 @@ for (int i = 1; (1<<i) < n; ++i)
 // query
 int lca(int u, int v) {
   if (h[u] < h[v]) swap(u, v);
-  for (int i = 20; i >= 0; --i) if (h[u]-(1<<i) >= h[v])
+  for (int i = M; i >= 0; --i) if (h[u]-(1<<i) >= h[v])
     u = anc[i][u];
+
   if (u == v) return u;
-  for (int i = 20; i >= 0; --i) if (anc[i][u] != anc[i][v])
+
+  for (int i = M; i >= 0; --i) if (anc[i][u] != anc[i][v])
     u = anc[i][u], v = anc[i][v];
   return anc[0][u];
 }
