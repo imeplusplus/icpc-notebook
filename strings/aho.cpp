@@ -1,3 +1,6 @@
+// Aho Corasick
+// Multiple string matching
+
 int p[N], sl[N], nxt[N][26], k[N], c[N];
 int tsz=1; // size of the trie
 
@@ -30,20 +33,20 @@ void build() {
     int v = q.front(); q.pop();
     int u = sl[p[v]];
 
-    while(u and !nxt[u][c[v]]) u = sl[u];
+    while (u and !nxt[u][c[v]]) u = sl[u];
     sl[v] = nxt[u][c[v]];
     k[v] += k[sl[v]];
 
-    for(int i=0; i<26; ++i) if (nxt[v][i])
+    for (int i = 0; i < 26; ++i) if (nxt[v][i])
       q.push(nxt[v][i]);
   }
 }
 
 int match(char *s) {
   int x = 1, ans = 0;
-  for(int i=0; s[i]; ++i) {
+  for (int i = 0; s[i]; ++i) {
     int t = s[i] - 'a';
-    while(x and !nxt[x][t]) x = sl[x];
+    while (x and !nxt[x][t]) x = sl[x];
     x = nxt[x][t];
     sm += k[x];
   }
