@@ -16,6 +16,7 @@
 \lhead{INSTITUTO MILITAR DE ENGENHARIA - \the\year}
 \chead{LOREM IPSUM}
 \rhead{\thepage}
+\title{ICPC Notebook}
 
 \renewcommand{\headrulewidth}{2pt}
 
@@ -52,14 +53,19 @@
 \setminted[cpp]{frame=none,breaklines}
 
 \begin{document}
-
   \pagestyle{fancy}
 
   \setlength{\columnseprule}{1pt}
   \large
 
+  \maketitle
   \tableofcontents
 
+  \section{Template \& vimrc}
+  \subsection{Template}
+  \inputminted{cpp}{template.cpp}
+  \subsection{vimrc}
+  \lstinputlisting{vimrc}
 
   \section{Graphs}
   \subsection{DFS}
@@ -90,6 +96,8 @@
   \inputminted{cpp}{graphs/lca.cpp}
   \subsection{2-SAT}
   \inputminted{cpp}{graphs/2-sat.cpp}
+  \subsection{Erdos-Gallai}
+  \inputminted{cpp}{graphs/erdos-gallai.cpp}
 
   \section{Mathematics}
   \subsection{Number Theory}
@@ -102,62 +110,88 @@
   \inputminted{cpp}{math/extended-euclid.cpp}
   \subsection{Multiplicative Inverse}
   \inputminted{cpp}{math/mult-inverse.cpp}
+  \subsection{Primarily test}
+  \inputminted{cpp}{math/miller-rabin.cpp}
   \subsection{Prime factors}
   \inputminted{cpp}{math/prime-factors.cpp}
   \inputminted{cpp}{math/pollard-rho.cpp}
-  \subsection{Primarily test}
-  \inputminted{cpp}{math/miller-rabin.cpp}
   \subsection{Fast Fourier Transform}
   \inputminted{cpp}{math/fft.cpp}
   \subsection{Number Theoretic Transform}
   \inputminted{cpp}{math/ntt.cpp}
+  \subsection{Chinese Remainder}
+  \inputminted{cpp}{math/chinese.cpp}
+  \subsection{Primitive Root}
+  \inputminted{cpp}{math/primitive-root.cpp}
   \subsection{Linear Systems}
   \subsubsection{Gaussian Elimination (double)}
   \inputminted{cpp}{math/gauss-elim.cpp}
   \subsubsection{Gaussian Elimination Modulo Prime}
   \inputminted{cpp}{math/gauss-elim-prime.cpp}
 
-  
   \section{Strings}
-  \subsection{String Matching}
-  \subsubsection{Rabin Karp}
+  \subsection{Rabin Karp}
   \inputminted{cpp}{strings/rabin-karp.cpp}
-  \subsubsection{Knuth-Morris-Pratt}
+  \subsection{Knuth-Morris-Pratt}
   \inputminted{cpp}{strings/kmp.cpp}
-  \subsubsection{Suffix Array}
+  \subsection{Suffix Array}
   \inputminted{cpp}{strings/suffix-array.cpp}
-  \subsubsection{Z Function}
+  \subsection{Z Function}
   \inputminted{cpp}{strings/z.cpp}
-  \subsubsection{Prefix Function}
+  \subsection{Prefix Function}
   \inputminted{cpp}{strings/prefix.cpp}
-  \subsubsection{Recursive-String Matching}
+  \subsection{Recursive-String Matching}
   \inputminted{cpp}{strings/recursive-string-matching.cpp}
+  \subsection{Aho-Corasick}
+  \inputminted{cpp}{strings/aho.cpp}
+  \subsection{Palindromes}
+  \inputminted{cpp}{strings/manacher.cpp}
 
- 
   \section{Data Structures}
   \subsection{Disjoint Set Union}
   \inputminted{cpp}{data-structures/dsu.cpp}
   \subsection{Sparse Table}
   \inputminted{cpp}{data-structures/sparse.cpp}
+  \subsection{Sparse Table 2D}
+  \inputminted{cpp}{data-structures/sparse2d.cpp}
   \subsection{Fenwick Tree}
   \inputminted{cpp}{data-structures/bit.cpp}
   \subsection{Fenwick Tree 2D}
   \inputminted{cpp}{data-structures/bit2d.cpp}
-  \subsection{Range Update Fenwick Tree}
+  \subsection{Range Update Point Query Fenwick Tree}
   \inputminted{cpp}{data-structures/bit-range.cpp}
   \subsection{Segment Tree}
   \inputminted{cpp}{data-structures/segtree.cpp}
-  \subsection{2D Segment Tree}
-  \inputminted{cpp}{data-structures/segtree-2d.cpp}
+  \subsection{Segment Tree 2D}
+  \inputminted{cpp}{data-structures/segtree2d.cpp}
+  \subsection{Persistent Segment Tree}
+  \inputminted{cpp}{data-structures/persistent-segtree.cpp}
   \subsection{Heavy-Light Decomposition}
   \inputminted{cpp}{data-structures/hld.cpp}
+  \subsection{Trie}
+  \inputminted{cpp}{data-structures/trie.cpp}
+  \subsection{Mergesort Tree}
+  \inputminted{cpp}{data-structures/mergesort-tree.cpp}
+
+  \section{Dynamic Programming}
+  \subsection{Longest Increasing Subsequence}
+  \inputminted{cpp}{dynamic-programming/lis.cpp}
+  \subsection{Convex Hull Trick}
+  \inputminted{cpp}{dynamic-programming/convex-hull-trick.cpp}
+  \subsection{Divide and Conquer Optimization}
+  \inputminted{cpp}{dynamic-programming/divide-and-conquer-optimization.cpp}
+  \subsection{Knuth Optimization}
+  \inputminted{cpp}{dynamic-programming/knuth-optimization.cpp}
+
+  \section{Geometry}
+  \subsection{Basic}
+  \inputminted{cpp}{geometry/basics.cpp}
+  \subsection{Closest Pair of Points}
+  \inputminted{cpp}{geometry/closest-pair.cpp}
+  \subsection{Nearest Neighbours}
+  \inputminted{cpp}{geometry/neighbour.cpp}
 
   \section{Miscellaneous}
-  %\subsection{Template}
-  %\inputminted{cpp}{../../template.cpp}
-  %\subsection{vimrc}
-  %\lstinputlisting{../../vimrc}
-
   \subsection{builtin}
   \inputminted{cpp}{misc/builtin.cpp}
   \subsection{prime numbers}
@@ -176,53 +210,53 @@
         \hline
         & A & C & N & Assunto & Descricao & Diff\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         A & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         B & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         C & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         D & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         E & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         F & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         G & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         H & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         I & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         J & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         K & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
-        & & & & & &\\
+          & & & & & &\\
         L & & & & & &\\
-        & & & & & &\\
+          & & & & & &\\
         \hline
       \end{tabular}
     }
