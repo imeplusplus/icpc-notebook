@@ -18,11 +18,20 @@ struct node {
 struct treap {
   node* root;
   treap() : root(0) {}
+  ~treap() { clear(); }
 
   int cnt(node* t) { return t ? t->cnt : 0; }
   int mn (node* t) { return t ? t->mn  : INF; }
   int mx (node* t) { return t ? t->mx  : -INF; }
   int mindiff(node* t) { return t ? t->mindiff : INF; }
+
+  void clear() { del(root); }
+  void del(node* t) {
+    if (!t) return;
+    del(t->l); del(t->r);
+    delete t;
+    t = 0;
+  }
 
   void push(node* t) {
     if (!t or !t->rev) return;
