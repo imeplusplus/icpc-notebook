@@ -155,10 +155,7 @@ struct treap {
   void reverse(int l, int r) {
     auto t2 = split(root, r+1);
     auto t1 = split(t2.st, l);
-
     t1.nd->rev = 1;
-    push(t1.nd);
-
     root = merge(merge(t1.st, t1.nd), t2.nd);
   }
 
