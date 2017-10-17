@@ -62,11 +62,11 @@ void fft(T* a, int n, int s) {
 // assert n is a power of two greater of equal product size
 // n = na + nb; while (n&(n-1)) n++;
 void multiply(T* a, T* b, int n) {
-  fft(&a[0],n,1);
-  fft(&b[0],n,1);
+  fft(a,n,1);
+  fft(b,n,1);
   for (int i = 0; i < n; i++) a[i] = a[i]*b[i];
-  fft(&a[0],n,-1);
-  for (int i = 0; i < n; ++i) a[i] /= n;
+  fft(a,n,-1);
+  for (int i = 0; i < n; i++) a[i] /= n;
 }
 
 // Convert to integers after multiplying:
