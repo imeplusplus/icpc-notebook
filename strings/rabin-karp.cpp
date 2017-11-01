@@ -15,7 +15,7 @@ void rabin() {
   if (hs == hp) { /* matching position 0 */ }
   for (int i = m; i < n; ++i) {
     hs = ((hs*B)%MOD + s[i])%MOD;
-    hs = (hs + (MOD - s[i-m]*E)%MOD)%MOD;
+    hs = (hs + (MOD - (s[i-m]*E)%MOD)%MOD)%MOD;
     if (hs == hp) { /* matching position i-m+1 */ }
   }
 }
