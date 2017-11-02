@@ -6,7 +6,7 @@ for(int j=0; j<m; j++) { //collumn to eliminate
     if(fabs(A[i][j])>fabs(A[l][j]))
       l=i;
   for(int k = 0; k < m+1; k++) { //Swap lines
-    double t=A[l][k]; A[l][k]=A[j][k]; A[j][k]=t;
+    swap(A[l][k],A[j][k]);
   }
   for(int i = j+1; i < n; i++) { //eliminate column
     double t=A[i][j]/A[j][j];

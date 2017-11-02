@@ -1,24 +1,34 @@
+// w: weight or cost, c : capacity
 struct edge {int v, f, w, c; };
 
-int n, m, k, s, t, f, c, p[N], d[N], et[N];
+int node_count, flw_lmt=INF, src, snk, flw, cst, p[N], d[N], et[N];
 vector<edge> e;
 vector<int> g[N];
 
 void add_edge(int u, int v, int w, int c) {
   int k = e.size();
+  node_count = max(node_count, u+1);
+  node_count = max(node_count, v+1);
   g[u].push_back(k);
   g[v].push_back(k+1);
   e.push_back({ v, 0,  w, c });
   e.push_back({ u, 0, -w, 0 });
 }
 
+void clear() {
+  flw_lmt = INF;
+  for(int i=0; i<node_count; ++i) g[i].clear();
+  e.clear();
+  node_count = 0;
+}
+
 void min_cost_max_flow() {
-  f = 0, c = 0;
-  while (f < k) {
-    memset(et, 0, n * sizeof et[0]);
-    memset(d, 63, n * sizeof d[0]);
+  flw = 0, cst = 0;
+  while (flw < flw_lmt) {
+    memset(et, 0, node_count * sizeof et[0]);
+    memset(d, 63, node_count * sizeof d[0]);
     deque<int> q;
-    q.push_back(s), d[s] = 0;
+    q.push_back(src), d[src] = 0;
 
     while (!q.empty()) {
       int u = q.front(); q.pop_front();
@@ -37,21 +47,22 @@ void min_cost_max_flow() {
       }
     }
 
-    if (d[t] > INF) break;
+    if (d[snk] > INF) break;
 
-    int inc = k - f;
-    for (int u=t; u != s; u = e[p[u]^1].v) {
+    int inc = flw_lmt - flw;
+    for (int u=snk; u != src; u = e[p[u]^1].v) {
       edge &dir = e[p[u]];
       inc = min(inc, dir.c - dir.f);
     }
 
-    for (int u=t; u != s; u = e[p[u]^1].v) {
+    for (int u=snk; u != src; u = e[p[u]^1].v) {
       edge &dir = e[p[u]], &rev = e[p[u]^1];
       dir.f += inc;
       rev.f -= inc;
-      c += inc * dir.w;
+      cst += inc * dir.w;
     }
 
-    f += inc;
+    if (!inc) break;
+    flw += inc;
   }
 }
