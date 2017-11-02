@@ -90,7 +90,7 @@ bool segments_intersect(point p, point q, point a, point b) {
 point lines_intersect(point p, point q, point a, point b) {
   point r = q-p, s = b-a, c(p%q, a%b);
   if (eq(r%s,0)) return point(INF, INF);
-  return point(point(r.x, s.x) % c, point(r.y, s.y) % c) / abs(r%s);
+  return point(point(r.x, s.x) % c, point(r.y, s.y) % c) / (r%s);
 }
 
 // Sorting points in counterclockwise order.
