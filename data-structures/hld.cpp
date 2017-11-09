@@ -1,5 +1,5 @@
 // Heavy-Light Decomposition
-vi adj[N];
+vector<int> adj[N];
 int par[N], h[N];
 
 int chainno, chain[N], head[N], chainpos[N], chainsz[N], pos[N], arrsz;
@@ -23,7 +23,7 @@ void hld(int u) {
 
   if (sc[u]) hld(sc[u]);
 
-  for (int v : adj[u]) if (v != sc[u])
+  for (int v : adj[u]) if (v != par[u] and v != sc[u])
     chainno++, hld(v);
 }
 
@@ -40,7 +40,6 @@ int query_up(int u, int v) {
   if (u == v) return 0;
   int ans = -1;
   while (1) {
-    uchain = chain[u];
     if (chain[u] == chain[v]) {
       if (u == v) break;
       ans = max(ans, query(1, 1, n, chainpos[v]+1, chainpos[u]));
