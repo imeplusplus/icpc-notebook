@@ -195,3 +195,6 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
+
+# obj files
+*.o
