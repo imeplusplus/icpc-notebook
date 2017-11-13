@@ -1,5 +1,6 @@
 \documentclass[a4paper, 10pt, twocolumn, landscape]{article}
 
+%packages
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -7,275 +8,256 @@
 \usepackage{bookmark}
 \usepackage{pdflscape}
 \usepackage{array}
-\usepackage{multicol}
 \usepackage[left=1cm, right=1cm, bottom=1cm, top=1cm, headsep=0.2cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{minted}
-\fancyhead{}
-\fancyfoot{}
+
+%header
 \lhead{INSTITUTO MILITAR DE ENGENHARIA - \the\year}
 \chead{LOREM IPSUM}
 \rhead{\thepage}
 \title{ICPC Notebook}
-
 \renewcommand{\headrulewidth}{2pt}
 
-\usepackage{xcolor}
-\usepackage{listings}
-\usepackage{listingsutf8}
-\definecolor{verdecpp}{rgb}{0,0.5,0}
-\lstset{
-  language=C++,
-  inputencoding=utf8/latin1,
-  alsolanguage={[Sharp]C},
-  basicstyle=\ttfamily\small,
-  keywordstyle=\color{blue},
-  stringstyle=\color{verdecpp},
-  commentstyle=\color{red},
-  extendedchars=true,
-  showspaces=false,
-  showstringspaces=false,
-  %numbers=left,
-  numberstyle=\tiny,
-  breaklines=true,
-  %backgroundcolor=\color{green!10},
-  breakautoindent=true,
-  captionpos=b,
-  xleftmargin=0pt,
+%PDF properties
+\hypersetup{
+pdftitle={ICPC Notebook},
+pdfauthor={Lorem Ipsum},
+colorlinks=true,
+allcolors=blue,
 }
 
-\hypersetup{
-  pdftitle={ICPC Notebook},
-  pdfauthor={Lorem Ipsum},
-  colorlinks=true,
-  allcolors=blue,
-}
+%Minted options
 \setminted{frame=none,breaklines,fontsize=\small}
 
 \begin{document}
-  \pagestyle{fancy}
+%set header
+\pagestyle{fancy}
 
-  \setlength{\columnseprule}{1pt}
-  \large
+%vetical line between columns
+\setlength{\columnseprule}{1pt}
 
-  \tableofcontents
+%set table of contents depth to section
+\setcounter{tocdepth}{1}
+%create table of contents
+\tableofcontents
 
-  \section{Template \& vimrc}
-  \subsection{Template}
-  \inputminted{cpp}{template.cpp}
-  \subsection{vimrc}
-  \inputminted{vim}{vimrc}
+\section{Template \& vimrc}
+\subsection{Template}
+\inputminted{cpp}{template.cpp}
+\subsection{vimrc}
+\inputminted{vim}{vimrc}
 
-  \section{Graphs}
-  \subsection{DFS}
-  \inputminted{cpp}{graphs/dfs.cpp}
-  \subsection{BFS}
-  \inputminted{cpp}{graphs/bfs.cpp}
-  \subsection{Topological Sort}
-  \inputminted{cpp}{graphs/kahn.cpp}
-  \subsection{Articulation points and bridges}
-  \inputminted{cpp}{graphs/articulation.cpp}
-  \subsection{Strongly Connected Components}
-  \inputminted{cpp}{graphs/kosaraju.cpp}
-  \subsection{Minimum Spanning Tree}
-  \inputminted{cpp}{graphs/kruskal.cpp}
-  \inputminted{cpp}{graphs/prim.cpp}
-  \subsection{Shortest path}
-  \inputminted{cpp}{graphs/dijkstra.cpp}
-  \inputminted{cpp}{graphs/bellman-ford.cpp}
-  \inputminted{cpp}{graphs/spfa.cpp}
-  \inputminted{cpp}{graphs/floyd-warshall.cpp}
-  \subsection{Maximum Flow}
-  \inputminted{cpp}{graphs/dinic.cpp} % Flow
-  \subsection{Minimum Cost Maximum Flow}
-  \inputminted{cpp}{graphs/min-cost-max-flow.cpp} % Flow
-  \subsection{Maximum Bipartite Cardinality Matching}
-  \inputminted{cpp}{graphs/kuhn.cpp}
-  \subsection{Lowest Common Ancestor}
-  \inputminted{cpp}{graphs/lca.cpp}
-  \subsection{2-SAT}
-  \inputminted{cpp}{graphs/2-sat.cpp}
-  \subsection{Erdos-Gallai}
-  \inputminted{cpp}{graphs/erdos-gallai.cpp}
+\section{Graphs}
+\subsection{DFS}
+\inputminted{cpp}{graphs/dfs.cpp}
+\subsection{BFS}
+\inputminted{cpp}{graphs/bfs.cpp}
+\subsection{Topological Sort}
+\inputminted{cpp}{graphs/kahn.cpp}
+\subsection{Articulation points and bridges}
+\inputminted{cpp}{graphs/articulation.cpp}
+\subsection{Strongly Connected Components}
+\inputminted{cpp}{graphs/kosaraju.cpp}
+\subsection{Minimum Spanning Tree}
+\inputminted{cpp}{graphs/kruskal.cpp}
+\inputminted{cpp}{graphs/prim.cpp}
+\subsection{Shortest path}
+\inputminted{cpp}{graphs/dijkstra.cpp}
+\inputminted{cpp}{graphs/bellman-ford.cpp}
+\inputminted{cpp}{graphs/spfa.cpp}
+\inputminted{cpp}{graphs/floyd-warshall.cpp}
+\subsection{Maximum Flow}
+\inputminted{cpp}{graphs/dinic.cpp} % Flow
+\subsection{Minimum Cost Maximum Flow}
+\inputminted{cpp}{graphs/min-cost-max-flow.cpp} % Flow
+\subsection{Maximum Bipartite Cardinality Matching}
+\inputminted{cpp}{graphs/kuhn.cpp}
+\subsection{Lowest Common Ancestor}
+\inputminted{cpp}{graphs/lca.cpp}
+\subsection{2-SAT}
+\inputminted{cpp}{graphs/2-sat.cpp}
+\subsection{Erdos-Gallai}
+\inputminted{cpp}{graphs/erdos-gallai.cpp}
 
-  \section{Mathematics}
-  \subsection{Number Theory}
-  \inputminted{cpp}{math/basics.cpp}
-  \subsection{Primes}
-  \inputminted{cpp}{math/sieve.cpp}
-  \subsection{Euler phi}
-  \inputminted{cpp}{math/euler-phi.cpp}
-  \subsection{Extended Euclidean}
-  \inputminted{cpp}{math/extended-euclid.cpp}
-  \subsection{Primarily test}
-  \inputminted{cpp}{math/miller-rabin.cpp}
-  \subsection{Prime factors}
-  \inputminted{cpp}{math/prime-factors.cpp}
-  \inputminted{cpp}{math/pollard-rho.cpp}
-  \subsection{Fast Fourier Transform}
-  \inputminted{cpp}{math/fft.cpp}
-  \subsection{Number Theoretic Transform}
-  \inputminted{cpp}{math/ntt.cpp}
-  \subsection{Chinese Remainder}
-  \inputminted{cpp}{math/chinese.cpp}
-  \subsection{Primitive Root}
-  \inputminted{cpp}{math/primitive-root.cpp}
-  \subsection{Linear Systems}
-  \subsubsection{Gaussian Elimination (double)}
-  \inputminted{cpp}{math/gauss-elim.cpp}
-  \subsubsection{Gaussian Elimination Modulo Prime}
-  \inputminted{cpp}{math/gauss-elim-prime.cpp}
-  \subsubsection{Gaussian Elimination Extended Inverse}
-  \inputminted{cpp}{math/gauss-elim-ext.cpp}
-  \subsection{Golden Section Search (Ternary Search)}
-  \inputminted{cpp}{math/gss.cpp}
-  \subsection{Josephus}
-  \inputminted{cpp}{math/josephus.cpp}
-  \subsection{Simposon Rule}
-  \inputminted{cpp}{math/simpson-rule.cpp}
+\section{Mathematics}
+\subsection{Number Theory}
+\inputminted{cpp}{math/basics.cpp}
+\subsection{Primes}
+\inputminted{cpp}{math/sieve.cpp}
+\subsection{Euler phi}
+\inputminted{cpp}{math/euler-phi.cpp}
+\subsection{Extended Euclidean}
+\inputminted{cpp}{math/extended-euclid.cpp}
+\subsection{Primarily test}
+\inputminted{cpp}{math/miller-rabin.cpp}
+\subsection{Prime factors}
+\inputminted{cpp}{math/prime-factors.cpp}
+\inputminted{cpp}{math/pollard-rho.cpp}
+\subsection{Fast Fourier Transform}
+\inputminted{cpp}{math/fft.cpp}
+\subsection{Number Theoretic Transform}
+\inputminted{cpp}{math/ntt.cpp}
+\subsection{Chinese Remainder}
+\inputminted{cpp}{math/chinese.cpp}
+\subsection{Primitive Root}
+\inputminted{cpp}{math/primitive-root.cpp}
+\subsection{Linear Systems}
+\subsubsection{Gaussian Elimination (double)}
+\inputminted{cpp}{math/gauss-elim.cpp}
+\subsubsection{Gaussian Elimination Modulo Prime}
+\inputminted{cpp}{math/gauss-elim-prime.cpp}
+\subsubsection{Gaussian Elimination Extended Inverse}
+\inputminted{cpp}{math/gauss-elim-ext.cpp}
+\subsection{Golden Section Search (Ternary Search)}
+\inputminted{cpp}{math/gss.cpp}
+\subsection{Josephus}
+\inputminted{cpp}{math/josephus.cpp}
+\subsection{Simposon Rule}
+\inputminted{cpp}{math/simpson-rule.cpp}
 
-  \section{Strings}
-  \subsection{Rabin Karp}
-  \inputminted{cpp}{strings/rabin-karp.cpp}
-  \subsection{Knuth-Morris-Pratt}
-  \inputminted{cpp}{strings/kmp.cpp}
-  \subsection{Suffix Array}
-  \inputminted{cpp}{strings/suffix-array.cpp}
-  \subsection{Z Function}
-  \inputminted{cpp}{strings/z.cpp}
-  \subsection{Prefix Function}
-  \inputminted{cpp}{strings/prefix.cpp}
-  \subsection{Recursive-String Matching}
-  \inputminted{cpp}{strings/recursive-string-matching.cpp}
-  \subsection{Aho-Corasick}
-  \inputminted{cpp}{strings/aho.cpp}
-  \subsection{Palindromes}
-  \inputminted{cpp}{strings/manacher.cpp}
-  \subsection{Suffix Automata}
-  \inputminted{cpp}{strings/suffix-automaton.cpp}
+\section{Strings}
+\subsection{Rabin Karp}
+\inputminted{cpp}{strings/rabin-karp.cpp}
+\subsection{Knuth-Morris-Pratt}
+\inputminted{cpp}{strings/kmp.cpp}
+\subsection{Suffix Array}
+\inputminted{cpp}{strings/suffix-array.cpp}
+\subsection{Z Function}
+\inputminted{cpp}{strings/z.cpp}
+\subsection{Prefix Function}
+\inputminted{cpp}{strings/prefix.cpp}
+\subsection{Recursive-String Matching}
+\inputminted{cpp}{strings/recursive-string-matching.cpp}
+\subsection{Aho-Corasick}
+\inputminted{cpp}{strings/aho.cpp}
+\subsection{Palindromes}
+\inputminted{cpp}{strings/manacher.cpp}
+\subsection{Suffix Automata}
+\inputminted{cpp}{strings/suffix-automaton.cpp}
 
-  \section{Data Structures}
-  \subsection{Disjoint Set Union}
-  \inputminted{cpp}{data-structures/dsu.cpp}
-  \subsection{Sparse Table}
-  \inputminted{cpp}{data-structures/sparse.cpp}
-  \subsection{Sparse Table 2D}
-  \inputminted{cpp}{data-structures/sparse2d.cpp}
-  \subsection{Fenwick Tree}
-  \inputminted{cpp}{data-structures/bit.cpp}
-  \subsection{Fenwick Tree 2D}
-  \inputminted{cpp}{data-structures/bit2d.cpp}
-  \subsection{Range Update Point Query Fenwick Tree}
-  \inputminted{cpp}{data-structures/bit-range.cpp}
-  \subsection{Segment Tree}
-  \inputminted{cpp}{data-structures/segtree.cpp}
-  \subsection{Segment Tree 2D}
-  \inputminted{cpp}{data-structures/segtree2d.cpp}
-  \subsection{Persistent Segment Tree}
-  \inputminted{cpp}{data-structures/persistent-segtree.cpp}
-  \inputminted{cpp}{data-structures/persistent-segtree-naum.cpp}
-  \subsection{Heavy-Light Decomposition}
-  \inputminted{cpp}{data-structures/hld.cpp}
-  \subsection{Centroid Decomposition}
-  \inputminted{cpp}{data-structures/centroid-decomposition.cpp}
-  \subsection{Trie}
-  \inputminted{cpp}{data-structures/trie.cpp}
-  \subsection{Mergesort Tree}
-  \inputminted{cpp}{data-structures/mergesort-tree.cpp}
-  \subsection{Treap}
-  \inputminted{cpp}{data-structures/treap.cpp}
+\section{Data Structures}
+\subsection{Disjoint Set Union}
+\inputminted{cpp}{data-structures/dsu.cpp}
+\subsection{Sparse Table}
+\inputminted{cpp}{data-structures/sparse.cpp}
+\subsection{Sparse Table 2D}
+\inputminted{cpp}{data-structures/sparse2d.cpp}
+\subsection{Fenwick Tree}
+\inputminted{cpp}{data-structures/bit.cpp}
+\subsection{Fenwick Tree 2D}
+\inputminted{cpp}{data-structures/bit2d.cpp}
+\subsection{Range Update Point Query Fenwick Tree}
+\inputminted{cpp}{data-structures/bit-range.cpp}
+\subsection{Segment Tree}
+\inputminted{cpp}{data-structures/segtree.cpp}
+\subsection{Segment Tree 2D}
+\inputminted{cpp}{data-structures/segtree2d.cpp}
+\subsection{Persistent Segment Tree}
+\inputminted{cpp}{data-structures/persistent-segtree.cpp}
+\inputminted{cpp}{data-structures/persistent-segtree-naum.cpp}
+\subsection{Heavy-Light Decomposition}
+\inputminted{cpp}{data-structures/hld.cpp}
+\subsection{Centroid Decomposition}
+\inputminted{cpp}{data-structures/centroid-decomposition.cpp}
+\subsection{Trie}
+\inputminted{cpp}{data-structures/trie.cpp}
+\subsection{Mergesort Tree}
+\inputminted{cpp}{data-structures/mergesort-tree.cpp}
+\subsection{Treap}
+\inputminted{cpp}{data-structures/treap.cpp}
 
-  \section{Dynamic Programming}
-  \subsection{Longest Increasing Subsequence}
-  \inputminted{cpp}{dynamic-programming/lis.cpp}
-  \subsection{Convex Hull Trick}
-  \inputminted{cpp}{dynamic-programming/convex-hull-trick.cpp}
-  \subsection{Divide and Conquer Optimization}
-  \inputminted{cpp}{dynamic-programming/divide-and-conquer-optimization.cpp}
-  \subsection{Knuth Optimization}
-  \inputminted{cpp}{dynamic-programming/knuth-optimization.cpp}
+\section{Dynamic Programming}
+\subsection{Longest Increasing Subsequence}
+\inputminted{cpp}{dynamic-programming/lis.cpp}
+\subsection{Convex Hull Trick}
+\inputminted{cpp}{dynamic-programming/convex-hull-trick.cpp}
+\subsection{Divide and Conquer Optimization}
+\inputminted{cpp}{dynamic-programming/divide-and-conquer-optimization.cpp}
+\subsection{Knuth Optimization}
+\inputminted{cpp}{dynamic-programming/knuth-optimization.cpp}
 
-  \section{Geometry}
-  \subsection{Basic}
-  \inputminted{cpp}{geometry/basics.cpp}
-  \subsection{Closest Pair of Points}
-  \inputminted{cpp}{geometry/closest-pair.cpp}
-  \subsection{Nearest Neighbours}
-  \inputminted{cpp}{geometry/neighbour.cpp}
+\section{Geometry}
+\subsection{Basic}
+\inputminted{cpp}{geometry/basics.cpp}
+\subsection{Closest Pair of Points}
+\inputminted{cpp}{geometry/closest-pair.cpp}
+\subsection{Nearest Neighbours}
+\inputminted{cpp}{geometry/neighbour.cpp}
 
-  \section{Miscellaneous}
-  \subsection{builtin}
-  \inputminted{cpp}{misc/builtin.cpp}
-  \subsection{prime numbers}
-  \inputminted{text}{misc/prime-numbers.txt}
-  \subsection{Week day}
-  \inputminted{cpp}{misc/week-day.cpp}
-  \subsection{Date}
-  \inputminted{cpp}{misc/date.cpp}
-  \subsection{Python}
-  \inputminted{cpp}{misc/python.py}
-  \subsection{Sqrt Decomposition}
-  \inputminted{cpp}{misc/sqrt-decomposition.cpp}
+\section{Miscellaneous}
+\subsection{builtin}
+\inputminted{cpp}{misc/builtin.cpp}
+\subsection{prime numbers}
+\inputminted{text}{misc/prime-numbers.txt}
+\subsection{Week day}
+\inputminted{cpp}{misc/week-day.cpp}
+\subsection{Date}
+\inputminted{cpp}{misc/date.cpp}
+\subsection{Python}
+\inputminted{cpp}{misc/python.py}
+\subsection{Sqrt Decomposition}
+\inputminted{cpp}{misc/sqrt-decomposition.cpp}
 
-  \newpage
-  \onecolumn
-  \begin{table}[ht]
-    \centering
-    \resizebox{\textwidth}{!}{
-      \begin{tabular}{|c|c|c|c|m{80mm}|m{120mm}|c|}
-        \hline
-        & A & C & N & Assunto & Descricao & Diff\\
-        \hline
-          & & & & & &\\
-        A & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        B & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        C & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        D & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        E & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        F & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        G & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        H & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        I & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        J & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        K & & & & & &\\
-          & & & & & &\\
-        \hline
-          & & & & & &\\
-        L & & & & & &\\
-          & & & & & &\\
-        \hline
-      \end{tabular}
-    }
-  \end{table}
+\newpage
+\onecolumn
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c|c|c|c|m{80mm}|m{120mm}|c|}
+\hline
+& A & C & N & Assunto & Descricao & Diff\\
+\hline
+& & & & & &\\
+A & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+B & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+C & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+D & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+E & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+F & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+G & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+H & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+I & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+J & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+K & & & & & &\\
+& & & & & &\\
+\hline
+& & & & & &\\
+L & & & & & &\\
+& & & & & &\\
+\hline
+\end{tabular}
+}
+\end{table}
 
 \end{document}
