@@ -1,5 +1,5 @@
 syntax on
-set et ts=4 sw=4 sts=4 ai nu hls cindent
+set et ts=2 sw=0 sts=-1 ai nu hls cindent
 nnoremap ; :
 vnoremap ; :
 noremap <c-j> 15gj
