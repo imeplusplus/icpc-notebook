@@ -48,6 +48,7 @@ int match(char p[], int m) {
 }
 
 // Longest Common Prefix with SA O(n)
+// strcat(s, "$"); n = strlen(s);
 int phi[N], plcp[N], lcp[N];
 void calcLCP() {
   int l = 0;
