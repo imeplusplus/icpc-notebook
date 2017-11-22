@@ -20,7 +20,7 @@ struct T {
 // a: vector containing polynomial
 // n: power of two greater or equal product size
 /*
-// Use iteractive version!
+// Use iterative version!
 void fft_recursive(T* a, int n, int s) {
   if (n == 1) return;
   T tmp[n];
