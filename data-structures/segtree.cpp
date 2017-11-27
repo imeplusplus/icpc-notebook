@@ -19,8 +19,8 @@ void push(int p, int l, int r) {
 }
 
 int query(int p, int l, int r, int i, int j) {
-  if (r < i or l > j) return INF; // RMQ -> INF, RSQ -> 0
   push(p, l, r);
+  if (r < i or l > j) return INF; // RMQ -> INF, RSQ -> 0
   if (l >= i and r <= j) return st[p];
   return min(query(2*p, l, (l+r)/2, i, j),
              query(2*p+1, (l+r)/2+1, r, i, j));
@@ -28,8 +28,8 @@ int query(int p, int l, int r, int i, int j) {
 }
 
 void update(int p, int l, int r, int i, int j, int v) {
-  if (r < i or l > j) return;
   push(p, l, r);
+  if (r < i or l > j) return;
   if (l >= i and r <= j) { lz[p] = v; push(p, l, r); return; }
   update(2*p, l, (l+r)/2, i, j, v);
   update(2*p+1, (l+r)/2+1, r, i, j, v);
