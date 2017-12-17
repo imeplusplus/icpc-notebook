@@ -116,7 +116,7 @@ struct treap {
 
   bool has(node* t, int val) {
     if (!t) return 0;
-    push(val);
+    push(t);
     if (t->val == val) return 1;
     return has((t->val > val ? t->l : t->r), val);
   }
