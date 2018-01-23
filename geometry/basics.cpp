@@ -4,7 +4,7 @@ using namespace std;
 const int INF = 0x3f3f3f3f;
 
 typedef long double ld;
-const double EPS = 1e-9;
+const double EPS = 1e-9, PI = acos(-1.);
 
 // Change long double to long long if using integers
 typedef long double type;
@@ -66,7 +66,7 @@ struct point {
   }
 
   point rotate(point p) { // rotate around the argument from vector p
-    ld hyp = (p.x+p.y) * (p.x+p.y);
+    ld hyp = p.abs();
     ld c = p.x / hyp;
     ld s = p.y / hyp;
     return point(c*x-s*y, s*x+c*y);
@@ -157,17 +157,20 @@ bool point_inside_convex_poly(int l, int r, vector<point> v, point p) {
   return point_inside_triangle(p, v[0], v[l], v[r]);
 }
 
-// TODO: find bug in this function
-bool find_circle_intersection(point p1, ld r1, point p2, ld r2, point &a1, point &a2) {
-  ld x, y;
+vector<point> circle_circle_intersection(point p1, ld r1, point p2, ld r2) {
+  vector<point> ret;
+
   ld d = p1.dist(p2);
-  if (d > r1 + r2) return 0;
+  if (d > r1 + r2 or d + min(r1, r2) < max(r1, r2)) return ret;
 
-  x = (r1*r1 - r2*r2 + d*d) / 2*d;
-  y = sqrt(r1*r1 - x*x);
-  a1 = point(x, y), a2 = point(x, -y);
+  ld x = (r1*r1 - r2*r2 + d*d) / (2*d);
+  ld y = sqrt(r1*r1 - x*x);
 
-  a1 = a1.rotate(p2 - p1) + p1;
-  a2 = a2.rotate(p2 - p1) + p1;
-  return 1;
+  point v = (p2 - p1)/d;
+
+  ret.push_back(p1 + v * x + v.rotate(PI/2) * y);
+  if (y > 0)
+    ret.push_back(p1 + v * x - v.rotate(PI/2) * y);
+
+  return ret;
 }
