@@ -18,7 +18,7 @@ ld closest_pair_util(point p[], int n) {
   for (int i = 0; i < n; i++) if ((p[i].x - mp.x)*(p[i].x - mp.x) < d) strip[sz++] = p[i];
 
   sort(strip, strip+sz, [](point s, point t){ return s.y > t.y; });
-  for (int i = 0; i < sz; i++) for (int j = i+1; j < sz and (strip[i].y - strip[j].y)*(strip[i].y - strip[j].y) < d; j++)
+  for (int i = 0; i < sz; i++) for (int j = i+1; j < sz and strip[i].y - strip[j].y < d; j++)
     d = min(d, strip[i].dist(strip[j]));
 
   return d;
