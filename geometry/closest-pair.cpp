@@ -1,30 +1,40 @@
-// Closest Pair of Points - O(nlogn)
-point p[N];
+//Time complexity: o(nlogn), using merge sort strategy
 
-ld closest_pair_util(point p[], int n) {
-  if (n <= 3) {
-    ld ans = p[0].dist(p[1]);
-    for (int i = 0; i < n; i++) for (int j = i+1; j < n; j++)
-      ans = min(ans, p[i].dist(p[j]));
-    return ans;
-  }
+struct pnt{
+    long long x, y;
+    pnt operator-(pnt p){ return {x - p.x, y - p.y}; }
+    long long operator!(){ return x*x+y*y; }
+};
 
-  int mid = n/2;
-  point mp = p[mid];
-  ld d = min(closest_pair_util(p, mid), closest_pair_util(p+mid, n-mid));
+const int N = 1e5 + 5;
+pnt pnts[N];
+pnt tmp[N];
+pnt p1, p2;
+unsigned long long d = 9e18;
 
-  point strip[n];
-  int sz = 0;
-  for (int i = 0; i < n; i++) if ((p[i].x - mp.x)*(p[i].x - mp.x) < d) strip[sz++] = p[i];
+void closest(int l, int r){
+    if(l == r) return;
+    int mid = (l + r)/2;
+    
+    int midx = pnts[mid].x;
+    closest(l, mid), closest(mid + 1, r);
 
-  sort(strip, strip+sz, [](point s, point t){ return s.y > t.y; });
-  for (int i = 0; i < sz; i++) for (int j = i+1; j < sz and strip[i].y - strip[j].y < d; j++)
-    d = min(d, strip[i].dist(strip[j]));
+    merge(pnts + l, pnts + mid + 1, pnts + mid + 1, pnts + r + 1, tmp + l,
+            [](pnt a, pnt b){ return a.y < b.y; });
 
-  return d;
-}
+    for (int i = l; i <= r; i++) pnts[i] = tmp[i];
 
-ld closest_pair(point p[], int n) {
-  sort(p, p+n, [](point s, point t){ return s.x < t.x; });
-  return closest_pair_util(p, n);
+    vector<pnt> margin;
+    for(int i = l; i <= r; i++)
+        if((pnts[i].x - midx)*(pnts[i].x - midx) < d)
+            margin.push_back(pnts[i]);
+
+    for(int i = 0; i < margin.size(); i++)
+        for(int j = i + 1;
+            j < margin.size() and
+            (margin[j].y - margin[i].y)*(margin[j].y - margin[i].y) < d;
+            j++) {
+            if(!(margin[i] - margin[j]) < d)
+                p1 = margin[i], p2 = margin[j], d = !(p1 - p2);
+        }
 }
