@@ -6,7 +6,7 @@ int anc[M][N], h[N], rt;
 
 // build (sparse table)
 anc[0][rt] = rt; // set parent of the root to itself
-for (int i = 1; (1<<i) < n; ++i)
+for (int i = 1; i < M; ++i)
   for (int j = 1; j <= n; ++j)
     anc[i][j] = anc[i-1][anc[i-1][j]];
 
