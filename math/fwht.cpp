@@ -11,7 +11,7 @@ void fwht(ll* a, int n, bool inv) {
         a[i+j] = (u+v) % MOD; 
         a[i+l+j] = (u-v+MOD) % MOD;
         // % is kinda slow, you can use add() macro instead
-        // #define add(x,y) (x+y >= MOD : x+y-MOD : x+y)
+        // #define add(x,y) (x+y >= MOD ? x+y-MOD : x+y)
       }
     }
   }
