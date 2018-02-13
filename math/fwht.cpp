@@ -1,3 +1,5 @@
+// Fast Walsh-Hadamard Transform - O(nlogn)
+//
 // Multiply two polynomials, but instead of x^a * x^b = x^(a+b)
 // we have x^a * x^b = x^(a XOR b).
 //
