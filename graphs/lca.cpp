@@ -1,5 +1,5 @@
 // Lowest Common Ancestor <O(nlogn), O(logn)>
-const int N = 1e6, M = 20;
+const int N = 1e6, M = 25;
 int anc[M][N], h[N], rt;
 
 // TODO: Calculate h[u] and set anc[0][u] = parent of node u for each u

@@ -1,5 +1,5 @@
 // Miller-Rabin - Primarily Test O(k*logn*logn*logn)
-bool miller(ll n, ll a) {
+bool miller(ll a, ll n) {
   if (a >= n) return 1;
   ll s = 0, d = n-1;
   while (d%2 == 0 and d) d >>= 1, s++;

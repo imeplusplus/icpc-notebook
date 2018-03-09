@@ -13,7 +13,7 @@ int gallai(vector<int> v) {
   for (int k = 1; k < v.size(); k++) {
     int p = lower_bound(v.begin(), v.end(), k, greater<int>()) - v.begin();
     if (p < k) p = k;
-    if (sum[k-1] > k*(p-1) + sum.back() - sum[p-1]) return 0;
+    if (sum[k-1] > 1ll*k*(p-1) + sum.back() - sum[p-1]) return 0;
   }
   return 1;
 }
