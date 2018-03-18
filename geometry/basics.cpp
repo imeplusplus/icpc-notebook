@@ -103,7 +103,7 @@ bool radial(point p, point q) {
 
 // Graham Scan
 vector<point> convex_hull(vector<point> pts) {
-  vector<point> ch;
+  vector<point> ch(pts.size());
   point mn = pts[0];
 
   for(point p : pts) if (p.y < mn.y or (p.y == mn.y and p.x < p.y)) mn = p;
