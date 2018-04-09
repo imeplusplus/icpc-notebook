@@ -1,0 +1,55 @@
+\section{Math Extra}
+\subsection{Combinatorial formulas}
+
+ $\sum_{k=0}^{n}k^{2}=n(n+1)(2n+1)/6$\\
+ $\sum_{k=0}^{n}k^{3}=n^{2}(n+1)^{2}/4$\\
+ $\sum_{k=0}^{n}k^{4}=(6n^{5}+15n^{4}+10n^{3}-n)/30$\\
+ $\sum_{k=0}^{n}k^{5}=(2n^{6}+6n^{5}+5n^{4}-n^{2})/12$\\
+ $\sum_{k=0}^{n}x^{k}=(x^{n+1}-1)/(x-1)$\\
+ $\sum_{k=0}^{n}kx^{k}=(x-(n+1)x^{n+1}+nx^{n+2})/(x-1)^{2}$\\
+ ${n \choose k}=\frac{n!}{(n-k)!k!}$\\
+ ${n \choose k}={n-1 \choose k}+{n-1 \choose k-1}$\\
+ ${n \choose k}=\frac{n}{n-k}{n-1 \choose k}$\\
+ ${n \choose k}=\frac{n-k+1}{k}{n \choose k-1}$\\
+ ${n+1 \choose k}=\frac{n+1}{n-k+1}{n \choose k}$\\
+ ${n \choose k+1}=\frac{n-k}{k+1}{n \choose k}$\\
+ $\sum_{k=1}^{n}k\tbinom{n}{k}=n2^{n-1}$\\
+ $\sum_{k=1}^{n}k^{2}\tbinom{n}{k}=(n+n^{2})2^{n-2}$\\
+ ${m+n \choose r}=\sum_{k=0}^{r}{m \choose k}{n \choose r-k}$\\
+ ${n \choose k}=\prod_{i=1}^{k}\frac{n-k+i}{i}$\\
+
+\subsection{Number theory identities}
+\textbf{Lucas' Theorem:} For non-negative integers $m$ and $n$ and a prime $p$,
+
+$$\binom{m}{n}\equiv\prod_{i=0}^k\binom{m_i}{n_i}\pmod p,$$
+where
+$$m=m_kp^k+m_{k-1}p^{k-1}+\cdots +m_1p+m_0$$
+is the base $p$ representation of $m$, and similarly for $n$.
+
+\subsection{Stirling Numbers of the second kind}
+Number of ways to partition a set of $n$ numbers into $k$ non-empty subsets.
+
+$${n \brace k}=\frac{1}{k!}\sum_{j=0}^{k}(-1)^{(k-j)}{k \choose j}j^n$$
+
+Recurrence relation:
+
+  $${0 \brace 0}=1$$
+  $${n \brace 0}={0 \brace n}=1$$
+  $${n+1 \brace k}=k{n \brace k}+{n \brace k-1}$$
+
+
+\subsection{Burnside's Lemma}
+Let $G$ be a finite group that acts on a set $X$. For each $g$ in $G$ let $X^g$ denote the set of elements in $X$ that are fixed by $g$, which means $X^g=\{x\in X| g(x)=x\}$. Burnside's lemma assers the following formula for the number of orbits, denoted $|X/G|$:
+\begin{align*}
+|X/G|=\frac{1}{|G|} \sum_{g\in G} |X^g|
+\end{align*}
+
+\subsection{Numerical integration}
+RK4: to integrate $\dot{y} = f(t, y)$ with $y_0 = y(t_0)$, compute
+\begin{align*}
+  k_1 &= f(t_n, y_n) \\
+  k_2 &= f(t_n + \frac h 2, y_n + \frac h 2 k_1) \\
+  k_3 &= f(t_n + \frac h 2, y_n + \frac h 2 k_2) \\
+  k_4 &= f(t_n + h, y_n + h k_3) \\
+  y_{n+1} &= y_n + \frac h 6 (k_1 + 2k_2 + 2k_3 + k_4) 
+\end{align*}
