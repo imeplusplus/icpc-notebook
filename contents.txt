@@ -47,6 +47,7 @@ math/josephus.cpp	Josephus
 math/simpson-rule.cpp	Simpson Rule
 math/discrete-log.cpp	Discrete Log (Baby-step Giant-step)
 math/mobius.cpp	Mobius Function
+math/stanford-simplex.cpp	Simplex (Stanford)
 
 [Strings]
 strings/rabin-karp.cpp	Rabin-Karp
@@ -75,6 +76,7 @@ data-structures/centroid-decomposition.cpp	Centroid Decomposition
 #data-structures/trie.cpp	Trie
 data-structures/mergesort-tree.cpp	Mergesort Tree
 data-structures/treap.cpp	Treap
+data-structures/stanford-kdtree.cpp	KD Tree (Stanford)
 
 [Dynamic Programming]
 dynamic-programming/lis.cpp	Longest Increasing Subsequence
@@ -87,10 +89,16 @@ geometry/basics.cpp	Basic
 geometry/closest-pair.cpp	Closest Pair of Points
 geometry/neighbour.cpp	Nearest Neighbours
 
+[Geometry (Stanford)]
+geometry/stanford-geom.cpp	Basic
+geometry/stanford-convex-hull.cpp	Convex Hull
+geometry/stanford-delaunay.cpp	Delaunay Triangulation
+
 [Miscellaneous]
 misc/builtin.cpp	builtin
 misc/prime-numbers.txt	prime numbers
 misc/week-day.cpp	Week day
 misc/date.cpp	Date
+misc/stanford-latlong.cpp	Latitude Longitude (Stanford)
 misc/python.py	Python
 misc/sqrt-decomposition.cpp	Sqrt Decomposition
