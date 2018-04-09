@@ -59,6 +59,7 @@ strings/aho.cpp	Aho-Corasick
 strings/manacher.cpp	Manacher
 strings/suffix-array.cpp	Suffix Array
 strings/suffix-automaton.cpp	Suffix Automaton
+strings/stanford-zfunction.cpp	Z Function (Stanford)
 
 [Data Structures]
 #data-structures/dsu.cpp	Disjoint Set Union
