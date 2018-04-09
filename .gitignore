@@ -198,3 +198,6 @@ TSWLatexianTemp*
 
 # obj files
 *.o
+
+#####
+contents.tex

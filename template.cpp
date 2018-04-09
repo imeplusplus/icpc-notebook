@@ -13,8 +13,8 @@ using namespace std;
   #define dbs(x) cerr << x << endl
   #define _ << ", " <<
 #else
-  #define db(x)
-  #define dbs(x)
+  #define db(x) ((void)0)
+  #define dbs(x) ((void)0)
 #endif
 
 typedef long long ll;

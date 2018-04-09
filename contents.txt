@@ -1,0 +1,96 @@
+# Any line followed by a '#' character is ignored
+# Section headings must be in square brackets
+# Subsections within a section should follow the format:
+#   [filename within code directory][tab character \t][subsection title]
+
+[Template + vimrc]
+template.cpp	Template
+vimrc	vimrc
+
+[Graphs]
+#graphs/dfs.cpp	DFS
+#graphs/bfs.cpp	BFS
+#graphs/kahn.cpp	Toposort
+graphs/articulation.cpp	Articulation points and bridges
+graphs/kosaraju.cpp	Strongly Connected Components
+graphs/kruskal.cpp	MST (Kruskal)
+graphs/prim.cpp	MST (Prim)
+#graphs/dijkstra.cpp	Shortest Path (Dijkstra)
+#graphs/bellman-ford.cpp	Shortest Path (Bellman-Ford)
+graphs/spfa.cpp	Shortest Path (SPFA)
+graphs/floyd-warshall.cpp	Shortest Path (Floyd-Warshall)
+graphs/dinic.cpp	Max Flow
+graphs/min-cost-max-flow.cpp	Min Cost Max Flow
+graphs/kuhn.cpp	Max Bipartite Cardinality Matching (Kuhn)
+graphs/lca.cpp	Lowest Common Ancestor
+graphs/2-sat.cpp	2-SAT
+graphs/erdos-gallai.cpp	Erdos-Gallai
+
+[Mathematics]
+math/basics.cpp	Basics
+#math/sieve.cpp	Sieve of Eratosthenes
+math/euler-phi.cpp	Euler Phi
+math/extended-euclid.cpp	Extended Euclidean
+math/miller-rabin.cpp	Miller-Rabin
+math/prime-factors.cpp	Prime Factors
+math/pollard-rho.cpp	Pollard-Rho
+math/fft.cpp	Fast Fourier Transform
+math/ntt.cpp	Number Theoretic Transform
+math/fwht.cpp	Fast Walsh-Hadamard Transform
+math/chinese.cpp	Chinese Remainder
+math/primitive-root.cpp	Primitive Root
+math/gauss-elim.cpp	Gaussian Elimination (double)
+math/gauss-elim-prime.cpp	Gaussian Elimination (modulo prime)
+math/gauss-elim-ext.cpp	Gaussian Elimination (extended inverse)
+math/gss.cpp	Golden Section Search (Ternary Search)
+math/josephus.cpp	Josephus
+math/simpson-rule.cpp	Simpson Rule
+math/discrete-log.cpp	Discrete Log (Baby-step Giant-step)
+math/mobius.cpp	Mobius Function
+
+[Strings]
+strings/rabin-karp.cpp	Rabin-Karp
+strings/kmp.cpp	Knuth-Morris-Pratt
+strings/z.cpp	Z Function
+strings/prefix.cpp	Prefix Function
+strings/recursive-string-matching.cpp	Recursive-String Matching
+strings/aho.cpp	Aho-Corasick
+strings/manacher.cpp	Manacher
+strings/suffix-array.cpp	Suffix Array
+strings/suffix-automaton.cpp	Suffix Automaton
+
+[Data Structures]
+#data-structures/dsu.cpp	Disjoint Set Union
+#data-structures/sparse.cpp	Sparse Table
+data-structures/sparse2d.cpp	Sparse Table 2D
+#data-structures/bit.cpp	Fenwick Tree
+data-structures/bit2d.cpp	Fenwick Tree 2D
+data-structures/bit-range.cpp	Range Update Point Query Fenwick Tree
+#data-structures/segtree.cpp	Segment Tree
+data-structures/segtree2d.cpp	Segment Tree 2D
+data-structures/persistent-segtree.cpp	Persistent Segment Tree
+data-structures/persistent-segtree-naum.cpp	Persistent Segment Tree (Naum)
+data-structures/hld.cpp	Heavy-Light Decomposition
+data-structures/centroid-decomposition.cpp	Centroid Decomposition
+#data-structures/trie.cpp	Trie
+data-structures/mergesort-tree.cpp	Mergesort Tree
+data-structures/treap.cpp	Treap
+
+[Dynamic Programming]
+dynamic-programming/lis.cpp	Longest Increasing Subsequence
+dynamic-programming/convex-hull-trick.cpp	Convex Hull Trick
+dynamic-programming/divide-and-conquer-optimization.cpp	Divide and Conquer Optimization
+dynamic-programming/knuth-optimization.cpp	Knuth Optimization
+
+[Geometry]
+geometry/basics.cpp	Basic
+geometry/closest-pair.cpp	Closest Pair of Points
+geometry/neighbour.cpp	Nearest Neighbours
+
+[Miscellaneous]
+misc/builtin.cpp	builtin
+misc/prime-numbers.txt	prime numbers
+misc/week-day.cpp	Week day
+misc/date.cpp	Date
+misc/python.py	Python
+misc/sqrt-decomposition.cpp	Sqrt Decomposition
