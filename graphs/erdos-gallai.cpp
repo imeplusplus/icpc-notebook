@@ -1,7 +1,7 @@
 // Erdos-Gallai - O(nlogn)
 // check if it's possible to create a simple graph (undirected edges) from
 // a sequence of vertice's degrees
-int gallai(vector<int> v) {
+bool gallai(vector<int> v) {
   vector<ll> sum;
   sum.resize(v.size());
 

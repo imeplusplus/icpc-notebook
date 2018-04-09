@@ -18,10 +18,9 @@ ll fexp(ll a, ll b, ll m = MOD) {
 
 // Multiplicative Inverse
 ll inv[N];
-
 inv[1] = 1;
-for (int i = 2; i < p; ++i)
-  inv[i] = (p - (p/i)*inv[p%i]%p)%p;
+for (int i = 2; i < MOD; ++i)
+  inv[i] = (MOD - (MOD/i)*inv[MOD%i]%MOD)%MOD;
 
 // Fibonacci
 // Fn = Fn-1 + Fn-2
@@ -33,3 +32,7 @@ for (int i = 2; i <= n; i++) f[i] = f[i-1] + f[i-2];
 // Cn = (2n)! / ((n+1)! * n!)
 // 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440
 cat[n] = (2*(2*n-1)/(n+1)) * cat[n-1]
+
+// Stirling
+// S(n, 1) = S(n, n) = 1
+// S(n, k) = k*S(n-1, k) + S(n-1, k-1)

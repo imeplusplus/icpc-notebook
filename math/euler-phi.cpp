@@ -1,6 +1,6 @@
 // Euler phi (totient)
 int ind = 0, pf = primes[0], ans = n;
-while (pf*pf <= n) {
+while (1ll*pf*pf <= n) {
   if (n%pf==0) ans -= ans/pf;
   while (n%pf==0) n /= pf;
   pf = primes[++ind];
