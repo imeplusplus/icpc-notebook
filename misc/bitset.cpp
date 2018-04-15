@@ -1,4 +1,4 @@
-Goes through the subsets of a set x :
+//Goes through the subsets of a set x :
 int b = 0;
 do {
 // process subset b
