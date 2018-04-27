@@ -9,6 +9,8 @@ pq.push(mp(0,0));
 while (!pq.empty()) {
   int u = pq.top().nd;
   int d = -pq.top().st;
+  pq.pop();
+
   if (d > dist[u]) continue;
   for (int i = 0; i < adj[u].size(); ++i) {
     int v = adj[u][i];
