@@ -49,6 +49,8 @@ struct point {
   ld dist(point x) { return (*this - x).abs(); }
   type dist2(point x) { return (*this - x).abs2(); }
 
+  ld arg() { return atan2l(y, x); }
+
   // Project point on vector y
   point project(point y) { return y * ((*this * y) / (y * y)); }
 
@@ -61,16 +63,10 @@ struct point {
     return project(x, y).on_seg(x, y) ? dist_line(x, y) :  min(dist(x), dist(y));
   }
 
-  point rotate(ld a) {
-    return point(cos(a)*x-sin(a)*y, sin(a)*x+cos(a)*y);
-  }
-
-  point rotate(point p) { // rotate around the argument from vector p
-    ld hyp = p.abs();
-    ld c = p.x / hyp;
-    ld s = p.y / hyp;
-    return point(c*x-s*y, s*x+c*y);
-  }
+  point rotate(ld sin, ld cos) { return point(cos*x-sin*y, sin*x+cos*y); }
+  point rotate(ld a) { return rotate(sin(a), cos(a)); }
+  // rotate around the argument of vector p
+  point rotate(point p) { return rotate(p.x / p.abs(), p.y / p.abs()); }
 };
 
 
