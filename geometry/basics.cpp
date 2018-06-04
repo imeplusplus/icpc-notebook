@@ -135,6 +135,26 @@ ld double_of_triangle_area(point p1, point p2, point p3) {
   return abs((p2-p1) % (p3-p1));
 }
 
+// TODO: test this code. This code has not been tested, please do it before proper use.
+// http://codeforces.com/problemset/problem/975/E is a good problem for testing.
+point centroid(vector<point> &v) {
+  int n = v.size();
+  type da = 0;
+  point m, c;
+
+  for(point p : v) m = m + p;
+  m = m / n;
+
+  for(int i=0; i<n; ++i) {
+    point p = v[i] - m, q = v[(i+1)%n] - m;
+    type x = p % q;
+    c = c + (p + q) * x;
+    da += x;
+  }
+
+  return c / (3 * da);
+}
+
 bool point_inside_triangle(point p, point p1, point p2, point p3) {
   ld a1, a2, a3, a;
   a =  double_of_triangle_area(p1, p2, p3);
