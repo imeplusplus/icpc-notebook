@@ -1,7 +1,7 @@
 // Pollard Rho - Integer factoring O(n^1/4)
 // requires n to be composite (use Miller Rabin to test)
 ll pollard(ll n) {
-  ll x, y, d, c=-1;
+  ll x, y, d, c = 1;
   if (n%2==0) return 2;
   while (1) {
     y = x = 2;
@@ -13,7 +13,7 @@ ll pollard(ll n) {
       if (d == n) break;
       else if (d > 1) return d;
     }
-    c--;
+    c++;
   }
 }
 
