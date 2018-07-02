@@ -1,31 +1,33 @@
-// TODO: retest this code. It was tested once, but had to be pushed for backup purposes.
-// DO TEST IT BEFORE PROPER USE.
-
 // Tarjan for SCC and Edge Biconnected Componentes - O(n + m)
-#include <bits/stdc++.h>
-using namespace std;
+vector<int> adj[N];
+stack<int> st;
+bool inSt[N];
 
-const int N = 1e5+5;
+int low[N], id[N], cmp[N];
+int cnt, cmpCnt;
 
-vector<int> adj[N], st;
-int num[N], low[N], vis[N], cnt, scc[N], sccn=1;
+void tarjan(int n){
+  id[n] = low[n] = ++cnt;
+  st.push(n), inSt[n] = true;
 
-void dfs(int u, int p) {
-  num[u] = low[u] = ++cnt;
-  int ch = 0;
-  st.push_back(u), vis[u] = 1;
-
-  for(int v : adj[u]) {
-    if (!num[v]) dfs(v, u);
-    // Uncomment below for biconnected components.
-    if (vis[v]/* and v != p*/) low[u] = min(low[u], low[v]);
+  for(auto x : adj[n]){
+    if(id[x] and inSt[x]) low[n] = min(low[n], id[x]);
+    else if(!id[x]) {
+      tarjan(x);
+      if(inSt[x])
+        low[n] = min(low[n], low[x]);
+    }
   }
 
-  if (low[u] == num[u]) while(1) {
-      int v = st.back(); st.pop_back();
-      scc[v] = sccn, vis[v] = 0;
-      if (v == u) { sccn++; break; }
+  if(low[n] == id[n]){
+    while(st.size()){
+      int x = st.top();
+      inSt[x] = false;
+      cmp[x] = cmpCnt;
+
+      st.pop();
+      if(x == n) break;
+    }
+    cmpCnt++;
   }
 }
-
-void tarjan(int n) { for(int i=1; i<=n; ++i) if (!num[i]) dfs(i, -1); }
