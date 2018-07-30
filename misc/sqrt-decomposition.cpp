@@ -7,7 +7,11 @@ void rem(int p) { /* remove value from aggregated data structure */ }
 
 struct query { int i, l, r, ans; } qs[N];
 
-bool c1(query a, query b) { return a.l/SQ == b.l/SQ ? a.r < b.r : a.l < b.l; }
+bool c1(query a, query b) {
+  if(a.l/SQ != b.l/SQ) return a.l < b.l;
+  return a.l/SQ&1 ? a.r > b.r : a.r < b.r;
+}
+
 bool c2(query a, query b) { return a.i < b.i; }
 
 /* inside main */
