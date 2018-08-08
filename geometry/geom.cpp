@@ -112,13 +112,13 @@ vector<point> convex_hull(vector<point> &pts) {
 
   // IF: Convex hull without collinear points
   for(point p : pts) {
-    while (n > 1 and (ch[n - 2] - ch[n-1])%(p - ch[n - 1]) < EPS) n--;
+    while (n > 1 and (ch[n - 1] - ch[n - 2])%(p - ch[n - 2]) < EPS) n--;
     ch[n++] = p;
   }
 
   /* ELSE IF: Convex hull with collinear points
   for(point p : pts) {
-    while (n > 1 and (ch[n - 2] - ch[n-1])%(p - ch[n - 1]) < -EPS) n--;
+    while (n > 1 and (ch[n - 1] - ch[n - 2])%(p - ch[n - 2]) < -EPS) n--;
     ch[n++] = p;
   }
 
