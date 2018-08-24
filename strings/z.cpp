@@ -1,11 +1,12 @@
-void z_f(char *s, int *z) {
-  int l=0,r=0, n=strlen(s);
-  for(int i = 1; i<n; i++) {
-    if(i <= r)
-      z[i]=min(z[i-l],r-i+1);
-    while(z[i]+i<n and s[z[i]+i]==s[z[i]])
-      z[i]++;
-    if(r<i+z[i]-1)
-      l=i,r=i+z[i]-1;
-  }
+vector<int> z(string s) {
+  int n = s.size();
+  vector<int> z(n);
+  int x = 0, y = 0;
+    for (int i = 1; i < n; i++) {
+      z[i] = max(0,min(z[i-x],y-i+1));
+      while (i+z[i] < n && s[z[i]] == s[i+z[i]]) {
+        x = i; y = i+z[i]; z[i]++;
+       }
+    }
+    return z;
 }

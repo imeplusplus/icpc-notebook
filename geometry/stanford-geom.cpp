@@ -18,6 +18,7 @@ double dist2(PT p, PT q)   { return dot(p-q,p-q); }
 double cross(PT p, PT q)   { return p.x*q.y-p.y*q.x; }
 ostream &operator<<(ostream &os, const PT &p) {
   os << "(" << p.x << "," << p.y << ")"; 
+  return os;
 }
 
 // rotate a point CCW or CW around the origin

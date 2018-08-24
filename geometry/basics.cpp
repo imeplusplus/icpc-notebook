@@ -49,6 +49,8 @@ struct point {
   ld dist(point x) { return (*this - x).abs(); }
   type dist2(point x) { return (*this - x).abs2(); }
 
+  ld arg() { return atan2l(y, x); }
+
   // Project point on vector y
   point project(point y) { return y * ((*this * y) / (y * y)); }
 
@@ -61,16 +63,10 @@ struct point {
     return project(x, y).on_seg(x, y) ? dist_line(x, y) :  min(dist(x), dist(y));
   }
 
-  point rotate(ld a) {
-    return point(cos(a)*x-sin(a)*y, sin(a)*x+cos(a)*y);
-  }
-
-  point rotate(point p) { // rotate around the argument from vector p
-    ld hyp = p.abs();
-    ld c = p.x / hyp;
-    ld s = p.y / hyp;
-    return point(c*x-s*y, s*x+c*y);
-  }
+  point rotate(ld sin, ld cos) { return point(cos*x-sin*y, sin*x+cos*y); }
+  point rotate(ld a) { return rotate(sin(a), cos(a)); }
+  // rotate around the argument of vector p
+  point rotate(point p) { return rotate(p.x / p.abs(), p.y / p.abs()); }
 };
 
 
@@ -137,6 +133,26 @@ vector<point> convex_hull(vector<point> pts) {
 // Double of the triangle area
 ld double_of_triangle_area(point p1, point p2, point p3) {
   return abs((p2-p1) % (p3-p1));
+}
+
+// TODO: test this code. This code has not been tested, please do it before proper use.
+// http://codeforces.com/problemset/problem/975/E is a good problem for testing.
+point centroid(vector<point> &v) {
+  int n = v.size();
+  type da = 0;
+  point m, c;
+
+  for(point p : v) m = m + p;
+  m = m / n;
+
+  for(int i=0; i<n; ++i) {
+    point p = v[i] - m, q = v[(i+1)%n] - m;
+    type x = p % q;
+    c = c + (p + q) * x;
+    da += x;
+  }
+
+  return c / (3 * da);
 }
 
 bool point_inside_triangle(point p, point p1, point p2, point p3) {
