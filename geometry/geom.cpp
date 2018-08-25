@@ -9,6 +9,11 @@ const double EPS = 1e-9, PI = acos(-1.);
 // Change long double to long long if using integers
 typedef long double type;
 
+//return -1: a < b, 0: a == b, 1: a > b
+int comp(type a, type b) {
+  return (a > b + EPS) - (a < b - EPS);
+}
+
 struct point {
   type x, y;
 
@@ -25,6 +30,13 @@ struct point {
   type operator %(point p) { return x*p.y - y*p.x; }
   type operator !() {return (*this)*(*this); };
 
+  bool onSegment(point a, point b) {
+    if(comp((*this-a)%(b-a), 0)) return 0;
+    return (comp(x, min(a.x, b.x)) >= 0 and
+            comp(x, max(a.x, b.x)) <= 0 and
+            comp(y, min(a.y, b.y)) >= 0 and
+            comp(y, max(a.y, b.y)) <= 0);
+  }
 };
 
 ostream &operator<<(ostream &os, const point &p) {
@@ -32,7 +44,7 @@ ostream &operator<<(ostream &os, const point &p) {
   return os;
 }
 
-point rotateCCW(point p, ld t) { 
+point rotateCCW(point p, ld t) {
   return point(p.x*cos(t)-p.y*sin(t), p.x*sin(t)+p.y*cos(t)); 
 }
 
@@ -59,20 +71,20 @@ ld distPointPlane(ld x, ld y, ld z,
   return abs(a*x+b*y+c*z-d)/sqrt(a*a+b*b+c*c);
 }
 
-bool linesColinear(point a, point b, point c, point d) {
+bool linesCollinear(point a, point b, point c, point d) {
   return abs((a-b)%(c-d)) < EPS and
          abs((a-b)%(a-c)) < EPS;
 }
 
 bool segmentIntersect(point a, point b, point c, point d) {
-  if(linesColinear(a, b, c, d)) {
+  if(linesCollinear(a, b, c, d)) {
     if (!(a - c) < EPS or !(a - d) < EPS or
         !(b - c) < EPS or !(b - d) < EPS) return true;
     if ((c-a)*(c-b) > 0 && (d-a)*(d-b) > 0 && (c-b)*(d-b) > 0)
       return false;
     return true;
   }
-
+  //overflow
   if (((d-a)%(b-a)) * ((c-a)%(b-a)) > 0) return false;
   if (((a-c)%(d-c)) * ((b-c)%(d-c)) > 0) return false;
   return true;
