@@ -3,8 +3,7 @@ int par[N];
 vector<int> adj[N];
 int sz[N], nxt[N];
 int h[N];
-int in[N], rin[N], out[N]; // out = subtree end, ed = heavy path end
-int ed[N];
+int in[N], rin[N], out[N];
 int t;
 
 void dfs_sz(int u = 1){
@@ -21,7 +20,6 @@ void dfs_sz(int u = 1){
 
 void dfs_hld(int u = 1){
   in[u] = t++;
-  ed[nxt[u]] = in[u];
   rin[in[u]] = u;
   for(auto v : adj[u]){
     nxt[v] = (v == adj[u][0] ? nxt[u] : v);
