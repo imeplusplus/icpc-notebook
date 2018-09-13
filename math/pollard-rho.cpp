@@ -30,6 +30,8 @@ void fator(ll n, vector<ll>& v) {
 //
 std::mt19937 rng((int) std::chrono::steady_clock::now().time_since_epoch().count());
 
+ull func(ull x, ull n, ull c) { return (mulmod(x, x, n) + c) % n; // f(x) = (x^2 + c) % n; }
+
 ull pollard(ull n) {
   // Finds a positive divisor of n
   ull x, y, d, c;
