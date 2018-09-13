@@ -9,6 +9,13 @@ ll mulmod(ll a, ll b, ll m = MOD) {
   return r;
 }
 
+// Another option for mulmod is using long double
+ull mulmod(ull a, ull b, ull m = MOD) {
+  ull q = (ld) a * (ld) b / (ld) m;
+  ull r = a * b - q * m;
+  return (r + m) % m;
+}
+
 // Fast exponential
 ll fexp(ll a, ll b, ll m = MOD) {
   ll r=1;
