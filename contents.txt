@@ -10,9 +10,10 @@ vimrc	vimrc
 [Graphs]
 #graphs/dfs.cpp	DFS
 #graphs/bfs.cpp	BFS
-#graphs/kahn.cpp	Toposort
+graphs/kahn.cpp	Toposort
 graphs/articulation.cpp	Articulation points and bridges
 graphs/kosaraju.cpp	Strongly Connected Components
+graphs/tarjan.cpp	Tarjan
 graphs/kruskal.cpp	MST (Kruskal)
 graphs/prim.cpp	MST (Prim)
 #graphs/dijkstra.cpp	Shortest Path (Dijkstra)
@@ -25,16 +26,19 @@ graphs/kuhn.cpp	Max Bipartite Cardinality Matching (Kuhn)
 graphs/lca.cpp	Lowest Common Ancestor
 graphs/2-sat.cpp	2-SAT
 graphs/erdos-gallai.cpp	Erdos-Gallai
+graphs/block_cut.cpp	Block Cut
+graphs/stanford-stoer-wagner.cpp	Stoer Wagner (Stanford)
 
 [Mathematics]
 math/basics.cpp	Basics
-#math/sieve.cpp	Sieve of Eratosthenes
+math/sieve.cpp	Sieve of Eratosthenes
 math/euler-phi.cpp	Euler Phi
 math/extended-euclid.cpp	Extended Euclidean
 math/miller-rabin.cpp	Miller-Rabin
 math/prime-factors.cpp	Prime Factors
 math/pollard-rho.cpp	Pollard-Rho
 math/fft.cpp	Fast Fourier Transform
+math/fft-tourist.cpp	Fast Fourier Transform(Tourist)
 math/ntt.cpp	Number Theoretic Transform
 math/fwht.cpp	Fast Walsh-Hadamard Transform
 math/chinese.cpp	Chinese Remainder
@@ -62,31 +66,37 @@ strings/suffix-automaton.cpp	Suffix Automaton
 strings/stanford-zfunction.cpp	Z Function (Stanford)
 
 [Data Structures]
-#data-structures/dsu.cpp	Disjoint Set Union
-#data-structures/sparse.cpp	Sparse Table
+data-structures/dsu.cpp	Disjoint Set Union
+data-structures/sparse.cpp	Sparse Table
 data-structures/sparse2d.cpp	Sparse Table 2D
-#data-structures/bit.cpp	Fenwick Tree
+data-structures/bit.cpp	Fenwick Tree
 data-structures/bit2d.cpp	Fenwick Tree 2D
 data-structures/bit-range.cpp	Range Update Point Query Fenwick Tree
-#data-structures/segtree.cpp	Segment Tree
+data-structures/segtree.cpp	Segment Tree
 data-structures/segtree2d.cpp	Segment Tree 2D
 data-structures/persistent-segtree.cpp	Persistent Segment Tree
 data-structures/persistent-segtree-naum.cpp	Persistent Segment Tree (Naum)
 data-structures/hld.cpp	Heavy-Light Decomposition
+data-structures/hld_tmp.cpp	Heavy-Light Decomposition (new)
 data-structures/centroid-decomposition.cpp	Centroid Decomposition
-#data-structures/trie.cpp	Trie
+data-structures/trie.cpp	Trie
 data-structures/mergesort-tree.cpp	Mergesort Tree
 data-structures/treap.cpp	Treap
 data-structures/stanford-kdtree.cpp	KD Tree (Stanford)
+data-structures/max-queue.cpp	Maximum Queue
+data-structures/ordered_set.cpp	Ordered Set
+data-structures/ita-lichao.cpp	Lichao Tree (ITA)
 
 [Dynamic Programming]
 dynamic-programming/lis.cpp	Longest Increasing Subsequence
 dynamic-programming/convex-hull-trick.cpp	Convex Hull Trick
+dynamic-programming/convex-hull-trick-emaxx.cpp	Convex Hull Trick (emaxx)
 dynamic-programming/divide-and-conquer-optimization.cpp	Divide and Conquer Optimization
 dynamic-programming/knuth-optimization.cpp	Knuth Optimization
 
 [Geometry]
 geometry/basics.cpp	Basic
+geometry/geom.cpp	Basic (new)
 geometry/closest-pair.cpp	Closest Pair of Points
 geometry/neighbour.cpp	Nearest Neighbours
 
@@ -94,6 +104,11 @@ geometry/neighbour.cpp	Nearest Neighbours
 geometry/stanford-geom.cpp	Basic
 geometry/stanford-convex-hull.cpp	Convex Hull
 geometry/stanford-delaunay.cpp	Delaunay Triangulation
+
+[Geometry (ITA)]
+geometry/ita-circle2d.cpp	Circulo 2d
+geometry/ita-minkowski.cpp	Minkowski
+geometry/ita-greatcircle.cpp	Great Circle
 
 [Miscellaneous]
 misc/builtin.cpp	builtin
@@ -103,3 +118,5 @@ misc/date.cpp	Date
 misc/stanford-latlong.cpp	Latitude Longitude (Stanford)
 misc/python.py	Python
 misc/sqrt-decomposition.cpp	Sqrt Decomposition
+misc/bitset.cpp	Bitset
+misc/ita-paren2polish.cpp	Parentesis to Poslish (ITA)
