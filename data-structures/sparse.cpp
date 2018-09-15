@@ -9,10 +9,10 @@ struct Sparse{
         t[i+1][j]=min(t[i][j],t[i][j+(1<<i)]);
   }
   int qry(int l, int r) {
-    int r=INF;
+    int a=INF;
     for(int i=29;l!=r;i--)
       if(l+(1<<i)<=r)
-        r=min(r,t[i][l]),l+=(1<<i);
-    return r=min(r,t[0][r]);
+        a=min(r,t[i][l]),l+=(1<<i);
+    return a=min(r,t[0][r]);
   }
 };
