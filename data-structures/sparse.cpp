@@ -12,7 +12,7 @@ struct Sparse{
     int a=INF;
     for(int i=29;l!=r;i--)
       if(l+(1<<i)<=r)
-        a=min(r,t[i][l]),l+=(1<<i);
-    return a=min(r,t[0][r]);
+        a=min(a,t[i][l]),l+=(1<<i);
+    return a=min(a,t[0][r]);
   }
 };
