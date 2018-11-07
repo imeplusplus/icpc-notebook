@@ -18,7 +18,7 @@ pair<vector<Point>, vector<Point>> ch(Point *v){
       vecs.pop_back(), hull.pop_back();
 
     if(hull.size())
-      vecs.pb(v[i] - hull.back());
+      vecs.pb((v[i] - hull.back()).ccw());
     
     hull.pb(v[i]);
   }
