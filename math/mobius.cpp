@@ -3,8 +3,8 @@
 // else (-1)^k, k = #(p) | p is prime and n%p == 0
 
 int mobius(int n){
+  if(n == 1) return 1;
   int p = 0;
-  int tmp = n;
   for(int i = 2; i*i <= n; i++)
     if(n%i == 0){
       n /= i;
