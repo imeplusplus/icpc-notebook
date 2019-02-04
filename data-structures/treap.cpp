@@ -124,7 +124,7 @@ struct treap {
   void insert(int val) {
     if (has(root, val)) return; // avoid repeated values
     push(root);
-    node* x = new node(c);
+    node* x = new node(val);
     auto t = split(root, order(root, val));
     root = merge(merge(t.st, x), t.nd);
   }
