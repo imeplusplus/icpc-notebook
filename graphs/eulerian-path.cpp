@@ -28,10 +28,10 @@ dfs(0);
 for(int i = 0; i < cnt; i++)
   if(adj[i].size()) //-> There is no valid eulerian circuit/path in this case because the graph is not conected
   
-ans.pop_back();
+ans.pop_back(); // Since it's a curcuit, the first and the last are repeated
 reverse(ans.begin(), ans.end());
 
-int bg = 0;
+int bg = 0; // Is used to mark where the eulerian path begins
 if(v.size()){
   for(int i = 0; i < ans.size(); i++)
     if(ans[i] == v[1] and ans[(i + 1)%ans.size()] == v[0]){
