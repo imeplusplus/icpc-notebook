@@ -3,23 +3,24 @@ vector<int> adj[N];
 stack<int> st;
 bool inSt[N];
 
-int low[N], id[N], cmp[N];
+int id[N], cmp[N];
 int cnt, cmpCnt;
 
-void tarjan(int n){
-  id[n] = low[n] = ++cnt;
+int tarjan(int n){
+  int low;
+  id[n] = low = ++cnt;
   st.push(n), inSt[n] = true;
 
   for(auto x : adj[n]){
-    if(id[x] and inSt[x]) low[n] = min(low[n], id[x]);
+    if(id[x] and inSt[x]) low = min(low, id[x]);
     else if(!id[x]) {
-      tarjan(x);
+      int lowx = tarjan(x);
       if(inSt[x])
-        low[n] = min(low[n], low[x]);
+        low = min(low, lowx);
     }
   }
 
-  if(low[n] == id[n]){
+  if(low == id[n]){
     while(st.size()){
       int x = st.top();
       inSt[x] = false;
@@ -30,4 +31,5 @@ void tarjan(int n){
     }
     cmpCnt++;
   }
+  return low;
 }
