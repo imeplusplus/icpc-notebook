@@ -43,3 +43,11 @@ cat[n] = (2*(2*n-1)/(n+1)) * cat[n-1]
 // Stirling
 // S(n, 1) = S(n, n) = 1
 // S(n, k) = k*S(n-1, k) + S(n-1, k-1)
+
+// Burnside's Lemma
+// Counts the number of equivalence classes in a set.
+// Let G be a group of operations acting on a set X. The number of equivalence classes given those operations |X/G| satisfies:
+//
+// |X/G| = 1/|G| * sum(I(g)) for each g in G
+//
+// Being I(g) the number of fixed points given the operation g.
