@@ -8,8 +8,9 @@ int t;
 
 void dfs_sz(int u = 1){
   sz[u] = 1;
-  for(auto &v : adj[u]){
+  for(auto &v : adj[u]) if(v != par[u]) {
     h[v] = h[u] + 1;
+    par[v] = u;
 
     dfs_sz(v);
     sz[u] += sz[v];
@@ -21,7 +22,7 @@ void dfs_sz(int u = 1){
 void dfs_hld(int u = 1){
   in[u] = t++;
   rin[in[u]] = u;
-  for(auto v : adj[u]){
+  for(auto v : adj[u]) if(v != par[u]) {
     nxt[v] = (v == adj[u][0] ? nxt[u] : v);
     dfs_hld(v);
   }
