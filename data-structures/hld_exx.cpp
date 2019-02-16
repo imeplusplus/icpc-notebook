@@ -1,8 +1,6 @@
-const int N = 2e5 + 5;
-int par[N];
 vector<int> adj[N];
 int sz[N], nxt[N];
-int h[N];
+int h[N], par[N];
 int in[N], rin[N], out[N];
 int t;
 
@@ -38,4 +36,26 @@ int lca(int u, int v){
 
   if(h[u] > h[v]) swap(u, v);
   return u;
+}
+
+int query_up(int u, int v) {
+  if(u == v) return 1;
+  int ans = 0;
+  while(1){
+    if(nxt[u] == nxt[v]){
+      if(u == v) break;
+      ans = max(ans, query(1, 0, n - 1, in[v] + 1, in[u]));
+      break;
+    }
+
+    ans = max(ans, query(1, 0, n - 1, in[nxt[u]], in[u]));
+    u = par[nxt[u]];
+  }
+
+  return ans;
+}
+
+int hld_query(int u, int v) {
+  int l = lca(u, v);
+  return mult(query_up(u, l), query_up(v, l));
 }
