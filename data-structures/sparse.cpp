@@ -4,7 +4,7 @@ int sparse[N][M];
 
 void build() {
   for(int i = 0; i < n; i++)
-    sparse[i][0].pb(c[i]);
+    sparse[i][0] = v[i];
 
   for(int j = 1; j < M; j++)
     for(int i = 0; i < n; i++)
