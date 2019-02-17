@@ -10,11 +10,11 @@ void build() {
     for(int i = 0; i < n; i++)
       sparse[i][j] = 
         i + (1 << j - 1) < n
-        ? merge(sparse[i][j - 1], sparse[i + (1 << j - 1)][j - 1]) 
+        ? min(sparse[i][j - 1], sparse[i + (1 << j - 1)][j - 1]) 
         : sparse[i][j - 1];
 }
 
-vector<int> query(int a, int b){
+int query(int a, int b){
   int pot = 32 - __builtin_clz(b - a) - 1;
-  return merge(sparse[a][pot], sparse[b - (1 << pot) + 1][pot]);
+  return min(sparse[a][pot], sparse[b - (1 << pot) + 1][pot]);
 }
