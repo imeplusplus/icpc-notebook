@@ -18,6 +18,10 @@ bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) {
     return true;
 }
 
+// all x' and y' are a valid solution for any integer k
+// x' = x + k*b/gcd
+// y' = y - k*a/gcd
+// Here a and b are actually a/gcd and b/gcd
 void shift_solution (int & x, int & y, int a, int b, int cnt) {
     x += cnt * b;
     y -= cnt * a;
