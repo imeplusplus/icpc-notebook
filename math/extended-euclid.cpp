@@ -70,6 +70,10 @@ int find_all_solutions (int a, int b, int c, int minx, int maxx, int miny, int m
   return (rx - lx) / abs(b) + 1;
 }
 
+//Solves
+//t = a mod m1
+//t = b mod m2
+//ans = t mod lcm(m1, m2)
 bool chinese_remainder(ll a, ll b, ll m1, ll m2, ll &ans, ll &lcm){
   ll x, y, g, c = b - a;
   euclid(m1, m2, x, y, g);
