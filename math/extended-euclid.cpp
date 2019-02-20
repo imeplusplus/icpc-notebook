@@ -79,7 +79,7 @@ bool chinese_remainder(ll a, ll b, ll m1, ll m2, ll &ans, ll &lcm){
   euclid(m1, m2, x, y, g);
   if(c%g) return false;
 
-  lcm = m1*m2/g;
+  lcm = m1/g*m2;
   ans = ((a + m1*((x*c/g)%(m2/g)))%lcm + lcm)%lcm;
   return true;
 }
