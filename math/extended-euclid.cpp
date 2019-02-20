@@ -80,6 +80,6 @@ bool chinese_remainder(ll a, ll b, ll m1, ll m2, ll &ans, ll &lcm){
   if(c%g) return false;
 
   lcm = m1/g*m2;
-  ans = ((a + m1*((c/g*x)%(m2/g)))%lcm + lcm)%lcm;
+  ans = ((a + c/g*x % (m2/g) * m1)%lcm + lcm)%lcm;
   return true;
 }
