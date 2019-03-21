@@ -1,66 +1,54 @@
 // Suffix Array O(nlogn)
-char s[N];
-int n, r, ra[N], sa[N], tra[N], tsa[N], c[N]; // n = strlen(s)
+// s.push('$');
+vector<int> suffix_array(string &s){
+  int n = s.size(), alph = 256;
+  vector<int> cnt(max(n, alph)), p(n), c(n);
 
-void count(int k) {
-  int sum = 0, x = max(300, n); cl(c, 0);
-  for (int i = 0; i < n; ++i) c[i+k<n ? ra[i+k] : 0]++;
-  for (int i = 0; i < x; ++i) sum += c[i], c[i] = sum-c[i];
-  for (int i = 0; i < n; ++i) tsa[c[sa[i]+k<n ? ra[sa[i]+k] : 0]++] = sa[i];
-  for (int i = 0; i < n; ++i) sa[i] = tsa[i];
-}
+  for(auto c : s) cnt[c]++;
+  for(int i = 1; i < alph; i++) cnt[i] += cnt[i - 1];
+  for(int i = 0; i < n; i++) p[--cnt[s[i]]] = i;
+  for(int i = 1; i < n; i++) 
+    c[p[i]] = c[p[i - 1]] + (s[p[i]] != s[p[i - 1]]);
 
-void suffixarray() {
-  for (int i = 0; i < n; ++i) ra[i] = s[i], sa[i] = i;
-  for (int k = 1; k < n; k <<= 1) {
-    count(k); count(0);
-    tra[sa[0]] = r = 0;
-    for (int i = 1; i < n; ++i)
-      tra[sa[i]] = (ra[sa[i]] == ra[sa[i-1]] and ra[sa[i]+k] == ra[sa[i-1]+k]) ? r : ++r;
-    for (int i = 0; i < n; ++i) ra[i] = tra[i];
-    if (ra[sa[n-1]] == n-1) break;
+  vector<int> c2(n), p2(n);
+
+  for(int k = 0; (1 << k) < n; k++){
+    int classes = c[p[n - 1]] + 1;
+    fill(cnt.begin(), cnt.begin() + classes, 0);
+
+    for(int i = 0; i < n; i++) p2[i] = (p[i] - (1 << k) + n)%n;
+    for(int i = 0; i < n; i++) cnt[c[i]]++;
+    for(int i = 1; i < classes; i++) cnt[i] += cnt[i - 1];
+    for(int i = n - 1; i >= 0; i--) p[--cnt[c[p2[i]]]] = p2[i];
+
+    c2[p[0]] = 0;
+    for(int i = 1; i < n; i++){
+      pair<int, int> b1 = {c[p[i]], c[(p[i] + (1 << k))%n]};
+      pair<int, int> b2 = {c[p[i - 1]], c[(p[i - 1] + (1 << k))%n]};
+      c2[p[i]] = c2[p[i - 1]] + (b1 != b2);
+    }
+
+    c.swap(c2);
   }
-}
-
-// String matching with SA O(mlogn)
-int mlo, mhi;
-int match(char p[], int m) {
-  int lo = 0, hi = n-1;
-  while (lo < hi) {
-    int mid = (lo+hi)/2;
-    int res = strncmp(s+sa[mid], p, m);
-    if (res < 0) lo = mid+1;
-    else hi = mid;
-  }
-  if (strncmp(s+sa[lo], p, m)) return 0; // no match
-  mlo = lo;
-
-  lo = 0, hi = n-1;
-  while (lo < hi) {
-    int mid = (lo+hi)/2;
-    int res = strncmp(s+sa[mid], p, m);
-    if (res <= 0) lo = mid+1;
-    else hi = mid;
-  }
-  if (strncmp(s+sa[hi], p, m)) hi--;
-  mhi = hi;
-  return 1;
+  return p;
 }
 
 // Longest Common Prefix with SA O(n)
-// strcat(s, "$"); n = strlen(s);
-int phi[N], plcp[N], lcp[N];
-void calcLCP() {
-  int l = 0;
-  phi[sa[0]] = -1; plcp[sa[0]] = 0;
-  for (int i = 1; i < n; ++i) phi[sa[i]] = sa[i-1];
-  for (int i = 0; i < n; ++i) {
-    if (phi[i] == -1) continue;
-    while (s[i+l] == s[phi[i]+l]) l++;
-    plcp[i] = l;
-    l = max(l-1, 0);
+vector<int> lcp(string &s, vector<int> &p){
+  int n = s.size();
+  vector<int> ans(n - 1), pi(n);
+  for(int i = 0; i < n; i++) pi[p[i]] = i;
+
+  int lst = 0;
+  for(int i = 0; i < n - 1; i++){
+    if(pi[i] == n - 1) continue;
+    while(s[i + lst] == s[p[pi[i] + 1] + lst]) lst++;
+
+    ans[pi[i]] = lst;
+    lst = max(0, lst - 1);
   }
-  for (int i = 0; i < n; ++i) lcp[i] = plcp[sa[i]];
+
+  return ans;
 }
 
 // Longest Repeated Substring O(n)
@@ -74,3 +62,6 @@ for (int i = 0; i < n; ++i) lrs = max(lrs, lcp[i]);
 int lcs = 0;
 for (int i = 1; i < n; ++i) if ((sa[i] < m) != (sa[i-1] < m))
   lcs = max(lcs, lcp[i]);
+
+// To calc LCS for multiple texts use a slide window with minqueue
+// The numver of different substrings of a string is n*(n + 1)/2 - sum(lcs[i]) 

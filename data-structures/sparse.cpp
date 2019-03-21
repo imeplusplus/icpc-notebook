@@ -1,18 +1,20 @@
-struct Sparse{
-  int n, t[30][N];
-  void init(int _n, int *v) {
-    n = _n; f=_f;
+const int N;
+const int M; //log2(N)
+int sparse[N][M];
+
+void build() {
+  for(int i = 0; i < n; i++)
+    sparse[i][0] = v[i];
+
+  for(int j = 1; j < M; j++)
     for(int i = 0; i < n; i++)
-      t[0][i]=v[i];
-    for(int i = 0; i < 29; i++)
-      for(int j = 0; j+(1<<i)<n; j++)
-        t[i+1][j]=min(t[i][j],t[i][j+(1<<i)]);
-  }
-  int qry(int l, int r) {
-    int a=INF;
-    for(int i=29;l!=r;i--)
-      if(l+(1<<i)<=r)
-        a=min(a,t[i][l]),l+=(1<<i);
-    return a=min(a,t[0][r]);
-  }
-};
+      sparse[i][j] = 
+        i + (1 << j - 1) < n
+        ? min(sparse[i][j - 1], sparse[i + (1 << j - 1)][j - 1]) 
+        : sparse[i][j - 1];
+}
+
+int query(int a, int b){
+  int pot = 32 - __builtin_clz(b - a) - 1;
+  return min(sparse[a][pot], sparse[b - (1 << pot) + 1][pot]);
+}
