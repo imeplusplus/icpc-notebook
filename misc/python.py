@@ -3,7 +3,7 @@ import sys
 sys.stdout = open('out','w')
 sys.stdin  = open('in' ,'r')
 
-//Dumby example
+//Dummy example
 R = lambda: map(int, input().split())
 n, k = R(),
 v, t = [], [0]*n
