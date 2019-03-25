@@ -7,6 +7,7 @@ void add(int u, int v){
   adj[v^1].pb(u^1);
 }
 
+//0-indexed variables; starts from var_0 and goes to var_n-1
 for(int i = 0; i < n; i++){
   tarjan(2*i), tarjan(2*i + 1);
   //cmp is a tarjan variable that says the component from a certain node
