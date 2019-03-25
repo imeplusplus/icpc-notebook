@@ -7,8 +7,6 @@ void add(int u, int v){
   adj[v^1].pb(u^1);
 }
 
-vector<bool> ans(n);
-
 for(int i = 0; i < n; i++){
   tarjan(2*i), tarjan(2*i + 1);
   //cmp is a tarjan variable that says the component from a certain node
