@@ -6,6 +6,11 @@ bool inSt[N];
 int id[N], cmp[N];
 int cnt, cmpCnt;
 
+void clear(){
+  memset(id, 0, sizeof id);
+  cnt = cmpCnt = 0;
+}
+
 int tarjan(int n){
   int low;
   id[n] = low = ++cnt;
