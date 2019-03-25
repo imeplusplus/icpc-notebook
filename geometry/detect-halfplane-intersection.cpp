@@ -1,3 +1,9 @@
+//
+// Detect whether there is a non-empty intersection in a set of halfplanes
+// Complexity O(n)
+//
+// By Agnez
+//
 pair<char, point> half_inter(vector<pair<point,point> > &vet){
 	random_shuffle(all(vet));
 	point p;
