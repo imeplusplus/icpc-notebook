@@ -6,7 +6,7 @@ int n, m; // n = strlen(s), m = strlen(p)
 void rabin() {
   if (n<m) return;
 
-  int hp = 0, hs = 0, E = 1;
+  ll hp = 0, hs = 0, E = 1;
   for (int i = 0; i < m; ++i)
     hp = ((hp*B)%MOD + p[i])%MOD,
     hs = ((hs*B)%MOD + s[i])%MOD,
