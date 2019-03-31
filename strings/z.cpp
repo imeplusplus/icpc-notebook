@@ -1,12 +1,13 @@
-vector<int> z(string s) {
-  int n = s.size();
-  vector<int> z(n);
-  int x = 0, y = 0;
-  for (int i = 1; i < n; i++) {
-    z[i] = max(0,min(z[i-x],y-i+1));
-    while (i+z[i] < n && s[z[i]] == s[i+z[i]]) {
-      x = i; y = i+z[i]; z[i]++;
-     }
+// Z-Function - O(n)
+
+string s;
+int z[N];
+
+void zfunc(string s){
+  for(int i = 1, l = 0, r = 0, n = s.size(); i < n; i++){
+    if(i <= r) z[i] = min(z[i-l], r - i + 1);
+    while(i + z[i] < n and s[z[i]] == s[z[i] + i]) z[i]++;
+    if(i + z[i] - 1 > r) l = i, r = i + z[i] - 1;
   }
-  return z;
 }
+
