@@ -6,7 +6,7 @@ int n, m; // n = strlen(s), m = strlen(p)
 void rabin() {
   if (n<m) return;
 
-  int hp = 0, hs = 0, E = 1;
+  ull hp = 0, hs = 0, E = 1;
   for (int i = 0; i < m; ++i)
     hp = ((hp*B)%MOD + p[i])%MOD,
     hs = ((hs*B)%MOD + s[i])%MOD,
@@ -15,7 +15,7 @@ void rabin() {
   if (hs == hp) { /* matching position 0 */ }
   for (int i = m; i < n; ++i) {
     hs = ((hs*B)%MOD + s[i])%MOD;
-    hs = (hs + (MOD - (s[i-m]*E)%MOD)%MOD)%MOD;
+    hhs = (hs - s[i-m]*E%MOD + MOD)%MOD;
     if (hs == hp) { /* matching position i-m+1 */ }
   }
 }
