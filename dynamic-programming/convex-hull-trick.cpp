@@ -15,6 +15,7 @@ int nh, pos;
 line hull[N];
 
 bool check(line s, line t, line u) {
+  // verify if it can overflow. If it can just divide using long double
   return (s.b - t.b)*(u.m - s.m) < (s.b - u.b)*(t.m - s.m);
 }
 
@@ -29,8 +30,9 @@ void update(line s) {
 
   if (nh == 1 and hull[nh-1].b == s.b) nh--;
   if (nh > 0  and hull[nh-1].m >= s.m) return;
-  while (nh >= 2 and !check(hull[nh-2], hull[nh-1], l)) nh--, pos = min(pos, nh);
-  hull[nh++] = l;
+  while (nh >= 2 and !check(hull[nh-2], hull[nh-1], s)) nh--;
+  pos = min(pos, nh);
+  hull[nh++] = s;
 }
 
 type eval(int id, type x) { return hull[id].b + hull[id].m * x; }
