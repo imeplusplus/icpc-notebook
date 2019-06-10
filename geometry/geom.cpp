@@ -99,9 +99,9 @@ point lineIntersection(point a, point b, point c, point d) {
 }
 
 point circumcircle(point a, point b, point c) {
-	point u = rot90CW(b-a);
+  point u = rot90CW(b-a);
   point v = rot90CW(c-a);
-	point n = (c-b)/2;
+  point n = (c-b)/2;
   return ((a+c)/2) + (v*((u%n)/(v%u)));
 }
 
