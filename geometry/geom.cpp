@@ -48,6 +48,9 @@ point rotateCCW(point p, ld t) {
   return point(p.x*cos(t)-p.y*sin(t), p.x*sin(t)+p.y*cos(t)); 
 }
 
+point rot90CCW (point p1) { return point(-p1.y, p1.x); }
+point rot90CW (point p1) { return point(p1.y, -p1.x); }
+
 point projectPointOnLine(point p, point a, point b) {
   return a + (b-a)*((p-a)*(b-a))/((b-a)*(b-a));
 }
@@ -95,11 +98,11 @@ point lineIntersection(point a, point b, point c, point d) {
   return a + b*(c%d)/(b%d);
 }
 
-point circleCenter(point a, point b, point c) {
-  b=(a+b)/2;
-  c=(a+c)/2;
-  return lineIntersection(b, b+rotateCCW(a-b, -PI/2),
-                          c, c+rotateCCW(a-c, -PI/2));
+point circumcircle(point a, point b, point c) {
+	point u = rot90CW(b-a);
+  point v = rot90CW(c-a);
+	point n = (c-b)/2;
+  return ((a+c)/2) + (v*((u%n)/(v%u)));
 }
 
 // Sorting points in counterclockwise order.
