@@ -1,5 +1,8 @@
 // Extended Euclid: gcd(a, b) = x*a + y*b
-void euclid(int a, int b, int &x, int &y, int &d) {
+// The solutions are:
+// x = x0 + k*b/gcd
+// y = y0 + k*a/gcd
+void euclid(ll a, ll b, ll &x, ll &y, ll &d) {
   if (b) euclid(b, a%b, y, x, d), y -= x*(a/b);
   else x = 1, y = 0, d = a;
 }
@@ -82,4 +85,25 @@ bool chinese_remainder(ll a, ll b, ll m1, ll m2, ll &ans, ll &lcm){
   lcm = m1/g*m2;
   ans = ((a + c/g*x % (m2/g) * m1)%lcm + lcm)%lcm;
   return true;
+}
+
+// FIXME verify if it's correct!
+// n statements: x == a_i mod b_i
+ll norm(ll x, ll mod) { x %= mod; return x<0 ? x+mod : x; }
+
+ll chinese(int n, int a[], int b[]) {
+  ll ans = a[0], l = b[0];
+  for (int i = 1; i < n; i++) {
+    ll x, y, d;
+    euclid(l, b[i], x, y, d);
+    if ((a[i] - ans) % d != 0) {
+      // no solution
+      return -1;
+    }
+
+    ans = norm(ans + x * (a[i] - ans) / d % (b[i] / d) * l, l * b[i] / d);
+    l = lcm(l, b[i]);
+  }
+
+  return ans;
 }
