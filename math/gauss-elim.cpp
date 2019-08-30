@@ -1,4 +1,4 @@
-//Gausian Elimination
+//Gaussian Elimination
 //double A[N][M+1], X[M]
 
 // if n < m, there's no solution
