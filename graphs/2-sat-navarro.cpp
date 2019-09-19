@@ -26,7 +26,7 @@ void dfs(int x){
 
 void dfst(int x){
   cmp[x] = cnt, vis[x] = 0;
-  for(auto v : adj[x]) if(vis[v]) dfst(v);
+  for(auto v : adjt[x]) if(vis[v]) dfst(v);
 }
 
 bool run2sat(){
