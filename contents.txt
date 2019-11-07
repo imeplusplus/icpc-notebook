@@ -82,7 +82,7 @@ data-structures/trie.cpp	Trie
 data-structures/mergesort-tree.cpp	Mergesort Tree
 data-structures/treap.cpp	Treap
 data-structures/stanford-kdtree.cpp	KD Tree (Stanford)
-data-structures/min-queue.cpp	Mainimum Queue
+data-structures/min-queue.cpp	Minimum Queue
 data-structures/ordered_set.cpp	Ordered Set
 data-structures/ita-lichao.cpp	Lichao Tree (ITA)
 
