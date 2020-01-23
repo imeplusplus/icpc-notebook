@@ -1,3 +1,5 @@
+// USE INF = 1e9!
+
 // w: weight or cost, c : capacity
 struct edge {int v, f, w, c; };
 
@@ -25,8 +27,8 @@ void clear() {
 void min_cost_max_flow() {
   flw = 0, cst = 0;
   while (flw < flw_lmt) {
-    memset(et, 0, node_count * sizeof et[0]);
-    memset(d, 63, node_count * sizeof d[0]);
+    memset(et, 0, sizeof et);
+    memset(d, 63, sizeof d);
     deque<int> q;
     q.push_back(src), d[src] = 0;
 
