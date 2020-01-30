@@ -52,9 +52,16 @@ void build() {
     while (u and !nxt[u][ch[v]]) u = f[u];
     f[v] = nxt[u][ch[v]];
     cnt[v] += cnt[f[v]];
+    elem[v] |= elem[f[v]];
 
-    for (int i = 0; i < 26; ++i) if (nxt[v][i])
-      q.push(nxt[v][i]);
+    for (int i = 0; i < 26; ++i) {
+      if (nxt[v][i]) q.push(nxt[v][i]);
+      else {
+        int ax = f[v];
+        while(ax and !nxt[ax][i]) ax = f[ax];
+        nxt[v][i] = nxt[ax][i];
+      }
+    }
   }
 }
 
