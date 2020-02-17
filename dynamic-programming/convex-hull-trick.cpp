@@ -49,10 +49,8 @@ type eval(int id, type x) { return hull[id].b + hull[id].m * x; }
 */
 type query(type x) {
     while (pos+1 < nh and eval(pos, x) > eval(pos+1, x)) pos++;
-    // ATTENTION! If using minimum CHT (with -b and -m),
-    // comment the line above and uncomment the line below:
-    // while (pos+1 < nh and eval(pos, x) < eval(pos+1, x)) pos++;
     return eval(pos, x);
+    // return -eval(pos, x);    ATTENTION: Uncomment for minimum CHT
 }
 
 // Ternary search query - O(logn) for each query
@@ -61,12 +59,10 @@ type query(type x) {
     while (lo < hi) {
         int mid = (lo+hi)/2;
         if (eval(mid, x) < eval(mid+1, x)) hi = mid;
-        // ATTENTION! If using minimum CHT (with -b and -m),
-        // comment the line above and uncomment the line below:
-        // if (eval(mid, x) > eval(mid+1, x)) hi = mid;
         else lo = mid+1;
     }
     return eval(lo, x);
+    // return -eval(lo, x);     ATTENTION: Uncomment for minimum CHT
 }
 
 // better use geometry line_intersect (this assumes s and t are not parallel)
