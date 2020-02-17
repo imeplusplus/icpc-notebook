@@ -1,7 +1,7 @@
 // Convex Hull Trick
 
 // ATTENTION: This is the maximum convex hull. If you need the minimum
-// CHT { -b, -m } and modify the query function.
+// CHT use {-b, -m} and modify the query function.
 
 // In case of floating point parameters swap long long with long double
 typedef long long type;
