@@ -11,8 +11,8 @@ struct line { type b, m; };
 line v[N]; // lines from input
 int n; // number of lines
 // in main:
-sort(v, v+n+1, [](line s, line t){
-     return s.b == t.b ? s.m < t.m : s.b > t.b });
+sort(v, v+n, [](line s, line t){
+     return s.b == t.b ? s.m < t.m : s.b > t.b; });
 
 // nh: number of lines on convex hull
 // pos: position for linear time search
