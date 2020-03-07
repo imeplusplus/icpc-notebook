@@ -14,6 +14,12 @@ int comp(type a, type b) {
   return (a > b + EPS) - (a < b - EPS);
 }
 
+bool ge(type x, type y) {return x + EPS > y;}
+bool le(type x, type y) {return x - EPS < y;}
+bool eq(type x, type y) {return ge(x, y) and le(x, y);}
+int sign(type x) { return ge(x, 0) - le(x, 0); }
+
+
 struct point {
   type x, y;
 
@@ -84,9 +90,12 @@ bool segmentIntersect(point a, point b, point c, point d) {
       return false;
     return true;
   }
-  //overflow
-  if (((d-a)%(b-a)) * ((c-a)%(b-a)) > 0) return false;
-  if (((a-c)%(d-c)) * ((b-c)%(d-c)) > 0) return false;
+  int d1 = sign((d-a)%(b-a));
+  int d2 = sign((c-a)%(b-a));
+  int d3 = sign((a-c)%(d-c));
+  int d4 = sign((b-c)%(d-c));
+
+  if (d1 * d2 > 0 or d3 * d4 > 0) return false;
   return true;
 }
 
