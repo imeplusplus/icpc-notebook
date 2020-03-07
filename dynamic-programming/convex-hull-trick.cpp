@@ -51,6 +51,7 @@ type query(type x) {
 }
 
 // Ternary search query - O(logn) for each query
+/*
 type query(type x) {
   int lo = 0, hi = nh-1;
   while (lo < hi) {
@@ -65,3 +66,4 @@ type query(type x) {
 // better use geometry line_intersect (this assumes s and t are not parallel)
 ld intersect_x(line s, line t) { return (t.b - s.b)/(ld)(s.m - t.m); }
 ld intersect_y(line s, line t) { return s.b + s.m * intersect_x(s, t); }
+*/
