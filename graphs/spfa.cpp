@@ -9,7 +9,7 @@ while (!q.empty()) {
   int u = q.front(); q.pop(); inq[u]=0;
   for (int i = 0; i < adj[u].size(); ++i) {
     int v = adj[u][i], w = adjw[u][i];
-    if (dist[v] > dist[u] + v) {
+    if (dist[v] > dist[u] + w) {
       dist[v] = dist[u] + w;
       if (!inq[v]) q.push(v), inq[v] = 1;
     }

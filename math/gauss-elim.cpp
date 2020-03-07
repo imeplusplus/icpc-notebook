@@ -1,10 +1,16 @@
+//Gaussian Elimination
 //double A[N][M+1], X[M]
+
+// if n < m, there's no solution
+// column m holds the right side of the equation
+// X holds the solutions
 
 for(int j=0; j<m; j++) { //collumn to eliminate
   int l = j;
   for(int i=j+1; i<n; i++) //find largest pivot
-    if(fabs(A[i][j])>fabs(A[l][j]))
+    if(abs(A[i][j])>abs(A[l][j]))
       l=i;
+  if(abs(A[i][j]) < EPS) continue;
   for(int k = 0; k < m+1; k++) { //Swap lines
     swap(A[l][k],A[j][k]);
   }

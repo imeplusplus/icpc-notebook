@@ -1,5 +1,5 @@
 // Finds a primitive root modulo p
-// To make it works for any value of p, we must add calculation of ϕ(p)
+// To make it works for any value of p, we must add calculation of phi(p)
 // n is 1, 2, 4 or p^k or 2*p^k (p odd in both cases)
 ll root(ll p) {
   ll n = p-1;

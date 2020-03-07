@@ -58,7 +58,9 @@ struct treap {
     update(t);
     return t;
   }
-
+  
+  // pos: amount of nodes in the left subtree or 
+  // the smallest position of the right subtree in a 0-indexed array
   pair<node*, node*> split(node* t, int pos) {
     if (!t) return {0, 0};
     push(t);
@@ -80,6 +82,7 @@ struct treap {
   // used when the values are just additional data
   // the positions are known when it's built, after that you
   // query to get the values at specific positions
+  // 0-indexed array! 
   /*
   void insert(int pos, int val) {
     push(root);

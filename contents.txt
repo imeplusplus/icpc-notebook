@@ -33,7 +33,7 @@ graphs/stanford-stoer-wagner.cpp	Stoer Wagner (Stanford)
 math/basics.cpp	Basics
 math/sieve.cpp	Sieve of Eratosthenes
 math/euler-phi.cpp	Euler Phi
-math/extended-euclid.cpp	Extended Euclidean
+math/extended-euclid.cpp	Extended Euclidean and Chinese Remainder
 math/miller-rabin.cpp	Miller-Rabin
 math/prime-factors.cpp	Prime Factors
 math/pollard-rho.cpp	Pollard-Rho
@@ -41,7 +41,6 @@ math/fft.cpp	Fast Fourier Transform
 math/fft-tourist.cpp	Fast Fourier Transform(Tourist)
 math/ntt.cpp	Number Theoretic Transform
 math/fwht.cpp	Fast Walsh-Hadamard Transform
-math/chinese.cpp	Chinese Remainder
 math/primitive-root.cpp	Primitive Root
 math/gauss-elim.cpp	Gaussian Elimination (double)
 math/gauss-elim-prime.cpp	Gaussian Elimination (modulo prime)
@@ -77,13 +76,13 @@ data-structures/segtree2d.cpp	Segment Tree 2D
 data-structures/persistent-segtree.cpp	Persistent Segment Tree
 data-structures/persistent-segtree-naum.cpp	Persistent Segment Tree (Naum)
 data-structures/hld.cpp	Heavy-Light Decomposition
-data-structures/hld_tmp.cpp	Heavy-Light Decomposition (new)
+data-structures/hld_exx.cpp	Heavy-Light Decomposition (new)
 data-structures/centroid-decomposition.cpp	Centroid Decomposition
 data-structures/trie.cpp	Trie
 data-structures/mergesort-tree.cpp	Mergesort Tree
 data-structures/treap.cpp	Treap
 data-structures/stanford-kdtree.cpp	KD Tree (Stanford)
-data-structures/max-queue.cpp	Maximum Queue
+data-structures/min-queue.cpp	Minimum Queue
 data-structures/ordered_set.cpp	Ordered Set
 data-structures/ita-lichao.cpp	Lichao Tree (ITA)
 
