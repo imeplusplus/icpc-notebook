@@ -25,6 +25,7 @@ int mobius(int n){
       p++;
       if(n%i == 0) return 0;
     }
+  if(n > 1) p++;
   return p&1 ? -1 : 1;
 }
 */
