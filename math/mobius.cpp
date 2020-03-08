@@ -3,7 +3,7 @@
 // else (-1)^k, k = #(p) | p is prime and n%p == 0
 
 //Calculate Mobius for all integers using sieve
-//O(log(log(n)))
+//O(n*log(log(n)))
 int mobius() {
   for(int i = 1; i < N; i++) mob[i] = 1;
 
