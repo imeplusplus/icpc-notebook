@@ -4,7 +4,7 @@
 
 //Calculate Mobius for all integers using sieve
 //O(n*log(log(n)))
-int mobius() {
+void mobius() {
   for(int i = 1; i < N; i++) mob[i] = 1;
 
   for(ll i = 2; i < N; i++) if(!sieve[i]){
