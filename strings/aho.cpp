@@ -56,13 +56,7 @@ void build() {
 
     for (int i = 0; i < 26; ++i) {
       if (nxt[v][i]) q.push(nxt[v][i]);
-      /* Pre-Computation of next states
-      else {
-        int ax = f[v];
-        while(ax and !nxt[ax][i]) ax = f[ax];
-        nxt[v][i] = nxt[ax][i];
-      }
-      */
+      else nxt[v][i] = nxt[f[v]][i];
     }
   }
 }
@@ -76,7 +70,6 @@ bitset<S> match(char *s) {
   int x = 1;
   for (int i = 0; s[i]; ++i) {
     int t = s[i] - 'a';
-    while (x and !nxt[x][t]) x = f[x];
     x = nxt[x][t];
 
     // match found
