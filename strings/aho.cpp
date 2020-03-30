@@ -49,7 +49,6 @@ void build() {
     int v = q.front(); q.pop();
     int u = f[p[v]];
 
-    while (u and !nxt[u][ch[v]]) u = f[u];
     f[v] = nxt[u][ch[v]];
     cnt[v] += cnt[f[v]];
     elem[v] |= elem[f[v]];
