@@ -1,4 +1,4 @@
-// Mergesort Tree - Time <O(nlognlogn), O(nlogn)> - Memory O(nlogn)
+// Mergesort Tree - Time <O(nlogn), O(log^2n)> - Memory O(nlogn)
 // Mergesort Tree is a segment tree that stores the sorted subarray
 // on each node.
 vi st[4*N];
