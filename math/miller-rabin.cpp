@@ -23,6 +23,7 @@ bool miller(ll a, ll n) {
 }
 
 bool isprime(ll n) {
+  if(n == 1) return 0;
   int base[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
   for (int i = 0; i < 12; ++i) if (!miller(base[i], n)) return 0;
   return 1;
