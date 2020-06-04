@@ -19,10 +19,10 @@ ll pollard(ll n) {
 }
 
 // Factorize number using pollar
-void fator(ll n, vector<ll>& v) {
-  if (isprime(n)) { v.pb(n); return; }                                                                                     ll f = pollard(n);
+void factor(ll n, vector<ll>& v) {
+  if (n == 1 or isprime(n)) return v.pb(n);
   ll f = pollard(n);
-  factorize(f, v); factorize(n/f, v);
+  factor(f, v), factor(n/f, v);
 }
 
 // You can optimize the algorithm through the code below
