@@ -1,9 +1,14 @@
 // Miller-Rabin - Primarily Test O(k*logn*logn*logn)
+ll addmod(ll a, ll b, ll m) {
+  if(a >= m - b) return a + b - m;
+  return a + b;
+}
+
 ll mulmod(ll a, ll b, ll m) {
   ll ans = 0;
   while (b) {
-    if (b&1) ans=(ans+a)%m;
-    a = (2*a)%m;
+    if (b&1) ans=addmod(ans, a, m);
+    a=addmod(a, a, m);
     b>>=1;
   }
   return ans;
