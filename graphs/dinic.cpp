@@ -1,3 +1,7 @@
+// Dinic - O(V^2 * E)
+// Bipartite graph or unit flow - O(sqrt(V) * E)
+// Small flow - O(F * (V + E))
+
 #include <bits/stdc++.h>
 using namespace std;
 
