@@ -8,7 +8,7 @@ int cnt, nxt[N+1][26];
 void prekmp(string &p) {
   nxt[0][p[0] - 'a'] = 1;
   for(int i = 1, j = 0; i <= p.size(); i++) {
-    for(int c = 0; c < 26. c++) nxt[i][c] = nxt[j][c];
+    for(int c = 0; c < 26; c++) nxt[i][c] = nxt[j][c];
     if(i == p.size()) continue;
     nxt[i][p[i] - 'a'] = i+1;
     j = nxt[j][p[i] - 'a'];
