@@ -7,10 +7,10 @@ ll pollard(ll n) {
   while (1) {
     y = x = 2;
     while (1) {
-      x = mulmod(x,x,n); x = (x-c)%n;
-      y = mulmod(y,y,n); y = (y-c)%n;
-      y = mulmod(y,y,n); y = (y-c)%n;
-      d = gcd(abs(n+y-x), n);
+      x = addmod(mulmod(x,x,n), c, n);
+      y = addmod(mulmod(y,y,n), c, n);
+      y = addmod(mulmod(y,y,n), c, n);
+      d = gcd(abs(x-y), n);
       if (d == n) break;
       else if (d > 1) return d;
     }
@@ -19,10 +19,10 @@ ll pollard(ll n) {
 }
 
 // Factorize number using pollar
-void fator(ll n, vector<ll>& v) {
-  if (isprime(n)) { v.pb(n); return; }                                                                                     ll f = pollard(n);
+void factor(ll n, vector<ll>& v) {
+  if (n == 1 or isprime(n)) return v.pb(n);
   ll f = pollard(n);
-  factorize(f, v); factorize(n/f, v);
+  factor(f, v), factor(n/f, v);
 }
 
 // You can optimize the algorithm through the code below

@@ -1,4 +1,19 @@
 // Miller-Rabin - Primarily Test O(k*logn*logn*logn)
+ll addmod(ll a, ll b, ll m) {
+  if(a >= m - b) return a + b - m;
+  return a + b;
+}
+
+ll mulmod(ll a, ll b, ll m) {
+  ll ans = 0;
+  while (b) {
+    if (b&1) ans=addmod(ans, a, m);
+    a=addmod(a, a, m);
+    b>>=1;
+  }
+  return ans;
+}
+
 bool miller(ll a, ll n) {
   if (a >= n) return 1;
   ll s = 0, d = n-1;
@@ -13,6 +28,7 @@ bool miller(ll a, ll n) {
 }
 
 bool isprime(ll n) {
+  if(n == 1) return 0;
   int base[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
   for (int i = 0; i < 12; ++i) if (!miller(base[i], n)) return 0;
   return 1;

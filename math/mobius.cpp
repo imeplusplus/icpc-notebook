@@ -1,5 +1,5 @@
 // 1 if n == 1
-// 0 if exists x | n%x² == 0
+// 0 if exists x | n%(x^2) == 0
 // else (-1)^k, k = #(p) | p is prime and n%p == 0
 
 //Calculate Mobius for all integers using sieve
