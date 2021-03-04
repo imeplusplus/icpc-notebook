@@ -16,3 +16,5 @@ jobs:
         env:
           CF_USER: ${{ secrets.CF_USER }}
           CF_PASSWORD: ${{ secrets.CF_PASSWORD }}
+          SPOJ_USER: ${{ secrets.SPOJ_USER }}
+          SPOJ_PASSWORD: ${{ secrets.SPOJ_PASSWORD }}
