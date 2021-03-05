@@ -8,6 +8,8 @@ int lis(vector<int>& a) {
   int res = 0;
 
   for (int v : a) {
+    // increasing: lower_bound
+    // non-decreasing: upper_bound
     int j = lower_bound(dp.begin(), dp.begin() + res, v) - dp.begin();
     dp[j] = min(dp[j], v);
     res = max(res, j + 1);
