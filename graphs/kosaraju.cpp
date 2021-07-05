@@ -13,7 +13,7 @@ void dfs(int u) {
 }
 
 void dfst(int u) {
-  cmp[x] = cnt, vis[x] = 0;
+  cmp[u] = cnt, vis[u] = 0;
   for (auto v : adjt[u]) if (vis[v]) dfst(v);
   // for (auto v : adj[u]) if(vis[v] and u != par[v]) dfst(v);
 }
