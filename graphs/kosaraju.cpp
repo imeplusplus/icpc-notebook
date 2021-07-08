@@ -1,17 +1,21 @@
 // Kosaraju - SCC O(V+E)
+// For undirected graph uncomment lines below
 
 vi adj[N], adjt[N];
 int n, ordn, cnt, vis[N], ord[N], cmp[N];
+//int par[N];
 
-void dfs(int x) {
-  vis[x] = 1;
-  for (auto v : adj[x]) if (!vis[v]) dfs(v);
-  ord[ordn++] = x;
+void dfs(int u) {
+  vis[u] = 1;
+  for (auto v : adj[u]) if (!vis[v]) dfs(v);
+  // for (auto v : adj[u]) if(!vis[v]) par[v] = u, dfs(v);
+  ord[ordn++] = u;
 }
 
-void dfst(int x) {
-  cmp[x] = cnt, vis[x] = 0;
+void dfst(int u) {
+  cmp[u] = cnt, vis[u] = 0;
   for (auto v : adjt[u]) if (vis[v]) dfst(v);
+  // for (auto v : adj[u]) if(vis[v] and u != par[v]) dfst(v);
 }
 
 // in main
