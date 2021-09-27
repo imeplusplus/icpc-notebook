@@ -1,5 +1,22 @@
 // USE INF = 1e9!
 
+/**********************************************************************************
+* MIN COST MAX FLOW (MINIMUM COST TO ACHIEVE MAXIMUM FLOW)                        *
+* Description: Given a graph which represents a flow network where every edge has *
+* a capacity and a cost per unit, find the minimum cost to establish the maximum  *
+* possible flow from s to t.                                                      *
+* Note: When adding edge (a, b), it is a directed edge!                           *
+* Usage: min_cost_max_flow()                                                      *
+*        add_edge(from, to, cost, capacity)                                       *
+* Notation: flw: max flow                                                         *
+*           cst: min cost to achieve flw                                          *
+* Testcase:                                                                       *
+* add_edge(src, 1, 0, 1);   add_edge(1, snk, 0, 1);   add_edge(2, 3, 1, INF);     *
+* add_edge(src, 2, 0, 1);   add_edge(2, snk, 0, 1);   add_edge(3, 4, 1, INF);     *
+* add_edge(src, 2, 0, 1);   add_edge(3, snk, 0, 1);                               *
+* add_edge(src, 2, 0, 1);   add_edge(4, snk, 0, 1);   => flw = 4, cst = 3         *
+**********************************************************************************/
+
 // w: weight or cost, c : capacity
 struct edge {int v, f, w, c; };
 
