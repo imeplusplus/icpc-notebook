@@ -1,6 +1,21 @@
 // Dinic - O(V^2 * E)
 // Bipartite graph or unit flow - O(sqrt(V) * E)
 // Small flow - O(F * (V + E))
+// USE INF = 1e9!
+
+/**********************************************************************************
+* DINIC (FIND MAX FLOW / BIPARTITE MATCHING)                                      *
+* Description: Given a graph which represents a flow network where every edge has *
+* a capacity, find the maximum possible flow from s to t.                         *
+* Time complexity: O(EV^2)                                                        *
+* Usage: dinic()                                                                  *
+*        add_edge(from, to, capacity)                                             *
+* Testcase:                                                                       *
+* add_edge(src, 1, 1);   add_edge(1, snk, 1);   add_edge(2, 3, INF);              *
+* add_edge(src, 2, 1);   add_edge(2, snk, 1);   add_edge(3, 4, INF);              *
+* add_edge(src, 2, 1);   add_edge(3, snk, 1);                                     *
+* add_edge(src, 2, 1);   add_edge(4, snk, 1);   => dinic() = 4                    *
+**********************************************************************************/
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -59,4 +74,9 @@ int dinic() {
     while (int inc = dfs(src, INF)) flow += inc;
   }
   return flow;
+}
+
+int main () {
+    clear();
+    return 0;
 }
