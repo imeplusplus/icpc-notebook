@@ -38,8 +38,8 @@ struct point {
     point(type x, type y) : x(x), y(y) {}
 
     point operator -() { return point(-x, -y); }
-    point operator +(point p) { return point(x+p.x, y+p.y); }
-    point operator -(point p) { return point(x-p.x, y-p.y); }
+    point operator +(point p) { return point(x + p.x, y + p.y); }
+    point operator -(point p) { return point(x - p.x, y - p.y); }
 
     point operator *(type k) { return point(k*x, k*y); }
     point operator /(type k) { return point(x/k, y/k); }
@@ -98,8 +98,8 @@ int direction(point o, point p, point q) { return p.dir(o, q); }
 point RotateCCW90(point p)   { return point(-p.y,p.x); }
 point RotateCW90(point p)    { return point(p.y,-p.x); }
 
-type dot(point p, point q)     { return p.x*q.x+p.y*q.y; }
-type cross(point p, point q)   { return p.x*q.y-p.y*q.x; }
+type dot(point p, point q)     { return p.x*q.x + p.y*q.y; }
+type cross(point p, point q)   { return p.x*q.y - p.y*q.x; }
 
 type area2(point a, point b, point c) { return cross(a,b) + cross(b,c) + cross(c,a); }
 
