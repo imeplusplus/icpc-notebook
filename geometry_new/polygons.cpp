@@ -81,6 +81,7 @@ void ConvexHull(vector<point> &pts) {
     #endif
 }
 
+//avoid using long double for comparisons, change type and remove division by 2
 ld ComputeSignedArea(const vector<point> &p) {
     ld area = 0;
     for(int i = 0; i < p.size(); i++) {
@@ -143,7 +144,7 @@ void sort_lex_hull(vector<point> &hull){
     rotate(hull.begin(), hull.begin() + pos, hull.end());
 }
 
-//O(nlogn)
+//determine if point is inside or on the boundary of a polygon (O(nlogn))
 bool pointInConvexPolygon(vector<point> &hull, point cur){
     int n = hull.size();
     //Corner cases: point outside most left and most right wedges

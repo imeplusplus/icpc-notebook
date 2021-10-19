@@ -98,9 +98,11 @@ int direction(point o, point p, point q) { return p.dir(o, q); }
 point RotateCCW90(point p)   { return point(-p.y,p.x); }
 point RotateCW90(point p)    { return point(p.y,-p.x); }
 
+//for reading purposes avoid using * and % operators, use the functions below:
 type dot(point p, point q)     { return p.x*q.x + p.y*q.y; }
 type cross(point p, point q)   { return p.x*q.y - p.y*q.x; }
 
+//double area
 type area2(point a, point b, point c) { return cross(a,b) + cross(b,c) + cross(c,a); }
 
 ostream &operator<<(ostream &os, const point &p) {
