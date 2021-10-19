@@ -1,6 +1,9 @@
 #include "basics.cpp"
 //functions tested at: https://codeforces.com/group/3qadGzUdR4/contest/101706/problem/B
 
+//WARNING: all distance functions are not realizing sqrt operation
+//Suggestion: for line intersections check LineLineIntersection and then use ComputeLineIntersection
+
 point ProjectPointLine(point c, point a, point b) {
     ld r = dot(b - a,b - a);
     if (fabs(r) < EPS) return a;
@@ -59,6 +62,7 @@ point lines_intersect(point p, point q, point a, point b) {
     return point(point(r.x, s.x) % c, point(r.y, s.y) % c) / (r%s);
 }
 
+//be careful: test LineLineIntersection before using this function
 point ComputeLineIntersection(point a, point b, point c, point d) {
     b = b - a; d = c - d; c = c - a;
     assert(dot(b, b) > EPS && dot(d, d) > EPS);
@@ -71,6 +75,8 @@ bool LineLineIntersect(point a, point b, point c, point d) {
     return false;
 }
 
+
+//rays in direction a -> b, c -> d
 bool RayRayIntersect(point a, point b, point c, point d){
     if (a.dist2(c) < EPS || a.dist2(d) < EPS ||
         b.dist2(c) < EPS || b.dist2(d) < EPS) return true;
@@ -105,6 +111,7 @@ bool SegmentLineIntersect(point a, point b, point c, point d){
     return false;
 }
 
+//ray in direction c -> d
 bool SegmentRayIntersect(point a, point b, point c, point d){
     if (a.dist2(c) < EPS || a.dist2(d) < EPS ||
         b.dist2(c) < EPS || b.dist2(d) < EPS) return true;
@@ -120,6 +127,7 @@ bool SegmentRayIntersect(point a, point b, point c, point d){
     return false; 
 }
 
+//ray in direction a -> b
 bool RayLineIntersect(point a, point b, point c, point d){
     if (a.dist2(c) < EPS || a.dist2(d) < EPS ||
         b.dist2(c) < EPS || b.dist2(d) < EPS) return true;
