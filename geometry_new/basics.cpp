@@ -49,9 +49,9 @@ struct point {
     //cross product
     type operator %(point p) { return x*p.y - y*p.x; }
 
-    bool operator ==(point p) { return x == p.x and y == p.y; }
-    bool operator !=(point p) { return x != p.x  or y != p.y; }
-    bool operator <(const point p) const { return (x < p.x) or (x == p.x and y < p.y); }
+    bool operator ==(const point &p) const{ return x == p.x and y == p.y; }
+    bool operator !=(const point &p) const{ return x != p.x  or y != p.y; }
+    bool operator <(const point &p) const { return (x < p.x) or (x == p.x and y < p.y); }
 
     // 0 => same direction
     // 1 => p is on the left 
