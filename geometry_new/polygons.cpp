@@ -1,7 +1,6 @@
 #include "basics.cpp"
 #include "lines.cpp"
 
-
 //Graham scan with bugs, not safe, prefer monotone chain!
 point origin;
 
@@ -168,4 +167,61 @@ bool PointOnPolygon(vector<point> &p, point q) {
 for (int i = 0; i < p.size(); i++)
     if (q.dist2(ProjectPointSegment(p[i], p[(i+1)%p.size()], q)) < EPS) return true;
     return false;
+}
+
+//Shamos - Hoey for test polygon simple in O(nlog(n))
+inline bool adj(int a, int b, int n) {return (b == (a + 1)%n or a == (b + 1)%n);}
+
+struct edge{
+    point ini, fim;
+    edge(point ini = point(0,0), point fim = point(0,0)) : ini(ini), fim(fim) {}
+};
+
+bool operator < (const edge& a, const edge& b) {
+    if (a.ini == b.ini) return direction(a.ini, a.fim, b.fim) < 0;
+    if (a.ini.x < b.ini.x) return direction(a.ini, a.fim, b.ini) < 0;
+    return direction(a.ini, b.fim, b.ini) < 0;
+}
+
+bool is_simple_polygon(const vector<point> &pts){
+    vector <pair<point, pii>> eve;
+    vector <pair<edge, int>> edgs;
+    set <pair<edge, int>> sweep;
+    int n = (int)pts.size();
+    for(int i = 0; i < n; i++){
+        point l = min(pts[i], pts[(i + 1)%n]);
+        point r = max(pts[i], pts[(i + 1)%n]);
+        eve.pb({l, {0, i}});
+        eve.pb({r, {1, i}});
+        edgs.pb(make_pair(edge(l, r), i));
+    }
+    sort(eve.begin(), eve.end());
+    for(auto e : eve){
+        if(!e.nd.st){
+            auto cur = sweep.lower_bound(edgs[e.nd.nd]);
+            pair<edge, int> above, below;
+            if(cur != sweep.end()){
+                above = *cur;
+                if(!adj(above.nd, e.nd.nd, n) and SegmentSegmentIntersect(pts[above.nd], pts[(above.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
+                    return false;
+            }
+            if(cur != sweep.begin()){
+                below = *(--cur);
+                if(!adj(below.nd, e.nd.nd, n) and SegmentSegmentIntersect(pts[below.nd], pts[(below.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
+                    return false;
+            }
+            sweep.insert(edgs[e.nd.nd]);
+        }
+        else{
+            auto above = sweep.upper_bound(edgs[e.nd.nd]);
+            auto cur = above, below = --cur;
+            if(above != sweep.end() and below != sweep.begin()){
+                --below;
+                if(!adj(above->nd, below->nd, n) and SegmentSegmentIntersect(pts[above->nd], pts[(above->nd + 1)%n], pts[below->nd], pts[(below->nd + 1)%n]))
+                    return false;
+            }
+            sweep.erase(cur);
+        }
+    }
+    return true;
 }
