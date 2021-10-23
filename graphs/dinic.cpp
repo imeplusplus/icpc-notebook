@@ -35,6 +35,15 @@ void add_edge (int u, int v, int c) {
   g[v].push_back(k+1);
 }
 
+void clear() {
+    memset(h, 0, sizeof h);
+    memset(ptr, 0, sizeof ptr);
+    edgs.clear();
+    for (int i = 0; i < N; i++) g[i].clear();
+    src = 0;
+    snk = N-1;
+}
+
 bool bfs() {
   memset(h, 0, sizeof h);
   queue<int> q;
