@@ -10,7 +10,7 @@ bool radial(point p, point q) {
     return dir > 0 or (!dir and p.on_seg(origin, q));
 }
 
-// Graham Scan
+// Graham Scan O(nlog(n))
 vector<point> convex_hull(vector<point> pts) {
     vector<point> ch(pts.size());
     point mn = pts[0];
@@ -42,7 +42,7 @@ vector<point> convex_hull(vector<point> pts) {
     return ch;
 }
 
-//Monotone chain
+//Monotone chain O(nlog(n))
 #define REMOVE_REDUNDANT
 #ifdef REMOVE_REDUNDANT
 bool between(const point &a, const point &b, const point &c) {
