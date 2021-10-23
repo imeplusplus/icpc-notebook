@@ -1,7 +1,6 @@
 // multiplicative function calculator
 // euler_phi and mobius are multiplicative
 // if another f[N] needed just remove comments
-// do NOT call this function twice
 // O(N)
 
 bool p[N];
