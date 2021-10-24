@@ -1,119 +1,70 @@
-// Pollard Rho - Integer factoring O(n^1/4)
-// requires n to be composite (use Miller Rabin to test)
-//
-ll pollard(ll n) {
-  ll x, y, d, c = 1;
-  if (n%2==0) return 2;
-  while (1) {
-    y = x = 2;
-    while (1) {
-      x = addmod(mulmod(x,x,n), c, n);
-      y = addmod(mulmod(y,y,n), c, n);
-      y = addmod(mulmod(y,y,n), c, n);
-      d = gcd(abs(x-y), n);
-      if (d == n) break;
-      else if (d > 1) return d;
-    }
-    c++;
-  }
+// factor(N, v) to get N factorized in vector v
+// O(N ^ (1 / 4))
+ll addmod(ll a, ll b, ll m){
+	if(a >= m - b) return a + b - m;
+	return a + b;
 }
 
-// Factorize number using pollar
-void factor(ll n, vector<ll>& v) {
-  if (n == 1 or isprime(n)) return v.pb(n);
-  ll f = pollard(n);
-  factor(f, v), factor(n/f, v);
+ll mulmod(ll a, ll b, ll m){
+	ll ans = 0;
+	while(b){
+		if(b & 1) ans = addmod(ans, a, m);
+		a = addmod(a, a, m);
+		b >>= 1;
+	}
+	return ans;
 }
 
-// You can optimize the algorithm through the code below
-// Using Brent's algorithm for cycle detection
-//
-std::mt19937 rng((int) std::chrono::steady_clock::now().time_since_epoch().count());
-
-ull func(ull x, ull n, ull c) { return (mulmod(x, x, n) + c) % n; // f(x) = (x^2 + c) % n; }
-
-ull pollard(ull n) {
-  // Finds a positive divisor of n
-  ull x, y, d, c;
-  ull pot, lam;
-  if(n % 2 == 0) return 2;
-  if(isprime(n)) return n;
-
-  while(1) {
-    y = x = 2; d = 1;
-    pot = lam = 1;
-    while(1) {
-      c = rng() % n;
-      if(c != 0 and (c+2)%n != 0) break;
-    }
-    while(1) {
-      if(pot == lam) {
-        x = y;
-        pot <<= 1;
-        lam = 0;
-      }
-      y = func(y, n, c);
-      lam++;
-      d = gcd(x >= y ? x-y : y-x, n);
-      if (d > 1) {
-        if(d == n) break;
-        else return d;
-      }
-    }
-  }
+ll fexp(ll a, ll b, ll n){
+	ll r = 1;
+	while(b){
+		if(b & 1) r = mulmod(r, a, n);
+		a = mulmod(a, a, n);
+		b >>= 1;
+	}
+	return r;
 }
 
-void fator(ull n, vector<ull> &v) {
-  // prime factorization of n, put into a vector v.
-  //
-  // for each prime factor of n, it is repeated the amount of times
-  // that it divides n
-  //
-  // ex : n == 120, v = {2, 2, 2, 3, 5};
-  // 
-  //
-  if(isprime(n)) { v.pb(n); return; }
-  vector<ull> w, t; w.pb(n); t.pb(1);
+bool miller(ll a, ll n){
+	if (a >= n) return true;
+	ll s = 0, d = n - 1;
+	while(d % 2 == 0 && d) d >>= 1, s++;
+	ll x = fexp(a, d, n);
+	if (x == 1 || x == n - 1) return true;
+	for (int r = 0; r < s; r++, x = mulmod(x,x,n)){
+		if (x == 1) return false;
+		if (x == n - 1) return true;
+	}
+	return 0;
+}
 
-  while(!w.empty()) {
-    ull bck = w.back();
-    ull div = pollard(bck);
+bool isprime(ll n){
+	if(n == 1) return false;
+	int base[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+	for (int i = 0; i < 12; ++i) if (!miller(base[i], n)) return false;
+	return true;
+}
 
-    if(div == w.back()) {
-      int amt = 0;
-      for(int i=0; i < (int) w.size(); i++) {
-        int cur = 0;
-        while(w[i] % div == 0) {
-          w[i] /= div;
-          cur++;
-        }
-        amt += cur * t[i];
-        if(w[i] == 1) {
-          swap(w[i], w.back());
-          swap(t[i], t.back());
-          w.pop_back();
-          t.pop_back();
-        }
-      }
-      while(amt--) v.pb(div);
-    }
-    else {
-      int amt = 0;
-      while(w.back() % div == 0) {
-        w.back() /= div;
-        amt++;
-      }
-      amt *= t.back();
-      if(w.back() == 1) {
-        w.pop_back();
-        t.pop_back();
-      }
+ll pollard(ll n){
+	ll x, y, d, c = 1;
+	if (n % 2 == 0) return 2;
+	while(true){
+		y = x = 2;
+		while(true){
+			x = addmod(mulmod(x,x,n), c, n);
+			y = addmod(mulmod(y,y,n), c, n);
+			y = addmod(mulmod(y,y,n), c, n);
+			d = __gcd(abs(x-y), n);
+			if (d == n) break;
+			else if (d > 1) return d;
+		}
+		c++;
+	}
+}
 
-      w.pb(div);
-      t.pb(amt);
-    }
-  }
-
-  // the divisors will not be sorted, so you need to sort it afterwards
-  sort(v.begin(), v.end());
+void factor(ll n, vector<ll>& v){
+	if (n == 1 || isprime(n)) return v.push_back(n);
+	ll f = pollard(n);
+	factor(f, v), factor(n/f, v);
+	sort(v.begin(), v.end());
 }
