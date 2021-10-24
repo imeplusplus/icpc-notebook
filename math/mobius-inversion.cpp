@@ -20,7 +20,7 @@ void mfc(){
             for(ll j = i; j < N; j *= i){
                 g[j] = // g(p^k) you found
                 // f[j] = f(p^k) you found
-                p[j] = true;
+                p[j] = (j != i);
             }
         }
         for(ll j : primes){
