@@ -1,4 +1,4 @@
-// factor(N, v) to get N factorized in vector v
+// factor(N) return N factorized
 // O(N ^ (1 / 4))
 ll addmod(ll a, ll b, ll m){
 	if(a >= m - b) return a + b - m;
@@ -62,9 +62,11 @@ ll pollard(ll n){
 	}
 }
 
-void factor(ll n, vector<ll>& v){
-	if (n == 1 || isprime(n)) return v.push_back(n);
+vector<ll> factor(ll n){
+	if (n == 1 || isprime(n)) return {n};
 	ll f = pollard(n);
-	factor(f, v), factor(n/f, v);
-	sort(v.begin(), v.end());
+	vector<ll> l = factor(f), r = factor(n / f);
+	l.insert(l.end(), r.begin(), r.end());
+	sort(l.begin(), l.end());
+	return l;
 }
