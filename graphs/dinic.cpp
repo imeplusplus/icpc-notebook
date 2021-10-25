@@ -5,8 +5,6 @@
 
 /**********************************************************************************
 * DINIC (FIND MAX FLOW / BIPARTITE MATCHING)                                      *
-* Description: Given a graph which represents a flow network where every edge has *
-* a capacity, find the maximum possible flow from s to t.                         *
 * Time complexity: O(EV^2)                                                        *
 * Usage: dinic()                                                                  *
 *        add_edge(from, to, capacity)                                             *

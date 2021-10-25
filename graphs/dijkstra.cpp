@@ -1,8 +1,17 @@
-// Dijkstra - SSSP O((V+E)logE)
-vi adj[N], adjw[N];
+/**********************************************************************************
+* DIJKSTRA'S ALGORITHM (SHORTEST PATH TO A VERTEX)                                *
+* Time complexity: O((V+E)logE)                                                   *
+* Usage: dist[node]                                                               *
+* Notation: m:           number of edges                                          *
+*           (a, b, w):   edge between a and b with weight w                       *
+*           s:           starting node                                            *
+*           par[v]:      parent node of u, used to rebuild the shortest path      *
+**********************************************************************************/
+
+vector<int> adj[N], adjw[N];
 int dist[N];
 
-cl(dist,63);
+memset(dist, 63, sizeof(dist));
 priority_queue<pii> pq;
 pq.push(mp(0,0));
 
