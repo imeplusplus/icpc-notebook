@@ -1,4 +1,13 @@
-// Kuhn - Maximum Cardinality Bipartite Matching (MCBM) O(VE)
+/**********************************************************************************
+* KUHN'S ALGORITHM (FIND GREATEST NUMBER OF MATCHINGS - BIPARTITE GRAPH)          *
+* Time complexity: O(VE)                                                          *
+* Notation: ans:      number of matchings                                         *
+*           b[j]:     matching edge b[j] <-> j                                    *
+*           adj[i]:   adjacency list for node i                                   *
+*           vis:      visited nodes                                               *
+*           x:        counter to help reuse vis list                              *
+**********************************************************************************/
+
 // TIP: If too slow, shuffle nodes and try again.
 int x, vis[N], b[N], ans;
 

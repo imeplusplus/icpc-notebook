@@ -1,4 +1,14 @@
-// 2-SAT - O(V+E)
+/**********************************************************************************
+* 2-SAT (TELL WHETHER A SERIES OF STATEMENTS CAN OR CANNOT BE FEASIBLE AT THE     *
+* SAME TIME)                                                                      *
+* Time complexity: O(V+E)                                                         *
+* Usage: n         -> number of variables, 1-indexed                              *
+*        p = v(i)  -> picks the "true" state for variable i                       *
+*        p = nv(i) -> picks the "false" state for variable i, i.e. ~i             *
+*        add(p, q) -> add clause p => q (which also means ~q => ~p)               *
+*        run2sat() -> true if possible, false if impossible                       *
+*        val[i]    -> tells if i has to be true or false for that solution        *
+**********************************************************************************/
 
 int n, vis[2*N], ord[2*N], ordn, cnt, cmp[2*N], val[N];
 vector<int> adj[2*N], adjt[2*N];
@@ -41,4 +51,10 @@ bool run2sat(){
     val[i] = cmp[v(i)] > cmp[nv(i)];
   }
   return true;
+}
+
+int main () {
+    for (int i = 1; i <= n; i++) {
+        if (val[i]); // i-th variable is true
+        else         // i-th variable is false
 }
