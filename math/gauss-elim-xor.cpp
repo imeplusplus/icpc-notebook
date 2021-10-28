@@ -1,7 +1,7 @@
 // Gauss Elimination for xor boolean operations
 // Return false if not possible to solve
 // Use boolean matrixes 0-indexed
-// n equations, m variables, O(n * m)
+// n equations, m variables, O(n * m²)
 // eq[i][j] = coefficient of j-th element in i-th equation
 // r[i] = result of i-th equation
 // Return ans[j] = xj that gives the lexicographically greatest solution (if possible)
