@@ -10,12 +10,13 @@ const int N = 1e6 + 5;
 
 const int MOD = 1e9+9;
 ull h[N], p[N];
+ull pr = 313;
 
 int cnt;
 
 
 void build(string &s) {
-  p[0] = 1, p[1] = 313;
+  p[0] = 1, p[1] = pr;
   for(int i = 1; i <= s.size(); i++) {
     h[i] = ((p[1]*h[i-1]) % MOD + s[i-1]) % MOD;
     p[i] = (p[1]*p[i-1]) % MOD;
@@ -30,7 +31,7 @@ ull fhash(int l, int r) {
 ull shash(string &pt) {
   ull h = 0;
   for(int i = 0; i < pt.size(); i++) 
-    h = ((h*p[1]) % MOD + pt[i]) % MOD;
+    h = ((h*pr) % MOD + pt[i]) % MOD;
   return h;
 }
 
