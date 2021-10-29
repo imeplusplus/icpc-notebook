@@ -64,7 +64,7 @@ struct Hash {
 template <int N> vector<int> Hash<N>::mods = { (int) 1e9 + 9, (int) 1e9 + 33, (int) 1e9 + 87 }; 
 
 // In case you need to generate the MODs, uncomment this:
-// Obs: you may need this on you template
+// Obs: you may need this on your template
 // mt19937_64 llrand((int) chrono::steady_clock::now().time_since_epoch().count());
 // In main: gen<>();
 /*
