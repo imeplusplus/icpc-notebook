@@ -143,7 +143,7 @@ void sort_lex_hull(vector<point> &hull){
     rotate(hull.begin(), hull.begin() + pos, hull.end());
 }
 
-//determine if point is inside or on the boundary of a polygon (O(nlogn))
+//determine if point is inside or on the boundary of a polygon (O(logn))
 bool pointInConvexPolygon(vector<point> &hull, point cur){
     int n = hull.size();
     //Corner cases: point outside most left and most right wedges
