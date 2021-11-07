@@ -1,5 +1,6 @@
-// factor(N) return N factorized
+// factor(N, v) to get N factorized in vector v
 // O(N ^ (1 / 4))
+// Miller-Rabin - Primarily Test O(|base|*log²n)
 ll addmod(ll a, ll b, ll m){
 	if(a >= m - b) return a + b - m;
 	return a + b;
@@ -28,14 +29,14 @@ ll fexp(ll a, ll b, ll n){
 bool miller(ll a, ll n){
 	if (a >= n) return true;
 	ll s = 0, d = n - 1;
-	while(d % 2 == 0 && d) d >>= 1, s++;
+	while(d % 2 == 0) d >>= 1, s++;
 	ll x = fexp(a, d, n);
 	if (x == 1 || x == n - 1) return true;
 	for (int r = 0; r < s; r++, x = mulmod(x,x,n)){
 		if (x == 1) return false;
 		if (x == n - 1) return true;
 	}
-	return 0;
+	return false;
 }
 
 bool isprime(ll n){
@@ -54,9 +55,9 @@ ll pollard(ll n){
 			x = addmod(mulmod(x,x,n), c, n);
 			y = addmod(mulmod(y,y,n), c, n);
 			y = addmod(mulmod(y,y,n), c, n);
+			if (x == y) break;
 			d = __gcd(abs(x-y), n);
-			if (d == n) break;
-			else if (d > 1) return d;
+			if (d > 1) return d;
 		}
 		c++;
 	}
@@ -70,3 +71,9 @@ vector<ll> factor(ll n){
 	sort(l.begin(), l.end());
 	return l;
 }
+
+//n < 2,047 base = {2};
+//n < 9,080,191 base = {31, 73};
+//n < 2,152,302,898,747 base = {2, 3, 5, 7, 11};
+//n < 318,665,857,834,031,151,167,461 base = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37};
+//n < 3,317,044,064,679,887,385,961,981 base = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41};
