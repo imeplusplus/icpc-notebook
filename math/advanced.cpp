@@ -1,9 +1,9 @@
 /* Multiplicative Inverse over MOD for all 1..N - 1 < MOD in O(N)
- If all 1..MOD - 1 needed, use N = MOD */
+ Only works for prime MOD. If all 1..MOD - 1 needed, use N = MOD */
 ll inv[N];
 inv[1] = 1;
 for(int i = 2; i < N; ++i)
-	inv[i] = (MOD - (MOD / i) * inv[MOD % i] % MOD) % MOD;
+	inv[i] = MOD - (MOD / i) * inv[MOD % i] % MOD;
 
 /* Catalan
  f(n) = sum(f(i) * f(n - i - 1)), i in [0, n - 1] = (2n)! / ((n+1)! * n!) = ...
