@@ -30,13 +30,13 @@ for(int i = 1; i + 1 < N; i++) // needs inv[i + 1] till inv[N - 1]
  else B = 1; */
 
 /* Stirling numbers of the second kind
- S(n, k) = Number of ways to split n numbers into k sets
+ S(n, k) = Number of ways to split n numbers into k non-empty sets
  S(n, 1) = S(n, n) = 1
  S(n, k) = k * S(n - 1, k) + S(n - 1, k - 1) 
  Sr(n, k) = S(n, k) with at least r numbers in each set
  Sr(n, k) = k * Sr(n - 1, k) + (n - 1) * Sr(n - r, k - 1)
 			       (r - 1) 
- S(n - d + 1, k - d + 1) = S(n, k) where if i, j belong to the same set, then |i - j| >= d */
+ S(n - d + 1, k - d + 1) = S(n, k) where if indexes i, j belong to the same set, then |i - j| >= d */
 
 /* Burnside's Lemma
  |Classes| = 1 / |G| * sum(K ^ C(g)) for each g in G
