@@ -38,7 +38,7 @@ for(int l = 1, r; l <= n; l = r + 1){
 /* Fibonacci in O(log(N))
  f(0) = f(1) = 1
  f(2*k) = f(k)² + f(k - 1)²
- f(2*k + 1) = f(k)*[f(k + 1) + f(k - 1)] */
+ f(2*k + 1) = f(k)*[f(k) + 2*f(k - 1)] */
 
 /* Wilson's Theorem Extension
  B = b1 * b2 * ... * bm (mod n) = +-1, all bi <= n such that gcd(bi, n) = 1
