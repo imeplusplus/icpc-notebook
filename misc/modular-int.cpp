@@ -19,8 +19,8 @@ struct Modular {
 
   friend Modular inv(const Modular& b) { return Modular(minv(b.v, MOD)); }
 
-  friend ostream& operator<<(std::ostream& os, const Modular& b) { return os << b.v; }
-  friend istream& operator>>(std::istream& is, Modular& b) { 
+  friend ostream& operator<<(ostream& os, const Modular& b) { return os << b.v; }
+  friend istream& operator>>(istream& is, Modular& b) { 
     ll _v; 
     is >> _v; 
     b = Modular(_v); 
