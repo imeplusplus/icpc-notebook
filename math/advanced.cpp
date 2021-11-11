@@ -35,7 +35,7 @@ for(int l = 1, r; l <= n; l = r + 1){
  [h[i] h[i-1]] = [h[1] h[0]] * [a1 1] ^ (i - 1)
                                [a0 0] 		*/
 
-/* Fibonacci in O(log(N))
+/* Fibonacci in O(log(N)) with memoization
  f(0) = f(1) = 1
  f(2*k) = f(k)² + f(k - 1)²
  f(2*k + 1) = f(k)*[f(k) + 2*f(k - 1)] */
