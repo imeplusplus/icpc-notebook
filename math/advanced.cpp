@@ -33,11 +33,11 @@ for(int l = 1, r; l <= n; l = r + 1){
 /* Recurrence using matriz
  h[i + 2] = a1 * h[i + 1] + a0 * h[i]
  [h[i] h[i-1]] = [h[1] h[0]] * [a1 1] ^ (i - 1)
-                               [a0 0] 			*/
+                               [a0 0] 		*/
 
 /* Fibonacci in O(log(N))
  f(2*k) = f(k)*(2*f(k + 1) - f(k))
- f(2*k + 1) = f(k)^2 + f(k + 1)^2 */
+ f(2*k + 1) = f(k)² + f(k + 1)² */
 
 /* Wilson's Theorem Extension
  B = b1 * b2 * ... * bm (mod n) = +-1, all bi <= n such that gcd(bi, n) = 1
