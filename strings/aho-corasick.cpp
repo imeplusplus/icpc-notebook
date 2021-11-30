@@ -9,20 +9,18 @@
 template <int ALPHA_SIZE = 62>
 struct Aho {
   struct Node {
-    int p, char_p, link = -1, str_idx = -1;
+    int p, char_p, link = -1, str_idx = -1, nxt[ALPHA_SIZE];
     bool has_end = false;
-    vector<int> nxt;
-    Node(int _p = -1, int _char_p = -1) : p(_p), char_p(_char_p), nxt(ALPHA_SIZE, -1) {}
+    Node(int _p = -1, int _char_p = -1) : p(_p), char_p(_char_p) {
+      fill(nxt, nxt + ALPHA_SIZE, -1);
+    }
   };
 
   vector<Node> nodes = { Node() };
-  vector<int> ord;
-  int cnt = 0;
-  int ans = 0;
+  int cnt = 0, ans = 0;
   bool build_done = false;
   vector<pair<int, int>> rep;
-  // how many times the string had a matching
-  vector<int> occur;
+  vector<int> ord, occur, occur_aux;
 
   // change this if different alphabet
   int remap(char c) {
@@ -33,7 +31,7 @@ struct Aho {
 
   void add(string &p, int id = -1) {
     int u = 0;
-    if (id == -1) id = cnt;
+    if (id == -1) id = cnt++;
 
     for (char ch : p) {
       int c = remap(ch);
@@ -48,7 +46,6 @@ struct Aho {
     if (nodes[u].str_idx != -1) rep.push_back({ id, nodes[u].str_idx });
     else nodes[u].str_idx = id;
     nodes[u].has_end = true;
-    cnt++;
   }
 
   void build() {
@@ -62,7 +59,7 @@ struct Aho {
 
     while(q.size()) {
       int u = q.front();
-      if (nodes[u].str_idx != -1) ord.push_back(u);
+      ord.push_back(u);
       q.pop();
 
       int j = nodes[nodes[u].p].link;
@@ -78,29 +75,32 @@ struct Aho {
     }
   }
 
-  void match(string &s) {
-    if (!cnt) return;
+  int match(string &s) {
+    if (!cnt) return 0;
     if (!build_done) build();
 
     ans = 0;
-    occur = vector<int>(cnt, 0);
+    occur = vector<int>(cnt);
+    occur_aux = vector<int>(nodes.size());
 
     int u = 0;
     for (char ch : s) {
       int c = remap(ch);
       u = nodes[u].nxt[c];
-
-      if (nodes[u].str_idx != -1) occur[nodes[u].str_idx]++;
+      if (nodes[u].str_idx != -1) occur_aux[u]++;
     }
 
     for (int i = (int)ord.size() - 1; i >= 0; i--) {
       int v = ord[i];
       int fv = nodes[v].link;
-      ans += occur[nodes[v].str_idx];
-
-      if (nodes[fv].str_idx != -1) occur[nodes[fv].str_idx] += occur[nodes[v].str_idx];
+      occur_aux[fv] += occur_aux[v];
+      if (nodes[v].str_idx != -1) {
+        occur[nodes[v].str_idx] = occur_aux[v];
+        ans += occur_aux[v];
+      }
     }
 
     for (pair<int, int> x : rep) occur[x.first] = occur[x.second];
+    return ans;
   }
 };
