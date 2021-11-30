@@ -17,7 +17,7 @@ struct Aho {
   };
 
   vector<Node> nodes = { Node() };
-  int cnt = 0, ans = 0;
+  int ans, cnt = 0;
   bool build_done = false;
   vector<pair<int, int>> rep;
   vector<int> ord, occur, occur_aux;
