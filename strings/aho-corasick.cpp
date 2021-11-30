@@ -87,7 +87,7 @@ struct Aho {
     for (char ch : s) {
       int c = remap(ch);
       u = nodes[u].nxt[c];
-      if (nodes[u].str_idx != -1) occur_aux[u]++;
+      occur_aux[u]++;
     }
 
     for (int i = (int)ord.size() - 1; i >= 0; i--) {
