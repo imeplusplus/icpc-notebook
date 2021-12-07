@@ -54,7 +54,7 @@ void knuth() {
   for (int i = 1; i <= n; i++) dp[i][1] = // ...
 
   // set initial a[i][j]
-  for (int i = 1; i <= n; i++) a[i][0] = 0, a[n+1][i] = n;
+  for (int i = 1; i <= n; i++) a[i][1] = 1, a[n+1][i] = n;
 
   for (int j = 2; j <= maxj; j++)
     for (int i = n; i >= 1; i--)
