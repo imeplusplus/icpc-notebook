@@ -15,11 +15,10 @@ cat[0] = 1;
 for(int i = 1; i + 1 < N; i++) // needs inv[i + 1] till inv[N - 1]
 	cat[i] = 2ll * (2ll * i - 1) * inv[i + 1] % MOD * cat[i - 1] % MOD;
 
-/* Work with floor(n / i) in O(sqrt(n))
- Proof: i = [1, sqrt(n)] has <= sqrt(n) diff values
- i = [l, r] we have that n / r <= n / i <= n / l,
- so it has n / l - n / r + 1 diff values
- thus i = [sqrt(n), n] has <= sqrt(n) diff values
+/* Floor(n / i), i = [1, n], has <= 2 * sqrt(n) diff values.
+ Proof: i = [1, sqrt(n)] has sqrt(n) diff values.
+ For i = [sqrt(n), n] we have that 1 <= n / i <= sqrt(n)
+ and thus has <= sqrt(n) diff values.
 */
 /* l = first number that has floor(N / l) = x
  r = last number that has floor(N / r) = x
