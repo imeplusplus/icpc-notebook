@@ -1,41 +1,35 @@
-// Extended Euclid: gcd(a, b) = x*a + y*b
-// The solutions are:
-// x = x0 + k*b/gcd
-// y = y0 + k*a/gcd
-void euclid(ll a, ll b, ll &x, ll &y, ll &d) {
-  if (b) euclid(b, a%b, y, x, d), y -= x*(a/b);
-  else x = 1, y = 0, d = a;
+// Extended Euclid:
+void euclid(ll a, ll b, ll &x, ll &y) {
+  if (b) euclid(b, a%b, y, x), y -= x*(a/b);
+  else x = 1, y = 0;
 }
 
-// Solves a*x + b*y = c
-bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) {
-  euclid(abs(a), abs(b), x0, y0, g);
-  if (c % g) {
-    return false;
-  }
-
-  x0 *= c / g;
-  y0 *= c / g;
-  if (a < 0) x0 = -x0;
-  if (b < 0) y0 = -y0;
+// find (x, y) such that a*x + b*y = c or return false if it's not possible
+// [x + k*b/gcd(a, b), y - k*a/gcd(a, b)] are also solutions
+bool diof(ll a, ll b, ll c, ll &x, ll &y){
+  euclid(abs(a), abs(b), x, y);
+  ll g = abs(__gcd(a, b));
+  if(c % g) return false;
+  x *= c / g;
+  y *= c / g;
+  if(a < 0) x = -x;
+  if(b < 0) y = -y;
   return true;
 }
 
-// all x' and y' are a valid solution for any integer k
-// x' = x + k*b/gcd
-// y' = y - k*a/gcd
-// Here a and b are actually a/gcd and b/gcd
-void shift_solution (int & x, int & y, int a, int b, int cnt) {
+// auxiliar to find_all_solutions
+void shift_solution (ll &x, ll &y, ll a, ll b, ll cnt) {
   x += cnt * b;
   y -= cnt * a;
 }
 
-// Find the amount of solutions in a interval of x and y
-int find_all_solutions (int a, int b, int c, int minx, int maxx, int miny, int maxy) {
-  int x, y, g;
-  if (! find_any_solution (a, b, c, x, y, g))
-    return 0;
-  a /= g;  b /= g;
+// Find the amount of solutions of
+// ax + by = c
+// in given intervals for x and y
+ll find_all_solutions (ll a, ll b, ll c, ll minx, ll maxx, ll miny, ll maxy) {
+  ll x, y, g = __gcd(a, b);
+  if(!diof(a, b, c, x, y)) return 0;
+  a /= g; b /= g;
 
   int sign_a = a>0 ? +1 : -1;
   int sign_b = b>0 ? +1 : -1;
@@ -73,37 +67,24 @@ int find_all_solutions (int a, int b, int c, int minx, int maxx, int miny, int m
   return (rx - lx) / abs(b) + 1;
 }
 
-//Solves
-//t = a mod m1
-//t = b mod m2
-//ans = t mod lcm(m1, m2)
-bool chinese_remainder(ll a, ll b, ll m1, ll m2, ll &ans, ll &lcm){
-  ll x, y, g, c = b - a;
-  euclid(m1, m2, x, y, g);
-  if(c%g) return false;
-
-  lcm = m1/g*m2;
-  ans = ((a + c/g*x % (m2/g) * m1)%lcm + lcm)%lcm;
+bool crt_auxiliar(ll a, ll b, ll m1, ll m2, ll &ans){
+  ll x, y;
+  if(!diof(m1, m2, b - a, x, y)) return false;
+  ll lcm = m1 / __gcd(m1, m2) * m2;
+  ans = ((a + x % (lcm / m1) * m1) % lcm + lcm) % lcm;
   return true;
 }
 
-// FIXME verify if it's correct!
-// n statements: x == a_i mod b_i
-ll norm(ll x, ll mod) { x %= mod; return x<0 ? x+mod : x; }
-
-ll chinese(int n, int a[], int b[]) {
-  ll ans = a[0], l = b[0];
-  for (int i = 1; i < n; i++) {
-    ll x, y, d;
-    euclid(l, b[i], x, y, d);
-    if ((a[i] - ans) % d != 0) {
-      // no solution
-      return -1;
-    }
-
-    ans = norm(ans + x * (a[i] - ans) / d % (b[i] / d) * l, l * b[i] / d);
-    l = lcm(l, b[i]);
+// find ans such that ans = a[i] mod b[i] for all 0 <= i < n or return false if not possible
+// ans + k * lcm(b[i]) are also solutions
+bool crt(int n, ll a[], ll b[], ll &ans){
+  if(!b[0]) return false;
+  ans = a[0] % b[0];
+  ll l = b[0];
+  for(int i = 1; i < n; i++){
+   if(!b[i]) return false;
+    if(!crt_auxiliar(ans, a[i] % b[i], l, b[i], ans)) return false;
+    l *= (b[i] / __gcd(b[i], l));
   }
-
-  return ans;
+  return true;
 }
