@@ -67,12 +67,11 @@ for(int l = 1, r; l <= n; l = r + 1){
  (For the brave, you can get to Ans = 1 / N * sum(euler_phi(N / d) * K ^ d), d | N) */
 
 /* Mobius Inversion
- How many pairs do we have with gcd(i, j), i, j = 1 .. N?
+ Sum of gcd(i, j), 1 <= i, j <= N?
  sum(k->N) k * sum(i->N) sum(j->N) [gcd(i, j) == k], i = a * k, j = b * k
  = sum(k->N) k * sum(a->N/k) sum(b->N/k) [gcd(a, b) == 1]
  = sum(k->N) k * sum(a->N/k) sum(b->N/k) sum(d->N/k) [d | a] * [d | b] * mi(d)
  = sum(k->N) k * sum(d->N/k) mi(d) * floor(N / kd)², l = kd, l <= N, k | l, d = l / k
- k|l -> k divides l
  = sum(l->N) floor(N / l)² * sum(k|l) k * mi(l / k)
  If f(n) = sum(x|n)(g(x) * h(x)) with g(x) and h(x) multiplicative, than f(n) is multiplicative
  Hence, g(l) = sum(k|l) k * mi(l / k) is multiplicative
