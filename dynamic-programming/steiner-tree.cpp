@@ -2,13 +2,23 @@
 
 // N - number of nodes
 // T - number of terminals
+// dist[N][N] - Adjacency matrix
+// steiner_tree() = min cost to connect first t nodes, 1-indexed
+// dp[i][bit_mask] = min cost to connect nodes active in bitmask rooting in i
+// min{dp[i][bit_mask]}, i <= n if root doesn't matter
 
 int n, t, dp[N][(1 << T)], dist[N][N];
 
 int steiner_tree() {
-  // + APSP
-  memset(dp, 63, sizeof dp);
-  for(int i = 1; i <= n; i++) dp[i][1 << (i-1)] = 0;
+  for (int k = 1; k <= n; ++k)
+    for (int i = 1; i <= n; ++i)
+      for (int j = 1; j <= n; ++j)
+        dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+        
+  for(int i = 1; i <= n; i++)
+    for(int j = 0; j < (1 << t); j++)
+      dp[i][j] = INF;
+  for(int i = 1; i <= t; i++) dp[i][1 << (i-1)] = 0;
 
   for(int msk = 0; msk < (1 << t); msk++) {
     for(int i = 1; i <= n; i++) {
