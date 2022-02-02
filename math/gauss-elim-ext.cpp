@@ -47,12 +47,13 @@ bool inverse(int n, ld m[N][N], ld inv[N][N]) {
 
 // Solves linear system m*x = y, of size n x n
 bool linear_system(int n, ld m[N][N], ld *x, ld *y) {
-  for(int i=0; i<n; ++i) for(int j=0; j<n; ++j) C[i][j] = m[i][j];
-  for(int j=0; j<n; ++j) C[n][j] = x[j];
+  for(int i = 0; i < n; ++i) for(int j = 0; j < n; ++j) C[i][j] = m[i][j];
+  for(int j = 0; j < n; ++j) C[j][n] = x[j];
 
   row = n, col = n+1;
   bool ok = elim();
 
-  for(int j=0; j<n; ++j) y[j] = C[n][j];
+  for(int j=0; j<n; ++j) y[j] = C[j][n];
   return ok;
 }
+
