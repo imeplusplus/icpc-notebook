@@ -6,8 +6,11 @@
 // r[i] = result of i-th equation
 // Return ans[j] = xj that gives the lexicographically greatest solution (if possible)
 // (Can be changed to lexicographically least, follow the comments in the code)
+// WARNING!! The arrays get changed during de algorithm
 
-bool gauss_elimination(int n, int m, bool &eq[N][M], bool &r[N], bool &ans[M]){
+bool eq[N][M], r[N], ans[M];
+
+bool gauss_xor(int n, int m){
 	for(int i = 0; i < m; i++)
 		ans[i] = true;
 	int lid[N] = {0}; // id + 1 of last element present in i-th line of final matrix
