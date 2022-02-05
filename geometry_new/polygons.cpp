@@ -177,6 +177,7 @@ struct edge{
     edge(point ini = point(0,0), point fim = point(0,0)) : ini(ini), fim(fim) {}
 };
 
+//< here means the edge on the top will be at the begin
 bool operator < (const edge& a, const edge& b) {
     if (a.ini == b.ini) return direction(a.ini, a.fim, b.fim) < 0;
     if (a.ini.x < b.ini.x) return direction(a.ini, a.fim, b.ini) < 0;
@@ -201,23 +202,23 @@ bool is_simple_polygon(const vector<point> &pts){
             auto cur = sweep.lower_bound(edgs[e.nd.nd]);
             pair<edge, int> above, below;
             if(cur != sweep.end()){
-                above = *cur;
-                if(!adj(above.nd, e.nd.nd, n) and segment_segment_intersect(pts[above.nd], pts[(above.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
+                below = *cur;
+                if(!adj(below.nd, e.nd.nd, n) and segment_segment_intersect(pts[below.nd], pts[(below.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
                     return false;
             }
             if(cur != sweep.begin()){
-                below = *(--cur);
-                if(!adj(below.nd, e.nd.nd, n) and segment_segment_intersect(pts[below.nd], pts[(below.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
+                above = *(--cur);
+                if(!adj(above.nd, e.nd.nd, n) and segment_segment_intersect(pts[above.nd], pts[(above.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
                     return false;
             }
             sweep.insert(edgs[e.nd.nd]);
         }
         else{
-            auto above = sweep.upper_bound(edgs[e.nd.nd]);
-            auto cur = above, below = --cur;
-            if(above != sweep.end() and below != sweep.begin()){
-                --below;
-                if(!adj(above->nd, below->nd, n) and segment_segment_intersect(pts[above->nd], pts[(above->nd + 1)%n], pts[below->nd], pts[(below->nd + 1)%n]))
+            auto below = sweep.upper_bound(edgs[e.nd.nd]);
+            auto cur = below, above = --cur;
+            if(below != sweep.end() and above != sweep.begin()){
+                --above;
+                if(!adj(below->nd, above->nd, n) and segment_segment_intersect(pts[below->nd], pts[(below->nd + 1)%n], pts[above->nd], pts[(above->nd + 1)%n]))
                     return false;
             }
             sweep.erase(cur);
