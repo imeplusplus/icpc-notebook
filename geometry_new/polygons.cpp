@@ -11,7 +11,7 @@ bool radial(point p, point q) {
 }
 
 // Graham Scan O(nlog(n))
-vector<point> convex_hull(vector<point> pts) {
+vector<point> graham_hull(vector<point> pts) {
     vector<point> ch(pts.size());
     point mn = pts[0];
 
@@ -46,17 +46,17 @@ vector<point> convex_hull(vector<point> pts) {
 #define REMOVE_REDUNDANT
 #ifdef REMOVE_REDUNDANT
 bool between(const point &a, const point &b, const point &c) {
-    return (fabs(area2(a,b,c)) < EPS && (a.x-b.x)*(c.x-b.x) <= 0 && (a.y-b.y)*(c.y-b.y) <= 0);
+    return (fabs(area_2(a,b,c)) < EPS && (a.x-b.x)*(c.x-b.x) <= 0 && (a.y-b.y)*(c.y-b.y) <= 0);
 }
 #endif
 
-void ConvexHull(vector<point> &pts) {
+void monotone_hull(vector<point> &pts) {
     sort(pts.begin(), pts.end());
     pts.erase(unique(pts.begin(), pts.end()), pts.end());
     vector<point> up, dn;
     for (int i = 0; i < pts.size(); i++) {
-        while (up.size() > 1 && area2(up[up.size()-2], up.back(), pts[i]) >= 0) up.pop_back();
-        while (dn.size() > 1 && area2(dn[dn.size()-2], dn.back(), pts[i]) <= 0) dn.pop_back();
+        while (up.size() > 1 && area_2(up[up.size()-2], up.back(), pts[i]) >= 0) up.pop_back();
+        while (dn.size() > 1 && area_2(dn[dn.size()-2], dn.back(), pts[i]) <= 0) dn.pop_back();
         up.push_back(pts[i]);
         dn.push_back(pts[i]);
     }
@@ -81,7 +81,7 @@ void ConvexHull(vector<point> &pts) {
 }
 
 //avoid using long double for comparisons, change type and remove division by 2
-ld ComputeSignedArea(const vector<point> &p) {
+ld compute_signed_area(const vector<point> &p) {
     ld area = 0;
     for(int i = 0; i < p.size(); i++) {
         int j = (i+1) % p.size();
@@ -90,11 +90,11 @@ ld ComputeSignedArea(const vector<point> &p) {
     return area / 2.0;
 }
 
-ld ComputeArea(const vector<point> &p) {
-    return fabs(ComputeSignedArea(p));
+ld compute_area(const vector<point> &p) {
+    return fabs(compute_signed_area(p));
 }
 
-ld ComputePerimeter(vector<point> &p) {
+ld compute_perimeter(vector<point> &p) {
     ld per = 0;
     for(int i = 0; i < p.size(); i++) {
         int j = (i+1) % p.size();
@@ -104,9 +104,9 @@ ld ComputePerimeter(vector<point> &p) {
 }
 
 //not tested
-point ComputeCentroid(vector<point> &p) {
+point compute_centroid(vector<point> &p) {
     point c(0,0);
-    ld scale = 6.0 * ComputeSignedArea(p);
+    ld scale = 6.0 * compute_signed_area(p);
     for (int i = 0; i < p.size(); i++){
         int j = (i+1) % p.size();
         c = c + (p[i]+p[j])*(p[i].x*p[j].y - p[j].x*p[i].y);
@@ -115,20 +115,20 @@ point ComputeCentroid(vector<point> &p) {
 }
 
 //O(n^2)
-bool IsSimple(const vector<point> &p) {
+bool is_simple(const vector<point> &p) {
     for (int i = 0; i < p.size(); i++) {
         for (int k = i+1; k < p.size(); k++) {
             int j = (i+1) % p.size();
             int l = (k+1) % p.size();
             if (i == l || j == k) continue;
-            if (SegmentSegmentIntersect(p[i], p[j], p[k], p[l])) 
+            if (segment_segment_intersect(p[i], p[j], p[k], p[l])) 
                 return false;
         }
     }
     return true;
 }
 
-bool pointInTriangle(point a, point b, point c, point cur){
+bool point_in_triangle(point a, point b, point c, point cur){
     ll s1 = abs(cross(b - a, c - a));
     ll s2 = abs(cross(a - cur, b - cur)) + abs(cross(b - cur, c - cur)) + abs(cross(c - cur, a - cur));
     return s1 == s2;
@@ -144,7 +144,7 @@ void sort_lex_hull(vector<point> &hull){
 }
 
 //determine if point is inside or on the boundary of a polygon (O(logn))
-bool pointInConvexPolygon(vector<point> &hull, point cur){
+bool point_in_convex_polygon(vector<point> &hull, point cur){
     int n = hull.size();
     //Corner cases: point outside most left and most right wedges
     if(cur.dir(hull[0], hull[1]) != 0 && cur.dir(hull[0], hull[1]) != hull[n - 1].dir(hull[0], hull[1]))
@@ -159,13 +159,13 @@ bool pointInConvexPolygon(vector<point> &hull, point cur){
         if(cur.dir(hull[0], hull[mid]) <= 0)l = mid;
         else r = mid;
     }
-    return pointInTriangle(hull[l], hull[l + 1], hull[0], cur);
+    return point_in_triangle(hull[l], hull[l + 1], hull[0], cur);
 }
 
 // determine if point is on the boundary of a polygon (O(N))
-bool PointOnPolygon(vector<point> &p, point q) {
+bool point_on_polygon(vector<point> &p, point q) {
 for (int i = 0; i < p.size(); i++)
-    if (q.dist2(ProjectPointSegment(p[i], p[(i+1)%p.size()], q)) < EPS) return true;
+    if (q.dist2(project_point_segment(p[i], p[(i+1)%p.size()], q)) < EPS) return true;
     return false;
 }
 
@@ -202,12 +202,12 @@ bool is_simple_polygon(const vector<point> &pts){
             pair<edge, int> above, below;
             if(cur != sweep.end()){
                 above = *cur;
-                if(!adj(above.nd, e.nd.nd, n) and SegmentSegmentIntersect(pts[above.nd], pts[(above.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
+                if(!adj(above.nd, e.nd.nd, n) and segment_segment_intersect(pts[above.nd], pts[(above.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
                     return false;
             }
             if(cur != sweep.begin()){
                 below = *(--cur);
-                if(!adj(below.nd, e.nd.nd, n) and SegmentSegmentIntersect(pts[below.nd], pts[(below.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
+                if(!adj(below.nd, e.nd.nd, n) and segment_segment_intersect(pts[below.nd], pts[(below.nd + 1)%n], pts[e.nd.nd], pts[(e.nd.nd + 1)%n]))
                     return false;
             }
             sweep.insert(edgs[e.nd.nd]);
@@ -217,7 +217,7 @@ bool is_simple_polygon(const vector<point> &pts){
             auto cur = above, below = --cur;
             if(above != sweep.end() and below != sweep.begin()){
                 --below;
-                if(!adj(above->nd, below->nd, n) and SegmentSegmentIntersect(pts[above->nd], pts[(above->nd + 1)%n], pts[below->nd], pts[(below->nd + 1)%n]))
+                if(!adj(above->nd, below->nd, n) and segment_segment_intersect(pts[above->nd], pts[(above->nd + 1)%n], pts[below->nd], pts[(below->nd + 1)%n]))
                     return false;
             }
             sweep.erase(cur);

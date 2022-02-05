@@ -34,14 +34,14 @@ circle circumcircle(point a, point b, point c) {
     return ans;
 }
 
-point ComputeCircleCenter(point a, point b, point c) {
+point compute_circle_center(point a, point b, point c) {
     //circumcenter
     b = (a + b)/2;
     c = (a + c)/2;
-    return ComputeLineIntersection(b, b + RotateCW90(a - b), c, c + RotateCW90(a - c));
+    return compute_line_intersection(b, b + rotate_cw90(a - b), c, c + rotate_cw90(a - c));
 }
 
-int insideCircle(point p, circle c) {
+int inside_circle(point p, circle c) {
     if (fabs(p.dist(c.c) - c.r)<EPS) return 1;
     else if (p.dist(c.c) < c.r) return 0;
     else return 2;
@@ -57,7 +57,7 @@ circle incircle( point p1, point p2, point p3 ) {
     return circle(c, r);
 }
 
-circle minimumCircle(vector<point> p) {
+circle minimum_circle(vector<point> p) {
     random_shuffle(p.begin(), p.end());
     circle C = circle(p[0], 0.0);
     for(int i = 0; i < (int)p.size(); i++) {
@@ -75,7 +75,7 @@ circle minimumCircle(vector<point> p) {
     return C;
 }
 
-vector<point> CircleLineIntersection(point a, point b, point c, ld r) {
+vector<point> circle_line_intersection(point a, point b, point c, ld r) {
     vector<point> ret;
     b = b - a;
     a = a - c;
@@ -90,15 +90,15 @@ vector<point> CircleLineIntersection(point a, point b, point c, ld r) {
     return ret;
 }
 
-vector<point> CircleCircleIntersection(point a, point b, ld r, ld R) {
+vector<point> circle_circle_intersection(point a, point b, ld r, ld R) {
     vector<point> ret;
     ld d = sqrt(a.dist2(b));
     if (d > r + R || d + min(r, R) < max(r, R)) return ret;
     ld x = (d*d - R*R + r*r)/(2*d);
     ld y = sqrt(r*r - x*x);
     point v = (b - a)/d;
-    ret.push_back(a + v*x + RotateCCW90(v)*y);
+    ret.push_back(a + v*x + rotate_ccw90(v)*y);
     if (y > 0)
-        ret.push_back(a + v*x - RotateCCW90(v)*y);
+        ret.push_back(a + v*x - rotate_ccw90(v)*y);
     return ret;
 }

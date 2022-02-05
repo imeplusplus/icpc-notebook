@@ -95,17 +95,17 @@ struct point {
 
 int direction(point o, point p, point q) { return p.dir(o, q); }
 
-point RotateCCW90(point p)   { return point(-p.y,p.x); }
-point RotateCW90(point p)    { return point(p.y,-p.x); }
+point rotate_ccw90(point p)   { return point(-p.y,p.x); }
+point rotate_cw90(point p)    { return point(p.y,-p.x); }
 
 //for reading purposes avoid using * and % operators, use the functions below:
 type dot(point p, point q)     { return p.x*q.x + p.y*q.y; }
 type cross(point p, point q)   { return p.x*q.y - p.y*q.x; }
 
 //double area
-type area2(point a, point b, point c) { return cross(a,b) + cross(b,c) + cross(c,a); }
+type area_2(point a, point b, point c) { return cross(a,b) + cross(b,c) + cross(c,a); }
 
-int angleLess(const point& a1, const point& b1, const point& a2, const point& b2) {
+int angle_less(const point& a1, const point& b1, const point& a2, const point& b2) {
     //angle between (a1 and b1) vs angle between (a2 and b2)
     //1  : bigger
     //-1 : smaller
