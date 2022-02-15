@@ -27,8 +27,8 @@ struct ColorUpdate {
     Seg s(l, r, c);
     auto it = segs.lower_bound(s);
     while (it != segs.end() and it->l <= s.r) {
-      it++;
-      segs.erase(prev(it));
+      auto it2 = it++;
+      segs.erase(it2);
     }
     segs.insert(s);
   }
