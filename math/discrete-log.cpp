@@ -3,6 +3,7 @@
 // Return the smallest x possible, or -1 if there is no solution
 // If all solutions needed, solve c * a^x = b mod(m) and (a*b) * a^y = b mod(m)
 // x + k * (y + 1) for k >= 0 are all solutions
+// Works for any integer values of c, a, b and positive m
 ll discrete_log(ll c, ll a, ll b, ll m){
 	c = ((c % m) + m) % m, a = ((a % m) + m) % m, b = ((b % m) + m) % m;
 	if(c == b)
