@@ -102,7 +102,7 @@ vector<point> convex_hull(vector<point> pts) {
   vector<point> ch(pts.size());
   point mn = pts[0];
 
-  for(point p : pts) if (p.y < mn.y or (p.y == mn.y and p.x < p.y)) mn = p;
+  for(point p : pts) if (p.y < mn.y or (p.y == mn.y and p.x < mn.x)) mn = p;
 
   origin = mn;
   sort(pts.begin(), pts.end(), radial);
