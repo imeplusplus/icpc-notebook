@@ -1,13 +1,19 @@
 #include "basics.cpp"
 #include "lines.cpp"
 
-//Graham scan with bugs, not safe, prefer monotone chain!
+//Graham scan NOT TESTED ENOUGH, not safe, prefer monotone chain!
 point origin;
 
-//radial function for graham scan, for a generic radial sort see radial_sort.cpp
-bool radial(point p, point q) {
-    int dir = p.dir(origin, q);
-    return dir > 0 or (!dir and p.on_seg(origin, q));
+int above(point p){
+    if(p.y == origin.y) return p.x > origin.x;
+    return p.y > origin.y;
+}
+
+bool cmp(point p, point q){
+    int tmp = above(q) - above(p);
+    if(tmp) return tmp > 0;
+    return p.dir(origin,q) > 0;
+    //Be Careful: p.dir(origin,q) == 0
 }
 
 // Graham Scan O(nlog(n))
@@ -15,28 +21,30 @@ vector<point> graham_hull(vector<point> pts) {
     vector<point> ch(pts.size());
     point mn = pts[0];
 
-    for(point p : pts) if (p.y < mn.y or (p.y == mn.y and p.x < p.y)) mn = p;
+    for(point p : pts) if (p.y < mn.y or (p.y == mn.y and p.x < mn.x)) mn = p;
 
     origin = mn;
-    sort(pts.begin(), pts.end(), radial);
+    sort(pts.begin(), pts.end(), cmp);
 
     int n = 0;
 
     // IF: Convex hull without collinear points
-    for(point p : pts) {
-        while (n > 1 and ch[n-1].dir(ch[n-2], p) < 1) n--;
-        ch[n++] = p;
-    }
+    // for(point p : pts) {
+    //     while (n > 1 and ch[n-1].dir(ch[n-2], p) < 1) n--;
+    //     ch[n++] = p;
+    // }
 
-    /* ELSE IF: Convex hull with collinear points
+    //ELSE IF: Convex hull with collinear points
     for(point p : pts) {
     while (n > 1 and ch[n-1].dir(ch[n-2], p) < 0) n--;
     ch[n++] = p;
     }
+
+    /*this part not safe
     for(int i=pts.size()-1; i >=1; --i)
-    if (pts[i] != ch[n-1] and !pts[i].dir(pts[0], ch[n-1]))
-        ch[n++] = pts[i];
-    // END IF */
+    if (n > 1 and pts[i] != ch[n-1] and !pts[i].dir(pts[0], ch[n-1]))
+        ch[n++] = pts[i];*/
+    // END IF
 
     ch.resize(n);
     return ch;
