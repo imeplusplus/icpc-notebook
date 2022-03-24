@@ -234,3 +234,39 @@ bool is_simple_polygon(const vector<point> &pts){
     }
     return true;
 }
+
+//code copied from https://github.com/tfg50/Competitive-Programming/blob/master/Biblioteca/Math/2D%20Geometry/ConvexHull.cpp
+int maximize_scalar_product(vector<point> &hull, point vec) {
+	// this code assumes that there are no 3 colinear points
+	int ans = 0;
+	int n = hull.size();
+	if(n < 20) {
+		for(int i = 0; i < n; i++) {
+			if(hull[i] * vec > hull[ans] * vec) {
+				ans = i;
+			}
+		}
+	} else {
+		if(hull[1] * vec > hull[ans] * vec) {
+			ans = 1;
+		}
+		for(int rep = 0; rep < 2; rep++) {
+			int l = 2, r = n - 1;
+			while(l != r) {
+				int mid = (l + r + 1) / 2;
+				bool flag = hull[mid] * vec >= hull[mid-1] * vec;
+				if(rep == 0) { flag = flag && hull[mid] * vec >= hull[0] * vec; }
+				else { flag = flag || hull[mid-1] * vec < hull[0] * vec; }
+				if(flag) {
+					l = mid;
+				} else {
+					r = mid - 1;
+				}
+			}
+			if(hull[ans] * vec < hull[l] * vec) {
+				ans = l;
+			}
+		}
+	}
+	return ans;
+}
