@@ -270,3 +270,41 @@ int maximize_scalar_product(vector<point> &hull, point vec) {
 	}
 	return ans;
 }
+
+//find tangents related to a point outside the polygon, essentially the same for maximizing scalar product
+int tangent(vector<point> &hull, point vec, int dir_flag) {
+	// this code assumes that there are no 3 colinear points
+    // dir_flag = -1 for right tangent
+    // dir_flag =  1 for left taangent
+	int ans = 0;
+	int n = hull.size();
+	if(n < 20) {
+		for(int i = 0; i < n; i++) {
+			if(hull[ans].dir(vec, hull[i]) == dir_flag) {
+				ans = i;
+			}
+		}
+	} else {
+		if(hull[ans].dir(vec, hull[1]) == dir_flag) {
+			ans = 1;
+		}
+		for(int rep = 0; rep < 2; rep++) {
+			int l = 2, r = n - 1;
+			while(l != r) {
+				int mid = (l + r + 1) / 2;
+				bool flag = hull[mid - 1].dir(vec, hull[mid]) == dir_flag;
+				if(rep == 0) { flag = flag && (hull[0].dir(vec, hull[mid]) == dir_flag); }
+				else { flag = flag || (hull[0].dir(vec, hull[mid - 1]) != dir_flag); }
+				if(flag) {
+					l = mid;
+				} else {
+					r = mid - 1;
+				}
+			}
+			if(hull[ans].dir(vec, hull[l]) == dir_flag) {
+				ans = l;
+			}
+		}
+	}
+	return ans;
+}
