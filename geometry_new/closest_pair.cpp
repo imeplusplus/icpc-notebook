@@ -1,5 +1,5 @@
 #include "basics.cpp"
-
+//DIVIDE AND CONQUER METHOD
 //Warning: include variable id into the struct point
 
 struct cmp_y {
@@ -57,3 +57,34 @@ int main(){
     sort(pts.begin(), pts.end());
     closest_pair(0, n);
 }
+
+
+//LINE SWEEP
+int n; //amount of points
+point pnt[N];
+
+struct cmp_y {
+    bool operator()(const point & a, const point & b) const {
+        if(a.y == b.y) return a.x < b.x;
+        return a.y < b.y;
+    }
+};
+
+ld closest_pair() {
+  sort(pnt, pnt+n);
+  ld best = numeric_limits<double>::infinity();
+  set<point, cmp_y> box;
+
+  box.insert(pnt[0]);
+  int l = 0;
+
+  for (int i = 1; i < n; i++){
+    while(l < i and pnt[i].x - pnt[l].x > best)
+      box.erase(pnt[l++]);
+    for(auto it = box.lower_bound({0, pnt[i].y - best}); it != box.end() and pnt[i].y + best >= it->y; it++)
+      best = min(best, hypot(pnt[i].x - it->x, pnt[i].y - it->y));
+    box.insert(pnt[i]);
+  }
+  return best;
+}
+
