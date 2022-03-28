@@ -104,3 +104,54 @@ vector<point> circle_circle_intersection(point a, point b, ld r, ld R) {
         ret.push_back(a + v*x - rotate_ccw90(v)*y);
     return ret;
 }
+
+//GREAT CIRCLE
+
+double gcTheta(double pLat, double pLong, double qLat, double qLong) {
+	pLat *= acos(-1.0) / 180.0; pLong *= acos(-1.0) / 180.0; // convert degree to radian
+	qLat *= acos(-1.0) / 180.0; qLong *= acos(-1.0) / 180.0;
+	return acos(cos(pLat)*cos(pLong)*cos(qLat)*cos(qLong) +
+		cos(pLat)*sin(pLong)*cos(qLat)*sin(qLong) +
+		sin(pLat)*sin(qLat));
+}
+
+double gcDistance(double pLat, double pLong, double qLat, double qLong, double radius) {
+	return radius*gcTheta(pLat, pLong, qLat, qLong);
+}
+
+
+/*
+ * Codeforces 101707B
+ */
+/*
+point A, B;
+circle C;
+
+double getd2(point a, point b) {
+	double h = dist(a, b);
+	double r = C.r;
+	double alpha = asin(h/(2*r));
+	while (alpha < 0) alpha += 2*acos(-1.0);
+	return dist(a, A) + dist(b, B) + r*2*min(alpha, 2*acos(-1.0) - alpha);
+}
+
+int main() {
+	scanf("%lf %lf", &A.x, &A.y);
+	scanf("%lf %lf", &B.x, &B.y);
+	scanf("%lf %lf %lf", &C.c.x, &C.c.y, &C.r);
+	double ans;
+	if (distToLineSegment(C.c, A, B) >= C.r) {
+		ans = dist(A, B);
+	}
+	else {
+		pair<point, point> tan1 = C.getTangentPoint(A);
+		pair<point, point> tan2 = C.getTangentPoint(B);
+		ans = 1e+30;
+		ans = min(ans, getd2(tan1.first, tan2.first));
+		ans = min(ans, getd2(tan1.first, tan2.second));
+		ans = min(ans, getd2(tan1.second, tan2.first));
+		ans = min(ans, getd2(tan1.second, tan2.second));
+	}
+	printf("%.18f\n", ans);
+	return 0;
+}*/
