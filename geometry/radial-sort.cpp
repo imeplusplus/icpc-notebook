@@ -1,3 +1,6 @@
+#include "basics.cpp"
+point origin;
+
 int above(point p){
     if(p.y == origin.y) return p.x > origin.x;
     return p.y > origin.y;
