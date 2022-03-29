@@ -3,21 +3,51 @@
 # Subsections within a section should follow the format:
 #   [filename within code directory][tab character \t][subsection title]
 
-[Template + vimrc]
+[Flags + Template + vimrc]
+flags.txt	Flags
 template.cpp	Template
 vimrc	vimrc
 
+[Data Structures]
+data-structures/bit_binary_search.cpp	Bit Binary Search
+data-structures/bit_range.cpp	Bit Range
+data-structures/bit.cpp	Bit
+data-structures/bit2d.cpp	Bit 2D
+data-structures/centroid_decomposition.cpp	Centroid Decomposition
+data-structures/color_update.cpp	Color Update
+data-structures/hld_exx.cpp	Heavy-Light Decomposition (new)
+data-structures/hld.cpp	Heavy-Light Decomposition
+data-structures/ita_lichao.cpp	Lichao Tree (ITA)
+data-structures/mergesort_tree.cpp	Merge Sort Tree
+data-structures/min_queue.cpp	Minimum Queue
+data-structures/ordered_set.cpp	Ordered Set
+data-structures/seg_tree_dynamic_lazy.cpp	Dynamic Segment Tree (Lazy Update)
+data-structures/seg_tree_dynamic.cpp	Dynamic Segment Tree
+data-structures/seg_tree_dynamic.cpp	Iterative Segment Tree
+data-structures/seg_tree_mod.cpp	Mod Segment Tree
+data-structures/seg_tree_persistent_naum.cpp	Persistent Segment Tree (Naum)
+data-structures/seg_tree_persistent.cpp	Persistent Segment Tree
+data-structures/seg_tree_point_update_struct.cpp	Struct Segment Tree
+data-structures/seg_tree.cpp	Segment Tree
+data-structures/seg_tree2d.cpp	Segment Tree 2D
+data-structures/set_of_intervals.cpp	Set Of Intervals
+data-structures/sparse.cpp	Sparse Table
+data-structures/sparse2d.cpp	Sparse Table 2D
+data-structures/stanford_kdtree.cpp	KD Tree (Stanford)
+data-structures/treap.cpp	Treap
+data-structures/trie.cpp	Trie
+data-structures/union_find.cpp	Union Find
+data-structures/union_find_partial_persistent.cpp	Union Find (Partial Persistent)
+data-structures/union_find_rollback.cpp	Union Find (Rollback)
 
 [Dynamic Programming]
 dynamic-programming/convex_hull_trick_emaxx.cpp	Convex Hull Trick (emaxx)
 dynamic-programming/convex_hull_trick.cpp	Convex Hull Trick
 dynamic-programming/divide_and_conquer_optimization.cpp	Divide and Conquer Optimization
 dynamic-programming/knuth_optimization.cpp	Knuth Optimization
-
 dynamic-programming/lis.cpp	Longest Increasing Subsequence
 dynamic-programming/sos.cpp	SOS DP
 dynamic-programming/steiner_tree.cpp	Steiner tree
-
 
 [Graphs]
 graphs/2_sat_kosaraju.cpp	2-SAT Kosaraju
@@ -48,6 +78,21 @@ graphs/stanford_stoer_wagner.cpp	Stoer Wagner (Stanford)
 graphs/tarjan.cpp	Tarjan
 graphs/zero_one_bfs.cpp	Zero One BFS
 
+[Strings]
+strings/aho_corasick.cpp	Aho-Corasick
+strings/aho_emaxx.cpp	Aho-Corasick (emaxx)
+strings/booths_algorithm.cpp	Booths Algorithm
+strings/kmp_automaton.cpp	Knuth-Morris-Pratt (Automaton)
+strings/kmp.cpp	Knuth-Morris-Pratt
+strings/manacher.cpp	Manacher
+strings/rabin_karp.cpp	Rabin-Karp
+strings/recursive_string_matching.cpp	Recursive-String Matching
+strings/string_hashing.cpp	String Hashing
+strings/string_multihashing.cpp	String Multihashing
+strings/suffix_array.cpp	Suffix Array
+strings/suffix_automaton.cpp	Suffix Automaton
+strings/suffix_tree.cpp	Suffix Tree
+strings/z_function.cpp	Z Function
 
 [Mathematics]
 math/basics.cpp	Basics
