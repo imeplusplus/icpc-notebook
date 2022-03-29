@@ -1,3 +1,5 @@
+/* Line integral = integral(sqrt(1 + (dy/dx)²)) dx */
+
 /* Multiplicative Inverse over MOD for all 1..N - 1 < MOD in O(N)
  Only works for prime MOD. If all 1..MOD - 1 needed, use N = MOD */
 ll inv[N];
