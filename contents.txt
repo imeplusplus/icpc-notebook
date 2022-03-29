@@ -134,6 +134,7 @@ geometry/polygons.cpp	Closest Pair of Points
 geometry/radial_sort.cpp	Radial Sort
 geometry/stanford_delaunay.cpp	Stanford Delaunay
 geometry/ternary_search.cpp	Ternary Search
+geometry/voronoi.cpp	Voronoi Diagram
 
 [Miscellaneous]
 misc/bitset.cpp	Bitset

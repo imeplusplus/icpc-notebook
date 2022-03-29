@@ -1,6 +1,7 @@
 /*
+Complexity: O(nlogn)
 Code by Monogon: https://codeforces.com/blog/entry/85638
-My code doesn't work when two points have the same x coordinate.
+This code doesn't work when two points have the same x coordinate.
 This is handled simply by rotating all input points by 1 radian and praying to the geometry gods.
 */
 
