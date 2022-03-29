@@ -1,0 +1,91 @@
+
+[Mathematics]
+math/basics.cpp	Basics
+math/sieve.cpp	Sieve of Eratosthenes
+math/euler-phi.cpp	Euler Phi
+math/extended-euclid.cpp	Extended Euclidean and Chinese Remainder
+math/miller-rabin.cpp	Miller-Rabin
+math/prime-factors.cpp	Prime Factors
+math/pollard-rho.cpp	Pollard-Rho
+math/fft.cpp	Fast Fourier Transform
+math/fft-tourist.cpp	Fast Fourier Transform(Tourist)
+math/ntt.cpp	Number Theoretic Transform
+math/fwht.cpp	Fast Walsh-Hadamard Transform
+math/primitive-root.cpp	Primitive Root
+math/gauss-elim.cpp	Gaussian Elimination (double)
+math/gauss-elim-prime.cpp	Gaussian Elimination (modulo prime)
+math/gauss-elim-ext.cpp	Gaussian Elimination (extended inverse)
+math/gss.cpp	Golden Section Search (Ternary Search)
+math/josephus.cpp	Josephus
+math/simpson-rule.cpp	Simpson Rule
+math/discrete-log.cpp	Discrete Log (Baby-step Giant-step)
+math/mobius.cpp	Mobius Function
+math/stanford-simplex.cpp	Simplex (Stanford)
+
+[Strings]
+strings/rabin-karp.cpp	Rabin-Karp
+strings/kmp.cpp	Knuth-Morris-Pratt
+strings/z.cpp	Z Function
+strings/prefix.cpp	Prefix Function
+strings/recursive-string-matching.cpp	Recursive-String Matching
+strings/aho.cpp	Aho-Corasick
+strings/manacher.cpp	Manacher
+strings/suffix-array.cpp	Suffix Array
+strings/suffix-automaton.cpp	Suffix Automaton
+strings/stanford-zfunction.cpp	Z Function (Stanford)
+
+[Data Structures]
+data-structures/dsu.cpp	Disjoint Set Union
+data-structures/sparse.cpp	Sparse Table
+data-structures/sparse2d.cpp	Sparse Table 2D
+data-structures/bit.cpp	Fenwick Tree
+data-structures/bit2d.cpp	Fenwick Tree 2D
+data-structures/bit-range.cpp	Range Update Point Query Fenwick Tree
+data-structures/segtree.cpp	Segment Tree
+data-structures/segtree2d.cpp	Segment Tree 2D
+data-structures/persistent-segtree.cpp	Persistent Segment Tree
+data-structures/persistent-segtree-naum.cpp	Persistent Segment Tree (Naum)
+data-structures/hld.cpp	Heavy-Light Decomposition
+data-structures/hld_exx.cpp	Heavy-Light Decomposition (new)
+data-structures/centroid-decomposition.cpp	Centroid Decomposition
+data-structures/trie.cpp	Trie
+data-structures/mergesort-tree.cpp	Mergesort Tree
+data-structures/treap.cpp	Treap
+data-structures/stanford-kdtree.cpp	KD Tree (Stanford)
+data-structures/min-queue.cpp	Minimum Queue
+data-structures/ordered_set.cpp	Ordered Set
+data-structures/ita-lichao.cpp	Lichao Tree (ITA)
+
+[Dynamic Programming]
+dynamic-programming/lis.cpp	Longest Increasing Subsequence
+dynamic-programming/convex-hull-trick.cpp	Convex Hull Trick
+dynamic-programming/convex-hull-trick-emaxx.cpp	Convex Hull Trick (emaxx)
+dynamic-programming/divide-and-conquer-optimization.cpp	Divide and Conquer Optimization
+dynamic-programming/knuth-optimization.cpp	Knuth Optimization
+
+[Geometry]
+geometry/basics.cpp	Basic
+geometry/geom.cpp	Basic (new)
+geometry/closest-pair.cpp	Closest Pair of Points
+geometry/neighbour.cpp	Nearest Neighbours
+
+[Geometry (Stanford)]
+geometry/stanford-geom.cpp	Basic
+geometry/stanford-convex-hull.cpp	Convex Hull
+geometry/stanford-delaunay.cpp	Delaunay Triangulation
+
+[Geometry (ITA)]
+geometry/ita-circle2d.cpp	Circulo 2d
+geometry/ita-minkowski.cpp	Minkowski
+geometry/ita-greatcircle.cpp	Great Circle
+
+[Miscellaneous]
+misc/builtin.cpp	builtin
+misc/prime-numbers.txt	prime numbers
+misc/week-day.cpp	Week day
+misc/date.cpp	Date
+misc/stanford-latlong.cpp	Latitude Longitude (Stanford)
+misc/python.py	Python
+misc/sqrt-decomposition.cpp	Sqrt Decomposition
+misc/bitset.cpp	Bitset
+misc/ita-paren2polish.cpp	Parentesis to Poslish (ITA)

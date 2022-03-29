@@ -1,3 +1,5 @@
+/* Line integral = integral(sqrt(1 + (dy/dx)^2)) dx */
+
 /* Multiplicative Inverse over MOD for all 1..N - 1 < MOD in O(N)
  Only works for prime MOD. If all 1..MOD - 1 needed, use N = MOD */
 ll inv[N];
@@ -36,7 +38,7 @@ for(int l = 1, r; l <= n; l = r + 1){
 
 /* Fibonacci in O(log(N)) with memoization
  f(0) = f(1) = 1
- f(2*k) = f(k)² + f(k - 1)²
+ f(2*k) = f(k)^2 + f(k - 1)^2
  f(2*k + 1) = f(k)*[f(k) + 2*f(k - 1)] */
 
 /* Wilson's Theorem Extension
@@ -71,8 +73,8 @@ for(int l = 1, r; l <= n; l = r + 1){
  sum(k->N) k * sum(i->N) sum(j->N) [gcd(i, j) == k], i = a * k, j = b * k
  = sum(k->N) k * sum(a->N/k) sum(b->N/k) [gcd(a, b) == 1]
  = sum(k->N) k * sum(a->N/k) sum(b->N/k) sum(d->N/k) [d | a] * [d | b] * mi(d)
- = sum(k->N) k * sum(d->N/k) mi(d) * floor(N / kd)², l = kd, l <= N, k | l, d = l / k
- = sum(l->N) floor(N / l)² * sum(k|l) k * mi(l / k)
+ = sum(k->N) k * sum(d->N/k) mi(d) * floor(N / kd)^2, l = kd, l <= N, k | l, d = l / k
+ = sum(l->N) floor(N / l)^2 * sum(k|l) k * mi(l / k)
  If f(n) = sum(x|n)(g(x) * h(x)) with g(x) and h(x) multiplicative, than f(n) is multiplicative
  Hence, g(l) = sum(k|l) k * mi(l / k) is multiplicative
- = sum(l->N) floor(N / l)² * g(l) */
+ = sum(l->N) floor(N / l)^2 * g(l) */

@@ -1,6 +1,6 @@
 // factor(N, v) to get N factorized in vector v
 // O(N ^ (1 / 4)) on average
-// Miller-Rabin - Primarily Test O(|base|*log²n)
+// Miller-Rabin - Primarily Test O(|base|*(logn)^2)
 ll addmod(ll a, ll b, ll m){
 	if(a >= m - b) return a + b - m;
 	return a + b;

@@ -7,9 +7,9 @@
     b: number of points on the border
 
 3) Conic Rotations
-    Given elipse: Ax² + Bxy + Cy² + Dx + Ey + F = 0
-    Convert it to: Ax² + Bxy + Cy² + Dx + Ey = 1 (this formula suits better for elipse, before doing this verify F = 0)
-    Final conversion: A(x + D/2A)² + C(y + E/2C)² = 1 + D²/4A + E²/4C
+    Given elipse: Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+    Convert it to: Ax^2 + Bxy + Cy^2 + Dx + Ey = 1 (this formula suits better for elipse, before doing this verify F = 0)
+    Final conversion: A(x + D/2A)^2 + C(y + E/2C)^2 = 1 + D^2/4A + E^2/4C
         B != 0 (Rotate):
             theta = atan2(b, c-a)/2.0; 
             A' = (a + c + b/sin(2.0*theta))/2.0; // A
