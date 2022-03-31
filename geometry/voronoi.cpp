@@ -3,6 +3,22 @@ Complexity: O(nlogn)
 Code by Monogon: https://codeforces.com/blog/entry/85638
 This code doesn't work when two points have the same x coordinate.
 This is handled simply by rotating all input points by 1 radian and praying to the geometry gods.
+
+The definition of the Voronoi diagram immediately shows signs of applications.
+*   Given a set S of n points and m query points p1,...,pm, we can answer for each query point, its nearest neighbor in S.
+    This can be done in O((n+q)log(n+q)) offline by sweeping the Voronoi diagram and query points.
+    Or it can be done online with persistent data structures.
+
+*   For each Delaunay triangle, its circumcircle does not strictly contain any points in S. (In fact, you can also consider this the defining property of Delaunay triangulation)
+
+*   The number of Delaunay edges is at most 3n - 6, so there is hope for an efficient construction.
+
+*   Each point p belongs to S is adjacent to its nearest neighbor with a Delaunay edge.
+
+*   The Delaunay triangulation maximizes the minimum angle in the triangles among all possible triangulations.
+
+*   The Euclidean minimum spanning tree is a subset of Delaunay edges.
+
 */
 
 #include <bits/stdc++.h>

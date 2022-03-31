@@ -17,6 +17,7 @@ data-structures/centroid_decomposition.cpp	Centroid Decomposition
 data-structures/color_update.cpp	Color Update
 data-structures/hld_exx.cpp	Heavy-Light Decomposition (new)
 data-structures/hld.cpp	Heavy-Light Decomposition
+data-structures/hld-lamarca.cpp	Heavy-Light Decomposition (Lamarca)
 data-structures/ita_lichao.cpp	Lichao Tree (ITA)
 data-structures/mergesort_tree.cpp	Merge Sort Tree
 data-structures/min_queue.cpp	Minimum Queue
