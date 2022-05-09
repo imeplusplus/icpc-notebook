@@ -58,13 +58,15 @@ bool between(const point &a, const point &b, const point &c) {
 }
 #endif
 
+//new change: <= 0 / >= 0 became < 0 / > 0 (yet to be tested)
+
 void monotone_hull(vector<point> &pts) {
     sort(pts.begin(), pts.end());
     pts.erase(unique(pts.begin(), pts.end()), pts.end());
     vector<point> up, dn;
     for (int i = 0; i < pts.size(); i++) {
-        while (up.size() > 1 && area_2(up[up.size()-2], up.back(), pts[i]) >= 0) up.pop_back();
-        while (dn.size() > 1 && area_2(dn[dn.size()-2], dn.back(), pts[i]) <= 0) dn.pop_back();
+        while (up.size() > 1 && area_2(up[up.size()-2], up.back(), pts[i]) > 0) up.pop_back();
+        while (dn.size() > 1 && area_2(dn[dn.size()-2], dn.back(), pts[i]) < 0) dn.pop_back();
         up.push_back(pts[i]);
         dn.push_back(pts[i]);
     }
