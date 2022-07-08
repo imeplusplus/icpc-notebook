@@ -4,6 +4,12 @@
 // If all solutions needed, solve c * a^x = b mod(m) and (a*b) * a^y = b mod(m)
 // x + k * (y + 1) for k >= 0 are all solutions
 // Works for any integer values of c, a, b and positive m
+
+// Corner Cases:
+// 0^x = 1 mod(m) returns x = 0, so you may want to change it to -1
+// You also may want to change for 0^x = 0 mod(1) to return x = 1 instead
+// We leave it like it is because you might be actually checking for m^x = 0^x mod(m)
+// which would have x = 0 as the actual solution.
 ll discrete_log(ll c, ll a, ll b, ll m){
 	c = ((c % m) + m) % m, a = ((a % m) + m) % m, b = ((b % m) + m) % m;
 	if(c == b)
