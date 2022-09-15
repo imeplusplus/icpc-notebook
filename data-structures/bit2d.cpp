@@ -6,7 +6,8 @@ struct Bit2D{
 	vector<T> ord;
 	vector<vector<T>> fw, coord;
 	
-	// if range qrys/upds remember to build with x + 1, x - 1, y + 1 and y - 1 already in pts
+	// pts needs all points that will be used in the upd
+	// if range upds remember to build with {x1, y1}, {x1, y2 + 1}, {x2 + 1, y1}, {x2 + 1, y2 + 1}
 	Bit2D(vector<pair<T, T>> pts){
 		sort(pts.begin(), pts.end());
 		for(auto a : pts)
