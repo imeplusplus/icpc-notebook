@@ -1,11 +1,13 @@
 // Thank you for the code tfg!
+
+// O(Nlog²N)
 template<class T = int>
 struct Bit2D{
 	vector<T> ord;
 	vector<vector<T>> fw, coord;
 	
 	// if range qrys/upds remember to build with x + 1, x - 1, y + 1 and y - 1 already in pts
-	Bit2D(vector<pair<T, T>> pts) {
+	Bit2D(vector<pair<T, T>> pts){
 		sort(pts.begin(), pts.end());
 		for(auto a : pts)
 			if(ord.empty() || a.first != ord.back())
