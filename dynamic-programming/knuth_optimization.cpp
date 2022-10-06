@@ -27,7 +27,7 @@ void knuth() {
   for (int i = 1; i <= n; i++) a[i][i] = i;
 
   for (int j = 2; j <= n; ++j)
-    for (int i = j; i >= 1; --i)
+    for (int i = j; i >= 1; --i){
       for (int k = a[i][j-1]; k <= a[i+1][j]; ++k) {
         ll v = dp[i][k] + dp[k][j] + cost(i, j);
 
@@ -35,7 +35,9 @@ void knuth() {
         // in case of maximum, use v > dp[i][k]
         if (v < dp[i][j])
           a[i][j] = k, dp[i][j] = v;
-      }
+      }      
+      //+ Iterate over i to get min{dp[i][j]} for each j, don't forget cost from n to
+    }
 }
 
 
@@ -57,7 +59,7 @@ void knuth() {
   for (int i = 1; i <= n; i++) a[i][1] = 1, a[n+1][i] = n;
 
   for (int j = 2; j <= maxj; j++)
-    for (int i = n; i >= 1; i--)
+    for (int i = n; i >= 1; i--){
       for (int k = a[i][j-1]; k <= a[i+1][j]; k++) {
         ll v = dp[k][j-1] + cost(k, i);
 
@@ -66,4 +68,6 @@ void knuth() {
         if (v < dp[i][j])
           a[i][j] = k, dp[i][j] = v;
       }
+      //+ Iterate over i to get min{dp[i][j]} for each j, don't forget cost from n to 
+    }
 }

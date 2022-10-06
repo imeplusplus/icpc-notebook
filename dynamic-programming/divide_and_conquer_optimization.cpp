@@ -1,38 +1,59 @@
-// Divide and Conquer DP Optimization - O(k*n^2) => O(k*n*logn)
-//
-// dp[i][j] = min k<i { dp[k][j-1] + C[k][i] }
-//
-// Condition: A[i][j] <= A[i+1][j]
-// A[i][j] is the smallest k that gives an optimal answer to dp[i][j]
-//
-// reference (pt-br): https://algorithmmarch.wordpress.com/2016/08/12/a-otimizacao-de-pds-e-o-garcom-da-maratona/
+/**********************************************************************************
+* DIVIDE AND CONQUER OPTIMIZATION ( dp[i][k] = min j<k {dp[j][k-1] + C(j,i)} )    *
+* Description: searches for bounds to optimal point using the monotocity condition*
+* Condition: L[i][k] <= L[i+1][k]                                                 * 
+* Time Complexity: O(K*N^2) becomes O(K*N*logN)                                   *                
+* Notation: dp[i][k]: optimal solution using k positions, until position i        *
+*           L[i][k]: optimal point, smallest j which minimizes dp[i][k]           *
+*           C(i,j): cost for splitting range [j,i] to j and i                     *
+**********************************************************************************/
 
-int n, maxj;
-int dp[N][J], a[N][J];
+const int N = 1e3+5;
 
-// declare the cost function
-int cost(int i, int j) {
-  // ...
+ll dp[N][N];
+
+//Cost for using i and j
+ll C(ll i, ll j);
+
+void compute(ll l, ll r, ll k, ll optl, ll optr){
+    // stop condition  
+    if(l > r) return;
+
+    ll mid = (l+r)/2;
+    //best : cost, pos
+    pair<ll,ll> best = {LINF,-1};
+
+    //searchs best: lower bound to right, upper bound to left
+    for(ll i = optl; i <= min(mid, optr); i++){
+        best = min(best, {dp[i][k-1] + C(i,mid), i});
+    }
+    dp[mid][k] = best.first;
+    ll opt = best.second;
+
+    compute(l, mid-1, k, optl, opt);
+    compute(mid + 1, r, k, opt, optr);
 }
 
-void calc(int l, int r, int j, int kmin, int kmax) {
-  int m = (l+r)/2;
-  dp[m][j] = LINF;
+//Iterate over k to calculate
+ll solve(){
+  //dimensions of dp[N][K]
+  int n, k;
 
-  for (int k = kmin; k <= kmax; ++k) {
-    ll v = dp[k][j-1] + cost(k, m);
-
-    // store the minimum answer for d[m][j]
-    // in case of maximum, use v > dp[m][j]
-    if (v < dp[m][j]) a[m][j] = k, dp[m][j] = v;
+  //Initialize DP
+  for(ll i = 1; i <= n; i++){
+    //dp[i,1] = cost from 0 to i
+    dp[i][1] = C(0, i);
   }
 
-  if (l < r) {
-    calc(l,   m, j, kmin,    a[m][k]);
-    calc(m+1, r, j, a[m][k], kmax   );
+  for(ll l = 2; l <= k; l++){
+    compute(1, n, l, 1, n);
   }
+
+  /*+ Iterate over i to get min{dp[i][k]}, don't forget cost from n to i
+    for(ll i=1;i<=n;i++){
+        ll rest = ;
+        ans = min(ans,dp[i][k] + rest);
+    }
+  */
 }
 
-// run for every j
-for (int j = 2; j <= maxj; ++j)
-  calc(1, n, j, 1, n);
