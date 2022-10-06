@@ -9,8 +9,8 @@ int cmp(ld x, ld y = 0, ld tol = EPS) {
     return (x <= y + tol) ? (x + tol < y) ? -1 : 0 : 1; }
 
 bool comp(point a, point b){
-    if((cmp(a.x) > 0 || (cmp(a.x) == 0 && cmp(a.y) > 0) ) && (cmp(b.x) < 0 || (cmp(b.x) == 0 && cmp(b.y < 0)))) return 1;
-    if((cmp(b.x) > 0 || (cmp(b.x) == 0 && cmp(b.y) > 0) ) && (cmp(a.x) < 0 || (cmp(a.x) == 0 && cmp(a.y < 0)))) return 0;
+    if((cmp(a.x) > 0 || (cmp(a.x) == 0 && cmp(a.y) > 0) ) && (cmp(b.x) < 0 || (cmp(b.x) == 0 && cmp(b.y) < 0))) return 1;
+    if((cmp(b.x) > 0 || (cmp(b.x) == 0 && cmp(b.y) > 0) ) && (cmp(a.x) < 0 || (cmp(a.x) == 0 && cmp(a.y) < 0))) return 0;
     ll R = a%b;
     if(R) return R > 0;
     return false;

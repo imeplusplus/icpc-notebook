@@ -91,17 +91,17 @@ void monotone_hull(vector<point> &pts) {
 }
 
 //avoid using long double for comparisons, change type and remove division by 2
-ld compute_signed_area(const vector<point> &p) {
-    ld area = 0;
+type compute_signed_area(const vector<point> &p) {
+    type area = 0;
     for(int i = 0; i < p.size(); i++) {
         int j = (i+1) % p.size();
         area += p[i].x*p[j].y - p[j].x*p[i].y;
     }
-    return area / 2.0;
+    return area;
 }
 
 ld compute_area(const vector<point> &p) {
-    return fabs(compute_signed_area(p));
+    return fabs(compute_signed_area(p) / 2.0);
 }
 
 ld compute_perimeter(vector<point> &p) {
@@ -168,6 +168,7 @@ bool point_in_triangle(point a, point b, point c, point cur){
 }
 
 void sort_lex_hull(vector<point> &hull){
+    if(compute_signed_area(hull) < 0) reverse(hull.begin(), hull.end());
     int n = hull.size();
 
     //Sort hull by x

@@ -2,7 +2,7 @@
 //functions tested at: https://codeforces.com/group/3qadGzUdR4/contest/101706/problem/B
 
 //WARNING: all distance functions are not realizing sqrt operation
-//Suggestion: for line intersections check LineLineIntersection and then use ComputeLineIntersection
+//Suggestion: for line intersections check line_line_intersection and then use compute_line_intersection
 
 point project_point_line(point c, point a, point b) {
     ld r = dot(b - a,b - a);
@@ -62,7 +62,7 @@ point lines_intersect(point p, point q, point a, point b) {
     return point(point(r.x, s.x) % c, point(r.y, s.y) % c) / (r%s);
 }
 
-//be careful: test LineLineIntersection before using this function
+//be careful: test line_line_intersection before using this function
 point compute_line_intersection(point a, point b, point c, point d) {
     b = b - a; d = c - d; c = c - a;
     assert(dot(b, b) > EPS && dot(d, d) > EPS);
@@ -74,7 +74,6 @@ bool line_line_intersect(point a, point b, point c, point d) {
     if(lines_collinear(a, b, c, d)) return true; 
     return false;
 }
-
 
 //rays in direction a -> b, c -> d
 bool ray_ray_intersect(point a, point b, point c, point d){
@@ -157,19 +156,19 @@ ld distance_segment_segment(point a, point b, point c, point d){
     return min(min1, min2);
 }
 
-ld DistanceRayLine(point a, point b, point c, point d){
+ld distance_ray_line(point a, point b, point c, point d){
     if(ray_line_intersect(a, b, c, d)) return 0;
     ld min1 = distance_point_line(a, c, d);
     return min1;
 }
 
-ld DistanceRayRay(point a, point b, point c, point d){
+ld distance_ray_ray(point a, point b, point c, point d){
     if(ray_ray_intersect(a, b, c, d)) return 0;
     ld min1 = min(distance_point_ray(c, a, b), distance_point_ray(a, c, d));
     return min1;
 }
 
-ld DistanceLineLine(point a, point b, point c, point d){
+ld distance_line_line(point a, point b, point c, point d){
     if(line_line_intersect(a, b, c, d)) return 0;
     return distance_point_line(a, c, d);
 }
