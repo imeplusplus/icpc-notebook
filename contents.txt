@@ -24,7 +24,7 @@ data-structures/min_queue.cpp	Minimum Queue
 data-structures/ordered_set.cpp	Ordered Set
 data-structures/seg_tree_dynamic_lazy.cpp	Dynamic Segment Tree (Lazy Update)
 data-structures/seg_tree_dynamic.cpp	Dynamic Segment Tree
-data-structures/seg_tree_dynamic.cpp	Iterative Segment Tree
+data-structures/seg_tree_iterative.cpp	Iterative Segment Tree
 data-structures/seg_tree_mod.cpp	Mod Segment Tree
 data-structures/seg_tree_persistent_naum.cpp	Persistent Segment Tree (Naum)
 data-structures/seg_tree_persistent.cpp	Persistent Segment Tree
@@ -54,11 +54,11 @@ dynamic-programming/steiner_tree.cpp	Steiner tree
 graphs/2_sat_kosaraju.cpp	2-SAT Kosaraju
 graphs/2_sat_tarjan.cpp	2-SAT Tarjan
 graphs/bellman_ford.cpp	Shortest Path (Bellman-Ford)
-#graphs/bfs.cpp	BFS
+graphs/bfs.cpp	BFS
 graphs/block_cut.cpp	Block Cut
 graphs/bridges_and_articulations.cpp	Articulation points and bridges
-#graphs/dfs.cpp	DFS
-#graphs/dijkstra.cpp	Shortest Path (Dijkstra)
+graphs/dfs.cpp	DFS
+graphs/dijkstra.cpp	Shortest Path (Dijkstra)
 graphs/dinic.cpp	Max Flow
 graphs/erdos_gallai.cpp	Erdos Gallai
 graphs/eulerian_path.cpp	Eulerian Path
@@ -110,7 +110,6 @@ math/gauss_elim_xor.cpp	Gaussian Elimination (xor)
 math/gauss_elim.cpp	Gaussian Elimination (double)
 math/gss.cpp	Golden Section Search (Ternary Search)
 math/josephus.cpp	Josephus
-#math/miller_rabin.cpp	Miller-Rabin
 math/mobius_inversion.cpp	Mobius Inversion
 math/mobius.cpp	Mobius Function
 math/ntt.cpp	Number Theoretic Transform
@@ -127,11 +126,12 @@ math/stanford_simplex.cpp	Simplex (Stanford)
 geometry/misc.cpp	Miscelanneous
 geometry/basics.cpp	Basics (Point)
 geometry/circle.cpp	Circle
+geometry/closest_pair.cpp	Closest Pair of Points
 geometry/halfplane_intersection.cpp	Half Plane Intersection
 geometry/lines.cpp	Lines
 geometry/minkowski_sum.cpp	Minkowski Sum
 geometry/nearest_neighbour.cpp	Nearest Neighbour
-geometry/polygons.cpp	Closest Pair of Points
+geometry/polygons.cpp	Polygons
 geometry/radial_sort.cpp	Radial Sort
 geometry/stanford_delaunay.cpp	Stanford Delaunay
 geometry/ternary_search.cpp	Ternary Search
