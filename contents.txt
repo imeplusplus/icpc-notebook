@@ -123,7 +123,7 @@ math/discrete_log.cpp	Discrete Log
 math/stanford_simplex.cpp	Simplex (Stanford)
 
 [Geometry]
-geometry/misc.cpp	Miscelanneous
+geometry/misc.cpp	Miscellaneous
 geometry/basics.cpp	Basics (Point)
 geometry/circle.cpp	Circle
 geometry/closest_pair.cpp	Closest Pair of Points

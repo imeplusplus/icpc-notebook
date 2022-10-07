@@ -1,6 +1,6 @@
 // Thank you for the code tfg!
 
-// O(Nlog²N)
+// O(N(logN)^2)
 template<class T = int>
 struct Bit2D{
 	vector<T> ord;
