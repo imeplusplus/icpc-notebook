@@ -1,9 +1,15 @@
 // Kosaraju - SCC O(V+E)
 // For undirected graph uncomment lines below
 
-vi adj[N], adjt[N];
+vector<int> adj[N], adjt[N];
 int n, ordn, cnt, vis[N], ord[N], cmp[N];
 //int par[N];
+
+// add edge u -> v
+void add_edge(int u, int v){
+  adj[u].push_back(v);
+  adjt[v].push_back(u);
+}
 
 void dfs(int u) {
   vis[u] = 1;
