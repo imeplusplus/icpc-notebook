@@ -1,16 +1,12 @@
-//#include <ext/pb_ds/assoc_container.hpp>
-//#include <ext/pb_ds/tree_policy.hpp>
-#include <ext/pb_ds/detail/standard_policies.hpp>
+#include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
 using namespace __gnu_pbds;
 
-typedef tree<int,null_type,less<int>,rb_tree_tag,
-tree_order_statistics_node_update> ordered_set;
+typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 
 ordered_set s;
-s.insert(2);
-s.insert(3);
-s.insert(7);
-s.insert(9);
+s.insert(2), s.insert(3), s.insert(7), s.insert(9);
 
 //find_by_order returns an iterator to the element at a given position
 auto x = s.find_by_order(2);

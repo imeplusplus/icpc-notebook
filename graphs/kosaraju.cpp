@@ -22,9 +22,21 @@
 const int N = 2e5 + 5;
 
 vector<int> adj[N], adjt[N];
+<<<<<<< HEAD
 int n, ordn, scc_cnt, vis[N], ord[N], scc[N];
 
 //Directed Version
+=======
+int n, ordn, cnt, vis[N], ord[N], cmp[N];
+//int par[N];
+
+// add edge u -> v
+void add_edge(int u, int v){
+  adj[u].push_back(v);
+  adjt[v].push_back(u);
+}
+
+>>>>>>> 54c263848fb5daef0e1f41e54fa38e55ec6c6f6f
 void dfs(int u) {
   vis[u] = 1;
   for (auto v : adj[u]) if (!vis[v]) dfs(v);
@@ -36,6 +48,7 @@ void dfst(int u) {
   for (auto v : adjt[u]) if (vis[v]) dfst(v);
 }
 
+<<<<<<< HEAD
 // add edge: u -> v
 void add_edge(int u, int v){
   adj[u].push_back(v);
@@ -70,3 +83,8 @@ void kosaraju(){
   for (int i = 1; i <= n; ++i) if (!vis[i]) dfs(i);
   for (int i = ordn - 1; i >= 0; --i) if (vis[ord[i]]) scc_cnt++, dfst(ord[i]);
 }
+=======
+// in main
+for (int i = 1; i <= n; ++i) if (!vis[i]) dfs(i);
+for (int i = ordn-1; i >= 0; --i) if (vis[ord[i]]) cnt++, dfst(ord[i]);
+>>>>>>> 54c263848fb5daef0e1f41e54fa38e55ec6c6f6f
