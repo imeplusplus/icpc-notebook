@@ -238,5 +238,5 @@ t.insert(t.new_node(node(p)), x);
 //deleting a certain value/range
 t.erase_range(x - 1, y);
 
-//getting the minimum of a certain range (hange this accordingly)
+//getting the minimum of a certain range (change this accordingly)
 t.find_range(x - 1, y)->val_min 
