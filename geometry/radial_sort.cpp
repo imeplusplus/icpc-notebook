@@ -1,6 +1,11 @@
 #include "basics.cpp"
 point origin;
 
+/*
+    below < above
+    order: [pi, 2 * pi)
+*/
+
 int above(point p){
     if(p.y == origin.y) return p.x > origin.x;
     return p.y > origin.y;
