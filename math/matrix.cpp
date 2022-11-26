@@ -1,3 +1,8 @@
+/*
+    This code assumes you are multiplying two matrices that can be multiplied: (A nxp * B pxm)
+    Matrix fexp assumes square matrices
+*/
+
 const int MOD = 1e9 + 7;
 typedef long long ll;
 typedef long long type;
