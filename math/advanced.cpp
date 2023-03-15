@@ -78,3 +78,9 @@ for(int l = 1, r; l <= n; l = r + 1){
  If f(n) = sum(x|n)(g(x) * h(x)) with g(x) and h(x) multiplicative, than f(n) is multiplicative
  Hence, g(l) = sum(k|l) k * mi(l / k) is multiplicative
  = sum(l->N) floor(N / l)^2 * g(l) */
+
+/* Frobenius / Chicken McNugget
+n, m given, gcd(n, m) = 1, we want to know if it's possible to create N = a * n + b * m
+N, a, b >= 0
+The greatest number NOT possible is n * m - n - m
+We can NOT create (n - 1) * (m - 1) / 2 numbers */
