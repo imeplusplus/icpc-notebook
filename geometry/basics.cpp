@@ -36,13 +36,13 @@ struct point {
     type x, y;
 
     point() : x(0), y(0) {}
-    point(type x, type y) : x(x), y(y) {}
+    point(type _x, type _y) : x(_x), y(_y) {}
 
     point operator -() { return point(-x, -y); }
     point operator +(point p) { return point(x + p.x, y + p.y); }
     point operator -(point p) { return point(x - p.x, y - p.y); }
 
-    point operator *(type k) { return point(k*x, k*y); }
+    point operator *(type k) { return point(x*k, y*k); }
     point operator /(type k) { return point(x/k, y/k); }
 
     //inner product
@@ -106,11 +106,11 @@ type cross(point p, point q)   { return p.x*q.y - p.y*q.x; }
 //double area
 type area_2(point a, point b, point c) { return cross(a,b) + cross(b,c) + cross(c,a); }
 
+//angle between (a1 and b1) vs angle between (a2 and b2)
+//1  : bigger
+//-1 : smaller
+//0  : equal
 int angle_less(const point& a1, const point& b1, const point& a2, const point& b2) {
-    //angle between (a1 and b1) vs angle between (a2 and b2)
-    //1  : bigger
-    //-1 : smaller
-    //0  : equal
     point p1(dot(   a1, b1), abs(cross(   a1, b1)));
     point p2(dot(   a2, b2), abs(cross(   a2, b2)));
     if(cross(p1, p2) < 0) return 1;
