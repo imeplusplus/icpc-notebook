@@ -7,6 +7,9 @@ typedef vector<point> polygon;
 
 /*
  * Minkowski sum
+   Distance between two polygons P and Q:
+		Do Minkowski(P, Q)
+		Ans = min(ans, dist((0, 0), edge))
  */
 
 polygon minkowski(polygon & A, polygon & B) {

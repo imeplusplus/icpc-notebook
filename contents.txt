@@ -34,6 +34,7 @@ data-structures/seg_tree2d.cpp	Segment Tree 2D
 data-structures/set_of_intervals.cpp	Set Of Intervals
 data-structures/sparse.cpp	Sparse Table
 data-structures/sparse2d.cpp	Sparse Table 2D
+data-structures/splay.cpp	Splay Tree
 data-structures/stanford_kdtree.cpp	KD Tree (Stanford)
 data-structures/treap.cpp	Treap
 data-structures/trie.cpp	Trie
@@ -86,6 +87,7 @@ strings/booths_algorithm.cpp	Booths Algorithm
 strings/kmp_automaton.cpp	Knuth-Morris-Pratt (Automaton)
 strings/kmp.cpp	Knuth-Morris-Pratt
 strings/manacher.cpp	Manacher
+strings/manacher_2.cpp	Manacher 2
 strings/rabin_karp.cpp	Rabin-Karp
 strings/recursive_string_matching.cpp	Recursive-String Matching
 strings/string_hashing.cpp	String Hashing
@@ -110,6 +112,7 @@ math/gauss_elim_xor.cpp	Gaussian Elimination (xor)
 math/gauss_elim.cpp	Gaussian Elimination (double)
 math/gss.cpp	Golden Section Search (Ternary Search)
 math/josephus.cpp	Josephus
+math/matrix.cpp	Matrix Exponentiation
 math/mobius_inversion.cpp	Mobius Inversion
 math/mobius.cpp	Mobius Function
 math/ntt.cpp	Number Theoretic Transform
@@ -125,6 +128,7 @@ math/stanford_simplex.cpp	Simplex (Stanford)
 [Geometry]
 geometry/misc.cpp	Miscellaneous
 geometry/basics.cpp	Basics (Point)
+geometry/radial_sort.cpp	Radial Sort
 geometry/circle.cpp	Circle
 geometry/closest_pair.cpp	Closest Pair of Points
 geometry/halfplane_intersection.cpp	Half Plane Intersection
@@ -132,9 +136,9 @@ geometry/lines.cpp	Lines
 geometry/minkowski_sum.cpp	Minkowski Sum
 geometry/nearest_neighbour.cpp	Nearest Neighbour
 geometry/polygons.cpp	Polygons
-geometry/radial_sort.cpp	Radial Sort
 geometry/stanford_delaunay.cpp	Stanford Delaunay
 geometry/ternary_search.cpp	Ternary Search
+geometry/delaunay.cpp	Delaunay Triangulation
 geometry/voronoi.cpp	Voronoi Diagram
 
 [Miscellaneous]
