@@ -102,6 +102,9 @@ Segment getBisector(PT a, PT b) {
 	return ans;
 }
 
+
+
+
 // BE CAREFUL!
 // the first point may be any point
 // O(N^3)
@@ -147,3 +150,16 @@ std::vector<std::vector<PT>> getVoronoi(std::vector<PT> pts) {
 	}
 	return ans;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
