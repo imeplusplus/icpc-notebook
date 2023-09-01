@@ -78,6 +78,7 @@ graphs/max_weight_lca.cpp	Max Weight on Path
 graphs/min_cost_max_flow.cpp	Min Cost Max Flow
 graphs/prim.cpp	MST (Prim)
 graphs/spfa.cpp	Shortest Path (SPFA)
+graphs/small_to_large.cpp	Small to Large
 graphs/stanford_stoer_wagner.cpp	Stoer Wagner (Stanford)
 graphs/tarjan.cpp	Tarjan
 graphs/zero_one_bfs.cpp	Zero One BFS
@@ -124,7 +125,6 @@ math/prime_factors.cpp	Prime Factors
 math/primitive_root.cpp	Primitive Root
 math/sieve.cpp	Sieve of Eratosthenes
 math/simpson_rule.cpp	Simpson Rule
-math/discrete_log.cpp	Discrete Log 
 math/stanford_simplex.cpp	Simplex (Stanford)
 
 [Geometry]

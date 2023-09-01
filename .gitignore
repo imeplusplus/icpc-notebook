@@ -201,3 +201,7 @@ TSWLatexianTemp*
 
 #####
 contents.tex
+
+# executable
+*.exe
+*.out
