@@ -61,9 +61,11 @@ graphs/bridges_and_articulations.cpp	Articulation points and bridges
 graphs/dfs.cpp	DFS
 graphs/dijkstra.cpp	Shortest Path (Dijkstra)
 graphs/dinic.cpp	Max Flow
+graphs/dominator_tree.cpp	Dominator Tree
 graphs/erdos_gallai.cpp	Erdos Gallai
 graphs/eulerian_path.cpp	Eulerian Path
 graphs/fast_kuhn.cpp	Fast Kuhn
+graphs/find_cycle_3_4.cpp	Find Cycle of size 3 and 4
 graphs/floyd_warshall.cpp	Floyd Warshall
 graphs/hungarian.cpp	Hungarian
 graphs/hungarian_navarro.cpp	Hungarian Navarro
@@ -140,6 +142,8 @@ geometry/stanford_delaunay.cpp	Stanford Delaunay
 geometry/ternary_search.cpp	Ternary Search
 geometry/delaunay.cpp	Delaunay Triangulation
 geometry/voronoi.cpp	Voronoi Diagram
+geometry/delaunay-emaxx.cpp	Delaunay Triangulation (emaxx)
+geometry/closest_pair_3d.cpp	Closest Pair of Points 3D
 
 [Miscellaneous]
 misc/bitset.cpp	Bitset
