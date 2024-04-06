@@ -17,7 +17,7 @@ class LiChao {
 	void update(int t, int l, int r, ll nm, ll nb) {
 		ll xl = nm * gx(l) + nb, xr = nm * gx(r) + nb;
 		ll yl = m[t] * gx(l) + b[t], yr = m[t] * gx(r) + b[t];
-        if (yl >= xl && yr >= xr) return;
+				if (yl >= xl && yr >= xr) return;
 		if (yl <= xl && yr <= xr) {
 			m[t] = nm, b[t] = nb; return;
 		}
@@ -59,7 +59,7 @@ int main(){
 		}
 		for(int k=2; k<=K; k++){
 			dp[0][k] = 0;
-            LiChao lc(x, x+N);
+						LiChao lc(x, x+N);
 			for(int i=1; i<N; i++){
 				lc.insert_line(A[i-1], -dp[i-1][k-1]-B[i-1]);
 				dp[i][k] = x[i]*A[i] - B[i] - lc.query(i);

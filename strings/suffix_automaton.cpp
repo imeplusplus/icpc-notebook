@@ -6,70 +6,70 @@ ll cnt[2*N];
 map<int, int> adj[2*N];
 
 void add(int c) {
-  int u = sz++;
-  len[u] = len[last] + 1;
-  cnt[u] = 1;
+	int u = sz++;
+	len[u] = len[last] + 1;
+	cnt[u] = 1;
 
-  int p = last;
-  while(p != -1 and !adj[p][c])
-    adj[p][c] = u, p = sl[p];
+	int p = last;
+	while(p != -1 and !adj[p][c])
+		adj[p][c] = u, p = sl[p];
 
-  if (p == -1) sl[u] = 0;
-  else {
-    int q = adj[p][c];
-    if (len[p] + 1 == len[q]) sl[u] = q;
-    else {
-      int r = sz++;
-      len[r] = len[p] + 1;
-      sl[r] = sl[q];
-      adj[r] = adj[q];
-      while(p != -1 and adj[p][c] == q)
-        adj[p][c] = r, p = sl[p];
-      sl[q] = sl[u] = r;
-    }
-  }
+	if (p == -1) sl[u] = 0;
+	else {
+		int q = adj[p][c];
+		if (len[p] + 1 == len[q]) sl[u] = q;
+		else {
+			int r = sz++;
+			len[r] = len[p] + 1;
+			sl[r] = sl[q];
+			adj[r] = adj[q];
+			while(p != -1 and adj[p][c] == q)
+				adj[p][c] = r, p = sl[p];
+			sl[q] = sl[u] = r;
+		}
+	}
 
-  last = u;
+	last = u;
 }
 
 void clear() {
-  for(int i=0; i<=sz; ++i) adj[i].clear();
-  last = 0;
-  sz = 1;
-  sl[0] = -1;
+	for(int i=0; i<=sz; ++i) adj[i].clear();
+	last = 0;
+	sz = 1;
+	sl[0] = -1;
 }
 
 void build(char *s) {
-  clear();
-  for(int i=0; s[i]; ++i) add(s[i]);
+	clear();
+	for(int i=0; s[i]; ++i) add(s[i]);
 }
 
 // Pattern matching - O(|p|)
 bool check(char *p) {
-  int u = 0, ok = 1;
-  for(int i=0; p[i]; ++i) {
-    u = adj[u][p[i]];
-    if (!u) ok = 0;
-  }
-  return ok;
+	int u = 0, ok = 1;
+	for(int i=0; p[i]; ++i) {
+		u = adj[u][p[i]];
+		if (!u) ok = 0;
+	}
+	return ok;
 }
 
 // Substring count - O(|p|)
 ll d[2*N];
 
 void substr_cnt(int u) {
-  d[u] = 1;
-  for(auto p : adj[u]) {
-    int v = p.second;
-    if (!d[v]) substr_cnt(v);
-    d[u] += d[v];
-  }
+	d[u] = 1;
+	for(auto p : adj[u]) {
+		int v = p.second;
+		if (!d[v]) substr_cnt(v);
+		d[u] += d[v];
+	}
 }
 
 ll substr_cnt() {
-  memset(d, 0, sizeof d);
-  substr_cnt(0);
-  return d[0] - 1;
+	memset(d, 0, sizeof d);
+	substr_cnt(0);
+	return d[0] - 1;
 }
 
 // k-th Substring - O(|s|)
@@ -85,23 +85,23 @@ ll substr_cnt() {
 vector<int> t[2*N];
 
 void occur_count(int u) {
-  for(int v : t[u]) occur_count(v), cnt[u] += cnt[v];
+	for(int v : t[u]) occur_count(v), cnt[u] += cnt[v];
 }
 
 void build_tree() {
-  for(int i=1; i<=sz; ++i)
-    t[sl[i]].push_back(i);
-  occur_count(0);
+	for(int i=1; i<=sz; ++i)
+		t[sl[i]].push_back(i);
+	occur_count(0);
 }
 
 ll occur_count(char *p) {
-  // Call build tree once per automaton
-  int u = 0;
-  for(int i=0; p[i]; ++i) {
-    u = adj[u][p[i]];
-    if (!u) break;
-  }
-  return !u ? 0 : cnt[u];
+	// Call build tree once per automaton
+	int u = 0;
+	for(int i=0; p[i]; ++i) {
+		u = adj[u][p[i]];
+		if (!u) break;
+	}
+	return !u ? 0 : cnt[u];
 }
 
 // First occurence - (|p|)

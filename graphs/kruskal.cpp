@@ -12,11 +12,11 @@ int cost = 0;
 vector <pair<int, pair<int, int>>> edges; //mp(dist, mp(node1, node2))
 
 int main () {
-    // ...
-    sort(edges.begin(), edges.end());
-    for (auto e : edges)
-        if (find(e.nd.st) != find(e.nd.nd))
-            unite(e.nd.st, e.nd.nd), cost += e.st;
+	// ...
+	sort(edges.begin(), edges.end());
+	for (auto e : edges)
+		if (find(e.nd.st) != find(e.nd.nd))
+			unite(e.nd.st, e.nd.nd), cost += e.st;
 
-    return 0;
+	return 0;
 }

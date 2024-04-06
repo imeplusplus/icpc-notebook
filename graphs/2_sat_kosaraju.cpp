@@ -21,39 +21,39 @@ int nv(int x) { return 2*x+1; }
 
 // add clause (a v b)
 void add(int a, int b){
-  adj[a^1].push_back(b);
-  adj[b^1].push_back(a);
-  adjt[b].push_back(a^1);
-  adjt[a].push_back(b^1);
+	adj[a^1].push_back(b);
+	adj[b^1].push_back(a);
+	adjt[b].push_back(a^1);
+	adjt[a].push_back(b^1);
 }
 
 void dfs(int x){
-  vis[x] = 1;
-  for(auto v : adj[x]) if(!vis[v]) dfs(v);
-  ord[ordn++] = x;
+	vis[x] = 1;
+	for(auto v : adj[x]) if(!vis[v]) dfs(v);
+	ord[ordn++] = x;
 }
 
 void dfst(int x){
-  cmp[x] = cnt, vis[x] = 0;
-  for(auto v : adjt[x]) if(vis[v]) dfst(v);
+	cmp[x] = cnt, vis[x] = 0;
+	for(auto v : adjt[x]) if(vis[v]) dfst(v);
 }
 
 bool run2sat(){
-  for(int i = 1; i <= n; i++) {
-    if(!vis[v(i)]) dfs(v(i));
-    if(!vis[nv(i)]) dfs(nv(i));
-  }
-  for(int i = ordn-1; i >= 0; i--) 
-    if(vis[ord[i]]) cnt++, dfst(ord[i]);
-  for(int i = 1; i <= n; i ++){
-    if(cmp[v(i)] == cmp[nv(i)]) return false;
-    val[i] = cmp[v(i)] > cmp[nv(i)];
-  }
-  return true;
+	for(int i = 1; i <= n; i++) {
+		if(!vis[v(i)]) dfs(v(i));
+		if(!vis[nv(i)]) dfs(nv(i));
+	}
+	for(int i = ordn-1; i >= 0; i--) 
+		if(vis[ord[i]]) cnt++, dfst(ord[i]);
+	for(int i = 1; i <= n; i ++){
+		if(cmp[v(i)] == cmp[nv(i)]) return false;
+		val[i] = cmp[v(i)] > cmp[nv(i)];
+	}
+	return true;
 }
 
 int main () {
-    for (int i = 1; i <= n; i++) {
-        if (val[i]); // i-th variable is true
-        else         // i-th variable is false
+		for (int i = 1; i <= n; i++) {
+				if (val[i]); // i-th variable is true
+				else         // i-th variable is false
 }

@@ -2,7 +2,7 @@
 vi factors;
 int ind=0, pf = primes[0];
 while (pf*pf <= n) {
-  while (n%pf == 0) n /= pf, factors.pb(pf);
-  pf = primes[++ind];
+	while (n%pf == 0) n /= pf, factors.pb(pf);
+	pf = primes[++ind];
 }
 if (n != 1) factors.pb(n);

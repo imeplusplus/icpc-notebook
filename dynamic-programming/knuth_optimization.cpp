@@ -15,29 +15,29 @@ int dp[N][N], a[N][N];
 
 // declare the cost function
 int cost(int i, int j) {
-  // ...
+	// ...
 }
 
 void knuth() {
-  // calculate base cases
-  memset(dp, 63, sizeof(dp));
-  for (int i = 1; i <= n; i++) dp[i][i] = 0;
+	// calculate base cases
+	memset(dp, 63, sizeof(dp));
+	for (int i = 1; i <= n; i++) dp[i][i] = 0;
 
-  // set initial a[i][j]
-  for (int i = 1; i <= n; i++) a[i][i] = i;
+	// set initial a[i][j]
+	for (int i = 1; i <= n; i++) a[i][i] = i;
 
-  for (int j = 2; j <= n; ++j)
-    for (int i = j; i >= 1; --i){
-      for (int k = a[i][j-1]; k <= a[i+1][j]; ++k) {
-        ll v = dp[i][k] + dp[k][j] + cost(i, j);
+	for (int j = 2; j <= n; ++j)
+		for (int i = j; i >= 1; --i){
+			for (int k = a[i][j-1]; k <= a[i+1][j]; ++k) {
+				ll v = dp[i][k] + dp[k][j] + cost(i, j);
 
-        // store the minimum answer for d[i][k]
-        // in case of maximum, use v > dp[i][k]
-        if (v < dp[i][j])
-          a[i][j] = k, dp[i][j] = v;
-      }      
-      //+ Iterate over i to get min{dp[i][j]} for each j, don't forget cost from n to
-    }
+				// store the minimum answer for d[i][k]
+				// in case of maximum, use v > dp[i][k]
+				if (v < dp[i][j])
+					a[i][j] = k, dp[i][j] = v;
+			}      
+			//+ Iterate over i to get min{dp[i][j]} for each j, don't forget cost from n to
+		}
 }
 
 
@@ -47,27 +47,27 @@ int dp[N][J], a[N][J];
 
 // declare the cost function
 int cost(int i, int j) {
-  // ...
+	// ...
 }
 
 void knuth() {
-  // calculate base cases
-  memset(dp, 63, sizeof(dp));
-  for (int i = 1; i <= n; i++) dp[i][1] = // ...
+	// calculate base cases
+	memset(dp, 63, sizeof(dp));
+	for (int i = 1; i <= n; i++) dp[i][1] = // ...
 
-  // set initial a[i][j]
-  for (int i = 1; i <= n; i++) a[i][1] = 1, a[n+1][i] = n;
+	// set initial a[i][j]
+	for (int i = 1; i <= n; i++) a[i][1] = 1, a[n+1][i] = n;
 
-  for (int j = 2; j <= maxj; j++)
-    for (int i = n; i >= 1; i--){
-      for (int k = a[i][j-1]; k <= a[i+1][j]; k++) {
-        ll v = dp[k][j-1] + cost(k, i);
+	for (int j = 2; j <= maxj; j++)
+		for (int i = n; i >= 1; i--){
+			for (int k = a[i][j-1]; k <= a[i+1][j]; k++) {
+				ll v = dp[k][j-1] + cost(k, i);
 
-        // store the minimum answer for d[i][k]
-        // in case of maximum, use v > dp[i][k]
-        if (v < dp[i][j])
-          a[i][j] = k, dp[i][j] = v;
-      }
-      //+ Iterate over i to get min{dp[i][j]} for each j, don't forget cost from n to 
-    }
+				// store the minimum answer for d[i][k]
+				// in case of maximum, use v > dp[i][k]
+				if (v < dp[i][j])
+					a[i][j] = k, dp[i][j] = v;
+			}
+			//+ Iterate over i to get min{dp[i][j]} for each j, don't forget cost from n to 
+		}
 }

@@ -8,48 +8,48 @@ typedef long long ll;
 template<int N> struct Seg{
 ll s[4*N], lazy[4*N];
 void build(int no = 1, int l = 0, int r = N){
-    if(r-l==1){
-        s[no] = 0;
-        return;
-    }
-    int mid = (l+r)/2;
-    build(2*no,l,mid);
-    build(2*no+1,mid,r);
-    s[no] = max(s[2*no],s[2*no+1]);
+		if(r-l==1){
+				s[no] = 0;
+				return;
+		}
+		int mid = (l+r)/2;
+		build(2*no,l,mid);
+		build(2*no+1,mid,r);
+		s[no] = max(s[2*no],s[2*no+1]);
 }
 Seg(){ //build da HLD tem de ser assim, pq chama sem os parametros
 	build();
 }
 void updlazy(int no, int l, int r, ll x){
-    s[no] += x;
-    lazy[no] += x;
+		s[no] += x;
+		lazy[no] += x;
 }
 void pass(int no, int l, int r){
-    int mid = (l+r)/2;
-    updlazy(2*no,l,mid,lazy[no]);
-    updlazy(2*no+1,mid,r,lazy[no]);
-    lazy[no] = 0;
+		int mid = (l+r)/2;
+		updlazy(2*no,l,mid,lazy[no]);
+		updlazy(2*no+1,mid,r,lazy[no]);
+		lazy[no] = 0;
 }
 void upd(int lup, int rup, ll x, int no = 1, int l = 0, int r = N){
-    if(rup<=l or r<=lup) return;
-    if(lup<=l and r<=rup){
-        updlazy(no,l,r,x);
-        return;
-    }   
-    pass(no,l,r);
-    int mid = (l+r)/2;
-    upd(lup,rup,x,2*no,l,mid);
-    upd(lup,rup,x,2*no+1,mid,r);
-    s[no] = max(s[2*no],s[2*no+1]);
+		if(rup<=l or r<=lup) return;
+		if(lup<=l and r<=rup){
+				updlazy(no,l,r,x);
+				return;
+		}   
+		pass(no,l,r);
+		int mid = (l+r)/2;
+		upd(lup,rup,x,2*no,l,mid);
+		upd(lup,rup,x,2*no+1,mid,r);
+		s[no] = max(s[2*no],s[2*no+1]);
 }
 ll qry(int lq, int rq, int no = 1, int l = 0, int r = N){
-    if(rq<=l or r<=lq) return -LLONG_MAX;
-    if(lq<=l and r<=rq){
-        return s[no];
-    } 
-    pass(no,l,r);
-    int mid = (l+r)/2;
-    return max(qry(lq,rq,2*no,l,mid),qry(lq,rq,2*no+1,mid,r));
+		if(rq<=l or r<=lq) return -LLONG_MAX;
+		if(lq<=l and r<=rq){
+				return s[no];
+		} 
+		pass(no,l,r);
+		int mid = (l+r)/2;
+		return max(qry(lq,rq,2*no,l,mid),qry(lq,rq,2*no+1,mid,r));
 }
 };
 

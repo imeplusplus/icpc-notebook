@@ -26,72 +26,72 @@ vector<edge> edgs;
 vector<int> g[N];
 
 void add_edge (int u, int v, int c) {
-  int k = edgs.size();
-  edgs.push_back({v, c, 0});
-  edgs.push_back({u, 0, 0});
-  g[u].push_back(k);
-  g[v].push_back(k+1);
+	int k = edgs.size();
+	edgs.push_back({v, c, 0});
+	edgs.push_back({u, 0, 0});
+	g[u].push_back(k);
+	g[v].push_back(k+1);
 }
 
 void clear() {
-    memset(h, 0, sizeof h);
-    memset(ptr, 0, sizeof ptr);
-    edgs.clear();
-    for (int i = 0; i < N; i++) g[i].clear();
-    src = 0;
-    snk = N-1;
+		memset(h, 0, sizeof h);
+		memset(ptr, 0, sizeof ptr);
+		edgs.clear();
+		for (int i = 0; i < N; i++) g[i].clear();
+		src = 0;
+		snk = N-1;
 }
 
 bool bfs() {
-  memset(h, 0, sizeof h);
-  queue<int> q;
-  h[src] = 1;
-  q.push(src);
-  while(!q.empty()) {
-    int u = q.front(); q.pop();
-    for(int i : g[u]) {
-      int v = edgs[i].v;
-      if (!h[v] and edgs[i].f < edgs[i].c)
-        q.push(v), h[v] = h[u] + 1;
-    }
-  }
-  return h[snk];
+	memset(h, 0, sizeof h);
+	queue<int> q;
+	h[src] = 1;
+	q.push(src);
+	while(!q.empty()) {
+		int u = q.front(); q.pop();
+		for(int i : g[u]) {
+			int v = edgs[i].v;
+			if (!h[v] and edgs[i].f < edgs[i].c)
+				q.push(v), h[v] = h[u] + 1;
+		}
+	}
+	return h[snk];
 }
 
 int dfs (int u, int flow) {
-  if (!flow or u == snk) return flow;
-  for (int &i = ptr[u]; i < g[u].size(); ++i) {
-    edge &dir = edgs[g[u][i]], &rev = edgs[g[u][i]^1];
-    int v = dir.v;
-    if (h[v] != h[u] + 1)  continue;
-    int inc = min(flow, dir.c - dir.f);
-    inc = dfs(v, inc);
-    if (inc) {
-      dir.f += inc, rev.f -= inc;
-      return inc;
-    }
-  }
-  return 0;
+	if (!flow or u == snk) return flow;
+	for (int &i = ptr[u]; i < g[u].size(); ++i) {
+		edge &dir = edgs[g[u][i]], &rev = edgs[g[u][i]^1];
+		int v = dir.v;
+		if (h[v] != h[u] + 1)  continue;
+		int inc = min(flow, dir.c - dir.f);
+		inc = dfs(v, inc);
+		if (inc) {
+			dir.f += inc, rev.f -= inc;
+			return inc;
+		}
+	}
+	return 0;
 }
 
 int dinic() {
-  int flow = 0;
-  while (bfs()) {
-    memset(ptr, 0, sizeof ptr);
-    while (int inc = dfs(src, INF)) flow += inc;
-  }
-  return flow;
+	int flow = 0;
+	while (bfs()) {
+		memset(ptr, 0, sizeof ptr);
+		while (int inc = dfs(src, INF)) flow += inc;
+	}
+	return flow;
 }
 
 //Recover Dinic
 void recover(){
-  for(int i = 0; i < edgs.size(); i += 2){
-    //edge (u -> v) is being used with flow f
-    if(edgs[i].f > 0) {
-      int v = edgs[i].v;
-      int u = edgs[i^1].v;
-    }
-  }
+	for(int i = 0; i < edgs.size(); i += 2){
+		//edge (u -> v) is being used with flow f
+		if(edgs[i].f > 0) {
+			int v = edgs[i].v;
+			int u = edgs[i^1].v;
+		}
+	}
 }
 
 /***********************************************************************************************
@@ -117,6 +117,6 @@ void recover(){
 
 
 int main () {
-    clear();
-    return 0;
+		clear();
+		return 0;
 }

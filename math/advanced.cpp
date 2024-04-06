@@ -34,7 +34,7 @@ for(int l = 1, r; l <= n; l = r + 1){
 /* Recurrence using matriz
  h[i + 2] = a1 * h[i + 1] + a0 * h[i]
  [h[i] h[i-1]] = [h[1] h[0]] * [a1 1] ^ (i - 1)
-                               [a0 0] 		*/
+															 [a0 0] 		*/
 
 /* Fibonacci in O(log(N)) with memoization
  f(0) = f(1) = 1
@@ -52,7 +52,7 @@ for(int l = 1, r; l <= n; l = r + 1){
  S(n, k) = k * S(n - 1, k) + S(n - 1, k - 1) 
  Sr(n, k) = S(n, k) with at least r numbers in each set
  Sr(n, k) = k * Sr(n - 1, k) + (n - 1) * Sr(n - r, k - 1)
-			       (r - 1) 
+						 (r - 1) 
  S(n - d + 1, k - d + 1) = S(n, k) where if indexes i, j belong to the same set, then |i - j| >= d */
 
 /* Burnside's Lemma

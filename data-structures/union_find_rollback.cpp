@@ -16,20 +16,20 @@ stack <pii> sp, ss;
 int find (int a) { return par[a] == a ? a : find(par[a]); }
 
 void unite (int a, int b) {
-    if ((a = find(a)) == (b = find(b))) return;
-    if (sz[a] < sz[b]) swap(a, b);
-    ss.push({a, sz[a]});
-    sp.push({b, par[b]});
-    sz[a] += sz[b];
-    par[b] = a;
+	if ((a = find(a)) == (b = find(b))) return;
+	if (sz[a] < sz[b]) swap(a, b);
+	ss.push({a, sz[a]});
+	sp.push({b, par[b]});
+	sz[a] += sz[b];
+	par[b] = a;
 }
 
 void rollback() {
-    par[sp.top().st] = sp.top().nd; sp.pop();
-    sz[ss.top().st]  = ss.top().nd; ss.pop();
+	par[sp.top().st] = sp.top().nd; sp.pop();
+	sz[ss.top().st]  = ss.top().nd; ss.pop();
 }
 
 int main(){
-    for (int i = 0; i < N; i++) par[i] = i, sz[i] = 1;
-    return 0;
+	for (int i = 0; i < N; i++) par[i] = i, sz[i] = 1;
+	return 0;
 }

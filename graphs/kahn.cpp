@@ -21,8 +21,8 @@ queue<int> q;
 for (int i = 1; i <= n; ++i) if (inc[i] <= 1) q.push(i);
 
 while (!q.empty()) {
-  int u = q.front(); q.pop();
-  for (int v : adj[u])
-    if (inc[v] > 1 and --inc[v] <= 1)
-      q.push(v);
+	int u = q.front(); q.pop();
+	for (int v : adj[u])
+		if (inc[v] > 1 and --inc[v] <= 1)
+			q.push(v);
 }

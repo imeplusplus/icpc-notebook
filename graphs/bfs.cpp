@@ -13,16 +13,16 @@ vector <int> adj[N];
 queue <int> q;
 
 void bfs (int s) {
-    memset(dist, 63, sizeof(dist));
-    dist[s] = 0;
-    q.push(s);
+	memset(dist, 63, sizeof(dist));
+	dist[s] = 0;
+	q.push(s);
 
-    while (!q.empty()) {
-        int u = q.front(); q.pop();
-        for (auto v : adj[u]) if (dist[v] > dist[u] + 1) {
-            par[v] = u;
-            dist[v] = dist[u] + 1;
-            q.push(v);
-        }
-    }
+	while (!q.empty()) {
+		int u = q.front(); q.pop();
+		for (auto v : adj[u]) if (dist[v] > dist[u] + 1) {
+			par[v] = u;
+			dist[v] = dist[u] + 1;
+			q.push(v);
+		}
+	}
 }

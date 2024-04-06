@@ -41,7 +41,7 @@ void dfs(int v = 1, int p = 0, bool keep = false) {
 			}
 		}
 	}
-  // now here you can do what the query wants
+	// now here you can do what the query wants
 	// there are cnt[c] vertex in subtree v color with c
 	if (keep == 0) {
 		for (auto u : vec[v]) {
