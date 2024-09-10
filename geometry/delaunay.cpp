@@ -1,8 +1,6 @@
 /*
 Complexity: O(nlogn)
-Code by Monogon: https://codeforces.com/blog/entry/85638
-This code doesn't work when two points have the same x coordinate.
-This is handled simply by rotating all input points by 1 radian and praying to the geometry gods.
+Code by Bruno Maletta (UFMG): https://github.com/brunomaletta/Biblioteca
 
 The definition of the Voronoi diagram immediately shows signs of applications.
 *   Given a set S of n points and m query points p1,...,pm, we can answer for each query point, its nearest neighbor in S.
@@ -21,200 +19,137 @@ The definition of the Voronoi diagram immediately shows signs of applications.
 
 */
 
-#include <bits/stdc++.h>
- 
-#define ll long long
-#define sz(x) ((int) (x).size())
-#define all(x) (x).begin(), (x).end()
-#define vi vector<int>
-#define pii pair<int, int>
-#define rep(i, a, b) for(int i = (a); i < (b); i++)
-using namespace std;
-template<typename T>
-using minpq = priority_queue<T, vector<T>, greater<T>>;
- 
-using ftype = long double;
-const ftype EPS = 1e-12, INF = 1e100;
- 
-struct pt {
-	ftype x, y;
-	pt(ftype x = 0, ftype y = 0) : x(x), y(y) {}
+#include "basics.cpp"
 
-	// vector addition, subtraction, scalar multiplication
-	pt operator+(const pt &o) const {
-		return pt(x + o.x, y + o.y);
-	}
-	pt operator-(const pt &o) const {
-		return pt(x - o.x, y - o.y);
-	}
-	pt operator*(const ftype &f) const {
-		return pt(x * f, y * f);
-	}
+bool ccw(point a, point b, point c){ return area_2(a, b, c) > 0; }
 
-	// rotate 90 degrees counter-clockwise
-	pt rot() const {
-		return pt(-y, x);
-	}
-
-	// dot and cross products
-	ftype dot(const pt &o) const {
-		return x * o.x + y * o.y;
-	}
-	ftype cross(const pt &o) const {
-		return x * o.y - y * o.x;
-	}
-
-	// length
-	ftype len() const {
-		return hypotl(x, y);
-	}
-
-	// compare points lexicographically
-	bool operator<(const pt &o) const {
-		return make_pair(x, y) < make_pair(o.x, o.y);
-	}
-};
-
-// check if two vectors are collinear. It might make sense to use a
-// different EPS here, especially if points have integer coordinates
-bool collinear(pt a, pt b) {
-	return abs(a.cross(b)) < EPS;
-}
-
-
-// intersection point of lines ab and cd. Precondition is that they aren't collinear
-pt lineline(pt a, pt b, pt c, pt d) {
-	return a + (b - a) * ((c - a).cross(d - c) / (b - a).cross(d - c));
-}
-
-// circumcircle of points a, b, c. Precondition is that abc is a non-degenerate triangle.
-pt circumcenter(pt a, pt b, pt c) {
-	b = (a + b) * 0.5;
-	c = (a + c) * 0.5;
-	return lineline(b, b + (b - a).rot(), c, c + (c - a).rot());
-}
-
-// x coordinate of sweep-line
-ftype sweepx;
-
-// an arc on the beacah line is given implicitly by the focus p,
-// the focus q of the following arc, and the position of the sweep-line.
-struct arc {
-	mutable pt p, q;
-	mutable int id = 0, i;
-	arc(pt p, pt q, int i) : p(p), q(q), i(i) {}
-
-	// get y coordinate of intersection with following arc.
-	// don't question my magic formulas
-	ftype gety(ftype x) const {
-		if(q.y == INF) return INF;
-		x += EPS;
-		pt med = (p + q) * 0.5;
-		pt dir = (p - med).rot();
-		ftype D = (x - p.x) * (x - q.x);
-		return med.y + ((med.x - x) * dir.x + sqrtl(D) * dir.len()) / dir.y;
-	}
-	bool operator<(const ftype &y) const {
-		return gety(sweepx) < y;
-	}
-	bool operator<(const arc &o) const {
-		return gety(sweepx) < o.gety(sweepx);
-	}
-};
-
-// the beach line will be stored as a multiset of arc objects
-using beach = multiset<arc, less<>>;
-
-// an event is given by
-//     x: the time of the event
-//     id: If >= 0, it's a point event for index id.
-//         If < 0, it's an ID for a vertex event
-//     it: if a vertex event, the iterator for the arc to be deleted
-struct event {
-	ftype x;
+typedef struct QuadEdge* Q;
+struct QuadEdge {
 	int id;
-	beach::iterator it;
-	event(ftype x, int id, beach::iterator it) : x(x), id(id), it(it) {}
-	bool operator<(const event &e) const {
-		return x > e.x;
-	}
+	point o;
+	Q rot, nxt;
+	bool used;
+
+	QuadEdge(int id_ = -1, point o_ = point(INF, INF)) :
+		id(id_), o(o_), rot(nullptr), nxt(nullptr), used(false) {}
+
+	Q rev() const { return rot->rot; }
+	Q next() const { return nxt; }
+	Q prev() const { return rot->next()->rot; }
+	point dest() const { return rev()->o; }
 };
 
-struct fortune {
-	beach line; // self explanatory
-	vector<pair<pt, int>> v; // (point, original index)
-	priority_queue<event> Q; // priority queue of point and vertex events
-	vector<pii> edges; // delaunay edges
-	vector<bool> valid; // valid[-id] == true if the vertex event with corresponding id is valid
-	int n, ti; // number of points, next available vertex ID
-	fortune(vector<pt> p) {
-		n = sz(p);
-		v.resize(n);
-		rep(i, 0, n) v[i] = {p[i], i};
-		sort(all(v)); // sort points by coordinate, remember original indices for the delaunay edges
+Q edge(point from, point to, int id_from, int id_to) {
+	Q e1 = new QuadEdge(id_from, from);
+	Q e2 = new QuadEdge(id_to, to);
+	Q e3 = new QuadEdge;
+	Q e4 = new QuadEdge;
+	tie(e1->rot, e2->rot, e3->rot, e4->rot) = {e3, e4, e2, e1};
+	tie(e1->nxt, e2->nxt, e3->nxt, e4->nxt) = {e1, e2, e4, e3};
+	return e1;
+}
+
+void splice(Q a, Q b) {
+	swap(a->nxt->rot->nxt, b->nxt->rot->nxt);
+	swap(a->nxt, b->nxt);
+}
+
+void del_edge(Q& e, Q ne) { // delete e and assign e <- ne
+	splice(e, e->prev());
+	splice(e->rev(), e->rev()->prev());
+	delete e->rev()->rot, delete e->rev();
+	delete e->rot; delete e;
+	e = ne;
+}
+
+Q conn(Q a, Q b) {
+	Q e = edge(a->dest(), b->o, a->rev()->id, b->id);
+	splice(e, a->rev()->prev());
+	splice(e->rev(), b);
+	return e;
+}
+
+bool in_c(point a, point b, point c, point p) { // p ta na circunf. (a, b, c) ?
+	type p2 = p*p, A = a*a - p2, B = b*b - p2, C = c*c - p2;
+	return area_2(p, a, b) * C + area_2(p, b, c) * A + area_2(p, c, a) * B > 0;
+}
+
+pair<Q, Q> build_tr(vector<point>& p, int l, int r) {
+	if (r-l+1 <= 3) {
+		Q a = edge(p[l], p[l+1], l, l+1), b = edge(p[l+1], p[r], l+1, r);
+		if (r-l+1 == 2) return {a, a->rev()};
+		splice(a->rev(), b);
+		type ar = area_2(p[l], p[l+1], p[r]);
+		Q c = ar ? conn(b, a) : 0;
+		if (ar >= 0) return {a, b->rev()};
+		return {c->rev(), c};
 	}
-	// update the remove event for the arc at position it
-	void upd(beach::iterator it) {
-		if(it->i == -1) return; // doesn't correspond to a real point
-		valid[-it->id] = false; // mark existing remove event as invalid
-		auto a = prev(it);
-		if(collinear(it->q - it->p, a->p - it->p)) return; // doesn't generate a vertex event
-		it->id = --ti; // new vertex event ID
-		valid.push_back(true); // label this ID true
-		pt c = circumcenter(it->p, it->q, a->p);
-		ftype x = c.x + (c - it->p).len();
-		// event is generated at time x.
-		// make sure it passes the sweep-line, and that the arc truly shrinks to 0
-		if(x > sweepx - EPS && a->gety(x) + EPS > it->gety(x)) {
-			Q.push(event(x, it->id, it));
+	int m = (l+r)/2;
+	auto [la, ra] = build_tr(p, l, m);
+	auto [lb, rb] = build_tr(p, m+1, r);
+	while (true) {
+		if (ccw(lb->o, ra->o, ra->dest())) ra = ra->rev()->prev();
+		else if (ccw(lb->o, ra->o, lb->dest())) lb = lb->rev()->next();
+		else break;
+	}
+	Q b = conn(lb->rev(), ra);
+	auto valid = [&](Q e) { return ccw(e->dest(), b->dest(), b->o); };
+	if (ra->o == la->o) la = b->rev();
+	if (lb->o == rb->o) rb = b;
+	while (true) {
+		Q L = b->rev()->next();
+		if (valid(L)) while (in_c(b->dest(), b->o, L->dest(), L->next()->dest()))
+			del_edge(L, L->next());
+		Q R = b->prev();
+		if (valid(R)) while (in_c(b->dest(), b->o, R->dest(), R->prev()->dest()))
+			del_edge(R, R->prev());
+		if (!valid(L) and !valid(R)) break;
+		if (!valid(L) or (valid(R) and in_c(L->dest(), L->o, R->o, R->dest())))
+			b = conn(R, b->rev());
+		else b = conn(b->rev(), L->rev());
+	}
+	return {la, rb};
+}
+
+//NOTE: Before calculating Delaunay add a bound triangle: (-INF, -INF), (INF, INF), (0, INF)
+vector<vector<int>> delaunay(vector<point> v) {
+	int n = v.size();
+	auto tmp = v;
+	vector<int> idx(n);
+	iota(idx.begin(), idx.end(), 0);
+	sort(idx.begin(), idx.end(), [&](int l, int r) { return v[l] < v[r]; });
+	for (int i = 0; i < n; i++) v[i] = tmp[idx[i]];
+	assert(unique(v.begin(), v.end()) == v.end());
+	vector<vector<int>> g(n);
+	bool col = true;
+	for (int i = 2; i < n; i++) if (area_2(v[i], v[i-1], v[i-2])) col = false;
+	if (col) {
+		for (int i = 1; i < n; i++)
+			g[idx[i-1]].push_back(idx[i]), g[idx[i]].push_back(idx[i-1]);
+		return g;
+	}
+	Q e = build_tr(v, 0, n-1).first;
+	vector<Q> edg = {e};
+	for (int i = 0; i < edg.size(); e = edg[i++]) {
+		for (Q at = e; !at->used; at = at->next()) {
+			at->used = true;
+			g[idx[at->id]].push_back(idx[at->rev()->id]);
+			edg.push_back(at->rev());
 		}
 	}
-	// add Delaunay edge
-	void add_edge(int i, int j) {
-		if(i == -1 || j == -1) return;
-		edges.push_back({v[i].second, v[j].second});
-	}
-	// handle a point event
-	void add(int i) {
-		pt p = v[i].first;
-		// find arc to split
-		auto c = line.lower_bound(p.y);
-		// insert new arcs. passing the following iterator gives a slight speed-up
-		auto b = line.insert(c, arc(p, c->p, i));
-		auto a = line.insert(b, arc(c->p, p, c->i));
-		add_edge(i, c->i);
-		upd(a); upd(b); upd(c);
-	}
-	// handle a vertex event
-	void remove(beach::iterator it) {
-		auto a = prev(it);
-		auto b = next(it);
-		line.erase(it);
-		a->q = b->p;
-		add_edge(a->i, b->i);
-		upd(a); upd(b);
-	}
-	// X is a value exceeding all coordinates
-	void solve(ftype X = 1e9) {
-		// insert two points that will always be in the beach line,
-		// to avoid handling edge cases of an arc being first or last
-		X *= 3;
-		line.insert(arc(pt(-X, -X), pt(-X, X), -1));
-		line.insert(arc(pt(-X, X), pt(INF, INF), -1));
-		// create all point events
-		rep(i, 0, n) {
-			Q.push(event(v[i].first.x, i, line.end()));
-		}
-		ti = 0;
-		valid.assign(1, false);
-		while(!Q.empty()) {
-			event e = Q.top(); Q.pop();
-			sweepx = e.x;
-			if(e.id >= 0) {
-				add(e.id);
-			}else if(valid[-e.id]) {
-				remove(e.it);
+	return g;
+}
+
+vector<vector<point>> voronoi(const vector<point>& points, const vector<vector<int>>& delaunay){
+	int n = delaunay.size();
+	vector<vector<point>> voronoi(n, vector<point>());
+	for(int i = 0; i < n; i++){
+			for(int d = 0; d < delaunay[i].size(); d++){
+					int j = delaunay[i][d], k = delaunay[i][(d + 1) % delaunay[i].size()];
+					circle c = circumcircle(points[i], points[j], points[k]);
+					voronoi[i].push_back(c.c);
+					voronoi[j].push_back(c.c);
+					voronoi[k].push_back(c.c);
 			}
-		}
 	}
-};
+}
