@@ -1,1 +1,1 @@
-g++ -fsanitize=address,undefined -fno-omit-frame-pointer -g -Wall -Wshadow -std=c++17 -Wno-unused-result -Wno-sign-compare -Wno-char-subscripts
+alias comp="g++ -g -Wall -Wextra -std=c++20 -pedantic -O2 -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wno-sign-compare -Wno-char-subscripts -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -D_FORTIFY_SOURCE=2 -fsanitize=address,undefined -fno-sanitize-recover -fstack-protector -fno-omit-frame-pointer -Wno-unused-result"
