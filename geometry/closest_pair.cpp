@@ -16,7 +16,12 @@ int n;
 void upd_ans(const point & a, const point & b) {
 	ld dist = sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
 	if (dist < min_dist) {
-		min_dist = dist;
+		min_dist = dist;		
+		/*	
+			Warning:
+			if you want to know which points forms the closest pair, include variable id into the struct point
+			and uncomment the line below
+		*/
 		// best_pair = {a.id, b.id};
 	}
 }

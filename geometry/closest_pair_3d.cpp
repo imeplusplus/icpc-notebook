@@ -1,3 +1,7 @@
+/*
+	The algorithm below calculates the closest pair of points for 3 dimensional points
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -49,11 +53,15 @@ pair<int, int> best_pair;
 vector<point> pts;
 int n;
 
-//Warning: include variable id into the struct point
 void upd_ans(const point & a, const point & b) {
 	ll dist = (a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y) + (a.z - b.z)*(a.z - b.z);
 	if (dist < min_dist) {
-		min_dist = dist;
+		min_dist = dist;		
+		/*	
+			Warning:
+			if you want to know which points forms the closest pair, include variable id into the struct point
+			and uncomment the line below
+		*/
 		// best_pair = {a.id, b.id};
 	}
 }
