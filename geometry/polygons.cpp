@@ -9,15 +9,24 @@ bool between(const point &a, const point &b, const point &c) {
 }
 #endif
 
-//new change: <= 0 / >= 0 became < 0 / > 0 (yet to be tested)
-
-void convex_hull(vector<point> &pts) {
-	sort(pts.begin(), pts.end());
-	pts.erase(unique(pts.begin(), pts.end()), pts.end());
-	vector<point> up, dn;
-	for (int i = 0; i < pts.size(); i++) {
+/*
+	If you want to keep redundant points, remove the ifdef remove_redundant
+	and change the while loops inside first for to:
 		while (up.size() > 1 && area_2(up[up.size()-2], up.back(), pts[i]) > 0) up.pop_back();
 		while (dn.size() > 1 && area_2(dn[dn.size()-2], dn.back(), pts[i]) < 0) dn.pop_back();
+
+	evaluate the unique line to see if you want only unique points!
+
+*/
+void convex_hull(vector<point> &pts) {
+	sort(pts.begin(), pts.end());
+	
+	pts.erase(unique(pts.begin(), pts.end()), pts.end());
+	
+	vector<point> up, dn;
+	for (int i = 0; i < pts.size(); i++) {
+		while (up.size() > 1 && area_2(up[up.size()-2], up.back(), pts[i]) >= 0) up.pop_back();
+		while (dn.size() > 1 && area_2(dn[dn.size()-2], dn.back(), pts[i]) <= 0) dn.pop_back();
 		up.push_back(pts[i]);
 		dn.push_back(pts[i]);
 	}
@@ -64,9 +73,7 @@ ld compute_perimeter(vector<point> &p) {
 	return per;
 }
 
-//not tested
-// TODO: test this code. This code has not been tested, please do it before proper use.
-// http://codeforces.com/problemset/problem/975/E is a good problem for testing.
+// tested, use this algorithm!
 point compute_centroid(vector<point> &p) {
 	point c(0,0);
 	ld scale = 6.0 * compute_signed_area(p);
@@ -75,7 +82,6 @@ point compute_centroid(vector<point> &p) {
 		c = c + (p[i]+p[j])*(p[i].x*p[j].y - p[j].x*p[i].y);
 	}
 	return c / scale;
-
 }
 
 // TODO: test this code. This code has not been tested, please do it before proper use.
@@ -112,12 +118,14 @@ bool is_simple(const vector<point> &p) {
 	return true;
 }
 
+// be careful with double in s1 == s2, if it is a long double point, use EPS to compare
 bool point_in_triangle(point a, point b, point c, point cur){
 	ll s1 = abs(cross(b - a, c - a));
 	ll s2 = abs(cross(a - cur, b - cur)) + abs(cross(b - cur, c - cur)) + abs(cross(c - cur, a - cur));
 	return s1 == s2;
 }
 
+//this algorithm sorts the hull, so the points with smaller x and smaller y is in 0 index
 void sort_lex_hull(vector<point> &hull){
 	if(compute_signed_area(hull) < 0) reverse(hull.begin(), hull.end());
 	int n = hull.size();
@@ -129,13 +137,16 @@ void sort_lex_hull(vector<point> &hull){
 }
 
 //determine if point is inside or on the boundary of a polygon (O(logn))
+// 0 : out of the polygon
+// 1 : on the border of polygon
+// 2 : inside the polygon
 bool point_in_convex_polygon(vector<point> &hull, point cur){
 	int n = hull.size();
 	//Corner cases: point outside most left and most right wedges
 	if(cur.dir(hull[0], hull[1]) != 0 && cur.dir(hull[0], hull[1]) != hull[n - 1].dir(hull[0], hull[1]))
-		return false;
+		return 0;
 	if(cur.dir(hull[0], hull[n - 1]) != 0 && cur.dir(hull[0], hull[n - 1]) != hull[1].dir(hull[0], hull[n - 1]))
-		return false;
+		return 0;
 
 	//Binary search to find which wedges it is between
 	int l = 1, r = n - 1;
@@ -144,7 +155,11 @@ bool point_in_convex_polygon(vector<point> &hull, point cur){
 		if(cur.dir(hull[0], hull[mid]) <= 0)l = mid;
 		else r = mid;
 	}
-	return point_in_triangle(hull[l], hull[l + 1], hull[0], cur);
+    if(point_in_triangle(hull[l], hull[l + 1], hull[0], cur)){
+        if(cur.on_seg(hull[l], hull[l + 1]) or cur.on_seg(hull[0], hull[1]) or cur.on_seg(hull[0], hull[n - 1])) return 1;
+        return 2;
+    }
+    return 0;
 }
 
 // determine if point is on the boundary of a polygon (O(N))
@@ -213,6 +228,8 @@ bool is_simple_polygon(const vector<point> &pts){
 }
 
 //code copied from https://github.com/tfg50/Competitive-Programming/blob/master/Biblioteca/Math/2D%20Geometry/ConvexHull.cpp
+
+//finds the farthest point of a convex hull in a specific direction (vec)
 int maximize_scalar_product(vector<point> &hull, point vec) {
 	// this code assumes that there are no 3 colinear points
 	int ans = 0;
@@ -260,7 +277,7 @@ int tangent(vector<point> &hull, point vec, int dir_flag) {
 			if(hull[ans].dir(vec, hull[i]) == dir_flag) {
 				ans = i;
 			}
-		}
+		} 
 	} else {
 		if(hull[ans].dir(vec, hull[1]) == dir_flag) {
 			ans = 1;
