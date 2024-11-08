@@ -24,9 +24,15 @@ const ll LINF = 0x3f3f3f3f3f3f3f3f;
 const int INF = 0x3f3f3f3f, MOD = 1e9+7;
 const int N = 1e5+5;
 
-typedef long double type;
 //for big coordinates change to long long
+typedef long double type;
 
+/* The functions above are for:
+	ge => greater or equal
+	le => lesser or equal
+	eq => equal
+	sign => sign of a number (+ or -)
+*/
 bool ge(type x, type y) { return x + EPS > y; }
 bool le(type x, type y) { return x - EPS < y; }
 bool eq(type x, type y) { return ge(x, y) and le(x, y); }
@@ -55,11 +61,11 @@ struct point {
 	bool operator <(const point &p) const { return (x < p.x) or (x == p.x and y < p.y); }
 
 	// 0 => same direction
-	// 1 => p is on the left 
-	//-1 => p is on the right    
-	int dir(point o, point p) {
-		type x = (*this - o) % (p - o);
-		return ge(x,0) - le(x,0);
+	// 1 => other is on the left 
+	//-1 => other is on the right 
+	int dir(point origin, point other) {
+		type d = (*this - origin) % (other - origin);
+		return ge(d, 0) - le(d, 0);
 	}
 
 	bool on_seg(point p, point q) {
@@ -94,22 +100,30 @@ struct point {
 
 };
 
-int direction(point o, point p, point q) { return p.dir(o, q); }
+int direction(point origin, point p, point other) { return p.dir(origin, other); }
 
+//rotates 90 degrees counter clockwise
 point rotate_ccw90(point p)   { return point(-p.y,p.x); }
+//rotates 90 degrees clockwise
 point rotate_cw90(point p)    { return point(p.y,-p.x); }
 
 //for reading purposes avoid using * and % operators, use the functions below:
 type dot(point p, point q)     { return p.x*q.x + p.y*q.y; }
 type cross(point p, point q)   { return p.x*q.y - p.y*q.x; }
 
-//double area
+//twice the area of a triangle
 type area_2(point a, point b, point c) { return cross(a,b) + cross(b,c) + cross(c,a); }
 
-//angle between (a1 and b1) vs angle between (a2 and b2)
-//1  : bigger
-//-1 : smaller
-//0  : equal
+/*Compares the absolute angle defined by (a1 and b1) vs angle defined by (a2 and b2)
+	1  : bigger
+	-1 : smaller
+	0  : equal
+Example:
+	angle_less(point(1, 0) , point(0, 1), point(-1, 0), point(-1, -1)) == 1
+	
+	the angle formed by the two first vectors is 90 degrees
+	the angle formed by the two last vectors is 45 degrees
+*/
 int angle_less(const point& a1, const point& b1, const point& a2, const point& b2) {
 	point p1(dot(   a1, b1), abs(cross(   a1, b1)));
 	point p2(dot(   a2, b2), abs(cross(   a2, b2)));
